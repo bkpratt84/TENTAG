@@ -1,46 +1,66 @@
 package com.violox.tentag.domain;
 
 import java.util.ArrayList;
+import javax.enterprise.context.RequestScoped;
+import javax.validation.constraints.*;
 
-/**
- * 
- */
+@RequestScoped
 public class Property {
 
-    /**
-     * Default constructor
-     */
-    public Property() {
+    private Integer id;
+    @NotNull(message = "Property Name may not be blank.")
+    private String name;
+    private Contact contact;
+    private Address mailingAddress;
+    private Address billingAddress;
+    private ArrayList<Group> groups;
+
+    public Integer getId() {
+        return id;
     }
 
-    /**
-     * 
-     */
-    private Integer id;
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-    /**
-     * 
-     */
-    private String name;
+    public String getName() {
+        return name;
+    }
 
-    /**
-     * 
-     */
-    private Contact contact;
+    public void setName(String name) {
+        this.name = name;
+    }
 
-    /**
-     * 
-     */
-    private Address mailingAddress;
+    public Contact getContact() {
+        return contact;
+    }
 
-    /**
-     * 
-     */
-    private Address billingAddress;
+    public void setContact(Contact contact) {
+        this.contact = contact;
+    }
 
-    /**
-     * 
-     */
-    private ArrayList<Group> groups;
+    public Address getMailingAddress() {
+        return mailingAddress;
+    }
+
+    public void setMailingAddress(Address mailingAddress) {
+        this.mailingAddress = mailingAddress;
+    }
+
+    public Address getBillingAddress() {
+        return billingAddress;
+    }
+
+    public void setBillingAddress(Address billingAddress) {
+        this.billingAddress = billingAddress;
+    }
+
+    public ArrayList<Group> getGroups() {
+        return groups;
+    }
+
+    public void setGroups(ArrayList<Group> groups) {
+        this.groups = groups;
+    }
 
 }

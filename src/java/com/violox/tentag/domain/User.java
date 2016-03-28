@@ -1,36 +1,48 @@
 package com.violox.tentag.domain;
 
 import java.util.ArrayList;
+import javax.enterprise.context.RequestScoped;
+import javax.validation.constraints.*;
 
-/**
- * 
- */
+@RequestScoped
 public class User {
+    private Integer id;
+    @NotNull(message = "User must have a name.")
+    private String name;
+    @NotNull(message = "User must have a password.")
+    private String password;
+    private ArrayList<Group> groups;
 
-    /**
-     * Default constructor
-     */
-    public User() {
+    public Integer getId() {
+        return id;
     }
 
-    /**
-     * 
-     */
-    private Integer id;
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-    /**
-     * 
-     */
-    private String name;
+    public String getName() {
+        return name;
+    }
 
-    /**
-     * 
-     */
-    private String password;
+    public void setName(String name) {
+        this.name = name;
+    }
 
-    /**
-     * 
-     */
-    private ArrayList<Group> groups;
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public ArrayList<Group> getGroups() {
+        return groups;
+    }
+
+    public void setGroups(ArrayList<Group> groups) {
+        this.groups = groups;
+    }
 
 }

@@ -1,41 +1,57 @@
 package com.violox.tentag.domain;
 
 import java.util.ArrayList;
+import javax.enterprise.context.RequestScoped;
+import javax.validation.constraints.*;
 
-/**
- * 
- */
+@RequestScoped
 public class Group {
 
-    /**
-     * Default constructor
-     */
-    public Group() {
+    private Integer id;
+    @NotNull(message = "Must have a group name.")
+    private String name;
+    private ArrayList<User> users;
+    private ArrayList<Property> properties;
+    private ArrayList<Printer> printers;
+
+    public Integer getId() {
+        return id;
     }
 
-    /**
-     * 
-     */
-    private Integer id;
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-    /**
-     * 
-     */
-    private String name;
+    public String getName() {
+        return name;
+    }
 
-    /**
-     * 
-     */
-    private ArrayList<User> users;
+    public void setName(String name) {
+        this.name = name;
+    }
 
-    /**
-     * 
-     */
-    private ArrayList<Property> properties;
+    public ArrayList<User> getUsers() {
+        return users;
+    }
 
-    /**
-     * 
-     */
-    private ArrayList<Printer> printers;
+    public void setUsers(ArrayList<User> users) {
+        this.users = users;
+    }
+
+    public ArrayList<Property> getProperties() {
+        return properties;
+    }
+
+    public void setProperties(ArrayList<Property> properties) {
+        this.properties = properties;
+    }
+
+    public ArrayList<Printer> getPrinters() {
+        return printers;
+    }
+
+    public void setPrinters(ArrayList<Printer> printers) {
+        this.printers = printers;
+    }
 
 }

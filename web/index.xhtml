@@ -10,7 +10,14 @@
         <br />
         <h:link outcome="admin/index" value="To the admin section" /><br />
         <h:link outcome="property/index" value="To the property section" /><br />
-        <h:link outcome="printer/index" value="To the printer section" />
+        <h:link outcome="printer/index" value="To the printer section" /><br />
+        
+        <h:outputText value="#{indexController.contact.firstName }"></h:outputText><br/>
+        <h:outputText value="#{indexController.contact.lastName }"></h:outputText><br/>
+        <h:outputText value="#{indexController.contact.email }"></h:outputText><br/>
+        <h:outputText value="#{indexController.contact.primaryPhone }"></h:outputText><br/>
+        <h:outputText value="#{indexController.contact.secondaryPhone }"></h:outputText><br/>
+        
     </h:body>
 </html>
 

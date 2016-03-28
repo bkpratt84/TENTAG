@@ -1,34 +1,47 @@
 package com.violox.tentag.domain;
 
-/**
- * 
- */
+import javax.enterprise.context.RequestScoped;
+import javax.validation.constraints.*;
+
+@RequestScoped
 public class Unit {
 
-    /**
-     * Default constructor
-     */
-    public Unit() {
+    private Integer id;
+    private Property property;
+    @NotNull(message = "Unit must have a name.")
+    private String name;
+    private String notes;
+
+    public Integer getId() {
+        return id;
     }
 
-    /**
-     * 
-     */
-    private Integer id;
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-    /**
-     * 
-     */
-    private Property property;
+    public Property getProperty() {
+        return property;
+    }
 
-    /**
-     * 
-     */
-    private String name;
+    public void setProperty(Property property) {
+        this.property = property;
+    }
 
-    /**
-     * 
-     */
-    private String notes;
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getNotes() {
+        return notes;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
+    }
 
 }

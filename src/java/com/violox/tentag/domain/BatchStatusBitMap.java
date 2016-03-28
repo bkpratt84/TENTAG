@@ -1,12 +1,30 @@
 package com.violox.tentag.domain;
 
+import javax.enterprise.context.RequestScoped;
+import javax.validation.constraints.*;
+
+@RequestScoped
 public class BatchStatusBitMap {
 
-    public BatchStatusBitMap() {
+    private Integer bit;
+    private String value;
+
+    public Integer getBit() {
+        return bit;
     }
 
-    private Integer bit;
+    public void setBit(Integer bit) {
+        this.bit = bit;
+    }
 
-    private String value;
+    public String getValue() {
+        return value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
+    }
+    
+    
 
 }

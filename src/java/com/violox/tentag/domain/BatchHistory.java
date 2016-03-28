@@ -1,41 +1,63 @@
 package com.violox.tentag.domain;
 
 import java.util.Date;
+import javax.enterprise.context.RequestScoped;
+import javax.validation.constraints.*;
 
-/**
- * 
- */
+@RequestScoped
 public class BatchHistory {
 
-    /**
-     * Default constructor
-     */
-    public BatchHistory() {
+    private Integer sequence;
+    private Batch batch;
+    @NotNull(message = "From Status is blank.")
+    private Integer fromStatus;
+    @NotNull(message = "To Status is blank.")
+    private Integer toStatus;
+    @NotNull(message = "Date cannot be blank.")
+    private Date changeDateTime;
+
+    public Integer getSequence() {
+        return sequence;
     }
 
-    /**
-     * 
-     */
-    private Integer sequence;
+    public void setSequence(Integer sequence) {
+        this.sequence = sequence;
+    }
 
-    /**
-     * 
-     */
-    private Batch batch;
+    public Batch getBatch() {
+        return batch;
+    }
 
-    /**
-     * 
-     */
-    private Integer fromStatus;
+    public void setBatch(Batch batch) {
+        this.batch = batch;
+    }
 
-    /**
-     * 
-     */
-    private Integer toStatus;
+    public Integer getFromStatus() {
+        return fromStatus;
+    }
 
-    /**
-     * 
-     */
-    private Date changeDateTime;
+    public void setFromStatus(Integer fromStatus) {
+        this.fromStatus = fromStatus;
+    }
+
+    public Integer getToStatus() {
+        return toStatus;
+    }
+
+    public void setToStatus(Integer toStatus) {
+        this.toStatus = toStatus;
+    }
+
+    public Date getChangeDateTime() {
+        return changeDateTime;
+    }
+
+    public void setChangeDateTime(Date changeDateTime) {
+        this.changeDateTime = changeDateTime;
+    }
+    
+    
+    
+    
 
 }
