@@ -1,23 +1,39 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
-    <h:head>
-        <title>Facelet Title</title>
-    </h:head>
+        xmlns:h="http://xmlns.jcp.org/jsf/html"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:b="http://bootsfaces.net/ui">
+    
     <h:body>
-        Select where you want to go:
-        <br />
-        <h:link outcome="admin/index" value="To the admin section" /><br />
-        <h:link outcome="property/index" value="To the property section" /><br />
-        <h:link outcome="printer/index" value="To the printer section" /><br />
-        
-        <h:outputText value="#{indexController.contact.firstName }"></h:outputText><br/>
-        <h:outputText value="#{indexController.contact.lastName }"></h:outputText><br/>
-        <h:outputText value="#{indexController.contact.email }"></h:outputText><br/>
-        <h:outputText value="#{indexController.contact.primaryPhone }"></h:outputText><br/>
-        <h:outputText value="#{indexController.contact.secondaryPhone }"></h:outputText><br/>
-        
+        <ui:composition template="/templates/template.xhtml">
+            <ui:define name="content">
+                <b:row>
+                    <b:column span="4"/>
+                    <b:column span="4">
+                        <b:panel title="Test links" look="primary">
+                            <h:link outcome="admin/index" value="To the admin section" /><br />
+                            <h:link outcome="property/index" value="To the property section" /><br />
+                            <h:link outcome="printer/index" value="To the printer section" /><br />
+                        </b:panel>
+                    </b:column>
+                    <b:column span="4"/>
+                </b:row>
+                
+                <b:row>
+                    <b:column span="4"/>
+                    <b:column span="4">
+                        <b:panel title="Test Output Controller" look="info">
+                            <h:outputText value="#{indexController.contact.firstName }"></h:outputText><br/>
+                            <h:outputText value="#{indexController.contact.lastName }"></h:outputText><br/>
+                            <h:outputText value="#{indexController.contact.email }"></h:outputText><br/>
+                            <h:outputText value="#{indexController.contact.primaryPhone }"></h:outputText><br/>
+                            <h:outputText value="#{indexController.contact.secondaryPhone }"></h:outputText><br/>
+                        </b:panel>
+                    </b:column>
+                    <b:column span="4"/>
+                </b:row>
+            </ui:define>
+        </ui:composition>
     </h:body>
 </html>
-
