@@ -1,20 +1,53 @@
 <?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:h="http://java.sun.com/jsf/html">
-    <h:head>
-        <title>Login Form</title>
-    </h:head>
+        xmlns:h="http://xmlns.jcp.org/jsf/html"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:b="http://bootsfaces.net/ui"
+        xmlns:f="http://java.sun.com/jsf/core">
+    
     <h:body>
-        <p:panel header="Login From">
-            <form method="POST" action="j_security_check">
-                Username: <input type="text" name="j_username" />
-                Password: <input type="password" name="j_password" />
-                <br />
-                <input type="submit" value="Login" />
-                <input type="reset" value="Reset" />
-            </form>
-        </p:panel>
+        <ui:composition template="/templates/template.xhtml">
+            <ui:define name="content">
+                <b:row>
+                    <b:column span="4" offset="4">
+                        <b:panel title="Sign In" look="primary">
+                            <form method="POST" action="j_security_check">
+                                <b:row>
+                                    <b:column offset="1" span="10">
+                                        <b:inputText placeholder="Username" type="text" required="true" id="j_username">
+                                            <f:facet name="prepend">
+                                                <b:iconAwesome name="user"/>
+                                            </f:facet>
+                                        </b:inputText>
+                                    </b:column>
+                                </b:row>
+                                
+                                <b:row>
+                                    <b:column offset="1" span="10">
+                                        <b:inputText placeholder="Password" type="password" required="true" id="j_password">
+                                            <f:facet name="prepend">
+                                                <b:iconAwesome name="key"/>
+                                            </f:facet>
+                                        </b:inputText>
+                                    </b:column>
+                                </b:row>
+                                
+                                <b:row>
+                                    <h:form>
+                                        <b:column offset="1" span="4">
+                                            <b:commandButton type="submit" value="Login" look="primary" style="width:100%"/>
+                                        </b:column>
+                                        <b:column span="4">
+                                            <b:commandButton type="reset" value="Rest" look="primary" style="width:100%"/>
+                                        </b:column>
+                                    </h:form>
+                                </b:row>
+                            </form>
+                        </b:panel>
+                    </b:column>
+                </b:row>
+            </ui:define>
+        </ui:composition>
     </h:body>
 </html>
