@@ -11,16 +11,16 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.Resource;
-import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.ApplicationScoped;
 import javax.sql.DataSource;
 
-@RequestScoped
+@ApplicationScoped
 public class ContactRelation implements Relation<Contact, Integer>, Serializable {
 
     private Integer key;
     
     @Resource(name = "jdbc/TentagDatabaseResource")
-    @RequestScoped
+    @ApplicationScoped
     private DataSource ds;
 
     @Override
