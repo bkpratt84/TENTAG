@@ -1,7 +1,5 @@
 package com.violox.tentag.entity;
 
-import com.violox.tentag.domain.Relationship;
-import com.violox.tentag.domain.Key;
 import com.violox.tentag.domain.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;

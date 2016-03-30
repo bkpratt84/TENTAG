@@ -1,7 +1,6 @@
 package com.violox.tentag.entity;
 
 import com.violox.tentag.domain.Key;
-import com.violox.tentag.domain.Key;
 import javax.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
