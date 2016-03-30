@@ -2,7 +2,9 @@ package com.violox.tentag.entity;
 
 import com.violox.tentag.domain.IntegerPair;
 import com.violox.tentag.domain.Key;
+import javax.enterprise.context.ApplicationScoped;
 
+@ApplicationScoped
 public class DoubleIntegerKey implements Key<IntegerPair> {
 
     private IntegerPair key;

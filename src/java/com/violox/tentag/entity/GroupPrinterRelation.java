@@ -2,7 +2,9 @@ package com.violox.tentag.entity;
 
 import com.violox.tentag.domain.*;
 import java.util.ArrayList;
+import javax.enterprise.context.ApplicationScoped;
 
+@ApplicationScoped
 public class GroupPrinterRelation implements Relation<GroupPrinter, IntegerPair> {
 
     public GroupPrinterRelation() {

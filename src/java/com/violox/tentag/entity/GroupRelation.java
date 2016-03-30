@@ -2,7 +2,9 @@ package com.violox.tentag.entity;
 
 import com.violox.tentag.domain.*;
 import java.util.ArrayList;
+import javax.enterprise.context.ApplicationScoped;
 
+@ApplicationScoped
 public class GroupRelation implements Relation<Group, Integer> {
 
     public GroupRelation() {

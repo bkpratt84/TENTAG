@@ -26,6 +26,11 @@ public class AddressPrinterRelationship implements Relationship<Printer, Address
     @Inject
     private ContactRelation contact;
 
+    @Inject
+    private Key<Integer> state_key;
+    @Inject
+    private StateRelation state;
+
     @Override
     public ArrayList<Printer> getByParent(Address address) {
 
@@ -44,22 +49,17 @@ public class AddressPrinterRelationship implements Relationship<Printer, Address
             while (rs.next()) {
 
                 Printer item = new Printer();
-
                 item.setId(rs.getInt("printer_id"));
-
                 item.setName(rs.getString("printer_name"));
-
                 item.setIsActive(rs.getBoolean("printer_is_active"));
-
                 item.setAddress(address);
 
                 contact_key.setKey(rs.getInt("printer_contact_id"));
                 item.setContact(contact.get(contact_key));
-
                 ret.add(item);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(ContactRelation.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AddressPrinterRelationship.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return ret;
@@ -69,7 +69,14 @@ public class AddressPrinterRelationship implements Relationship<Printer, Address
     @Override
     public Address getByChild(Printer item) {
         Address ret = new Address();
-        String sql = String.format("", item.getId()
+        String sql = String.format("SELECT `address`.`address_id`,\n"
+                + "    `address`.`address_line_1`,\n"
+                + "    `address`.`address_line_2`,\n"
+                + "    `address`.`address_city`,\n"
+                + "    `address`.`address_state_id`,\n"
+                + "    `address`.`address_zip`\n"
+                + "FROM `tentag`.`address`"
+                + "WHERE `address`.`address_id` = %d;", item.getAddress().getId()
         );
 
         try (Connection conn = ds.getConnection()) {
@@ -77,11 +84,17 @@ public class AddressPrinterRelationship implements Relationship<Printer, Address
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
-                item.setId(rs.getInt(1));
+                ret.setId(rs.getInt("address_id"));
+                ret.setAddressLine1(rs.getString("address_line_1"));
+                ret.setAddressLine2(rs.getString("address_line_2"));
+                ret.setCity(rs.getString("address_city"));
+                ret.setZip(rs.getString("address_zip"));
+                state_key.setKey(rs.getInt("address_state_id"));
+                ret.setState(state.get(state_key));
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(ContactRelation.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AddressPrinterRelationship.class.getName()).log(Level.SEVERE, null, ex);
         }
         return ret;
     }
