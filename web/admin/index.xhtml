@@ -18,6 +18,18 @@
                     </b:column>
                     <b:column span="4"/>
                 </b:row>
+                
+                <b:row>
+                    <b:column span="4" offset="4">
+                        <b:panel title="Test Output Controller" look="info">
+                            <h:outputText value="#{indexController.contact.firstName }"></h:outputText><br/>
+                            <h:outputText value="#{indexController.contact.lastName }"></h:outputText><br/>
+                            <h:outputText value="#{indexController.contact.email }"></h:outputText><br/>
+                            <h:outputText value="#{indexController.contact.primaryPhone }"></h:outputText><br/>
+                            <h:outputText value="#{indexController.contact.secondaryPhone }"></h:outputText><br/>
+                        </b:panel>
+                    </b:column>
+                </b:row>
             </ui:define>
         </ui:composition>
     </h:body>
