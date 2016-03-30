@@ -1,8 +1,12 @@
 package com.violox.tentag.entity;
 
+import com.violox.tentag.domain.Key;
+import com.violox.tentag.domain.Relation;
 import com.violox.tentag.domain.*;
 import java.util.ArrayList;
+import javax.enterprise.context.ApplicationScoped;
 
+@ApplicationScoped
 public class PrinterRelation implements Relation<Printer, Integer> {
 
     public PrinterRelation() {

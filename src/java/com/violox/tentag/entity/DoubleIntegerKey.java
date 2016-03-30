@@ -1,5 +1,10 @@
 package com.violox.tentag.entity;
 
+import com.violox.tentag.domain.IntegerPair;
+import com.violox.tentag.domain.IntegerPair;
+import com.violox.tentag.domain.Key;
+import com.violox.tentag.domain.Key;
+
 public class DoubleIntegerKey implements Key<IntegerPair> {
 
     private IntegerPair key;

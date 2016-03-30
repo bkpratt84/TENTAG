@@ -1,5 +1,6 @@
 package com.violox.tentag.entity;
 
+import com.violox.tentag.domain.Relationship;
 import com.violox.tentag.domain.*;
 import java.util.ArrayList;
 

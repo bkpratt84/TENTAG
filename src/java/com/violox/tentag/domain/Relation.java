@@ -1,7 +1,9 @@
-package com.violox.tentag.entity;
+package com.violox.tentag.domain;
 
 import java.util.ArrayList;
+import javax.enterprise.context.ApplicationScoped;
 
+@ApplicationScoped
 public interface Relation<T, U> {
 
     public T post(T item);

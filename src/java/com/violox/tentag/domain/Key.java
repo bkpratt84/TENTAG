@@ -1,4 +1,4 @@
-package com.violox.tentag.entity;
+package com.violox.tentag.domain;
 
 public interface Key<T> {
 
