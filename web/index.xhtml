@@ -3,36 +3,107 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
         xmlns:h="http://xmlns.jcp.org/jsf/html"
         xmlns:ui="http://java.sun.com/jsf/facelets"
-        xmlns:b="http://bootsfaces.net/ui">
+        xmlns:b="http://bootsfaces.net/ui"
+        xmlns:p="http://primefaces.org/ui">
     
-    <h:body>
+    <h:body>        
         <ui:composition template="/templates/template.xhtml">
             <ui:define name="content">
-                <b:row>
-                    <b:column span="4"/>
-                    <b:column span="4">
-                        <b:panel title="Test links" look="primary">
-                            <h:link outcome="admin/index" value="To the admin section" /><br />
-                            <h:link outcome="property/index" value="To the property section" /><br />
-                            <h:link outcome="printer/index" value="To the printer section" /><br />
-                        </b:panel>
-                    </b:column>
-                    <b:column span="4"/>
-                </b:row>
-                
-                <b:row>
-                    <b:column span="4"/>
-                    <b:column span="4">
-                        <b:panel title="Test Output Controller" look="info">
-                            <h:outputText value="#{indexController.contact.firstName }"></h:outputText><br/>
-                            <h:outputText value="#{indexController.contact.lastName }"></h:outputText><br/>
-                            <h:outputText value="#{indexController.contact.email }"></h:outputText><br/>
-                            <h:outputText value="#{indexController.contact.primaryPhone }"></h:outputText><br/>
-                            <h:outputText value="#{indexController.contact.secondaryPhone }"></h:outputText><br/>
-                        </b:panel>
-                    </b:column>
-                    <b:column span="4"/>
-                </b:row>
+                <b:container fluid="true">
+                    <b:row>
+                        <b:column offset="2" span="4">
+                            <h2><h:outputLabel value="What TENTAG?"/></h2>
+                        </b:column>
+                    </b:row>
+                    
+                    <b:row>
+                        <b:column offset="2" span="2" style="text-align: center;">
+                            <b:iconAwesome name="question" size="5x"/>
+                        </b:column>
+                        <b:column span="6">
+                            TENTAG is your number one solution for property parking management. We keep you connected to your print vendor hassle free and at the touch of a button.
+                            We also do other stuff and stuff and will do some other stuff that leads to some other stuff.
+                        </b:column>
+                    </b:row>
+                    
+                    <b:row style="text-align: center; margin-top: 20px;">
+                        <b:iconAwesome name="chevron-down" size="5x" style="color: lightgrey;"/>
+                    </b:row>
+                    
+                    <p:separator />
+                    
+                    <b:row>
+                        <b:column offset="2" span="4">
+                            <h2><h:outputLabel value="Why TENTAG?"/></h2>
+                        </b:column>
+                    </b:row>
+
+                    <b:row>
+                        <b:column offset="2" span="2" style="text-align: center;">
+                            <b:iconAwesome name="dashboard" size="5x" style="color: orange;"/>
+                            <h:outputLabel value="Easy to use dashboard to manage your properties." style="margin-top: 10px;"/>
+                        </b:column>
+
+                        <b:column span="2" style="text-align: center;">
+                            <b:iconAwesome name="cloud" size="5x" style="color: grey;"/>
+                            <h:outputLabel value="Cloud hosted. Always online. Always available." style="margin-top: 10px;"/>
+                        </b:column>
+
+                        <b:column span="2" style="text-align: center;">
+                            <b:iconAwesome name="credit-card" size="5x" style="color: green;"/>
+                            <h:outputLabel value="Affordable. Easy on the wallet." style="margin-top: 10px;"/>
+                        </b:column>
+
+                        <b:column span="2" style="text-align: center;">
+                            <b:iconAwesome name="quote-left" size="5x" style="color: blue;"/>
+                            <h:outputLabel value="&quot;Easier than sliced bread!&quot;" style="margin-top: 10px;"/>
+                        </b:column>
+                    </b:row>
+                    
+                    <b:row style="text-align: center; margin-top: 20px;">
+                        <b:iconAwesome name="chevron-down" size="5x" style="color: lightgrey;"/>
+                    </b:row>
+                    
+                    <p:separator />
+                    
+                    <b:row style="text-align: center; margin-top: 0;">
+                        <b:iconAwesome name="phone" size="5x"/>
+                    </b:row>
+                    
+                    <b:row style="text-align: center; display: block; margin-bottom: 25px;"> 
+                        <h2><h:outputLabel value="Interested in joining? Click here to receive additional information."/></h2>
+                        <h2><h:outputLabel value="Already a member? Sign in below."/></h2>
+                    </b:row>
+
+                    <b:row>
+                        <b:column span="2" offset="3">
+                            <b:navLink href="/TENTAG/admin/index.xhtml" style="list-style-type: none;">
+                                <b:panel style="text-align: center;">
+                                    <b:iconAwesome name="user-plus" size="4x" style="color: grey;"/><br/>
+                                    <h:outputLabel value="Admin" style="margin-top: 10px;"/>
+                                </b:panel>
+                            </b:navLink>
+                        </b:column>
+
+                        <b:column span="2">
+                            <b:navLink href="/TENTAG/property/index.xhtml" style="list-style-type: none;">
+                                <b:panel style="text-align: center;">
+                                    <b:iconAwesome name="building-o" size="4x" style="color: grey;"/><br/>
+                                    <h:outputLabel value="Property Manager" style="margin-top: 10px;"/>
+                                </b:panel>
+                            </b:navLink>
+                        </b:column>
+       
+                        <b:column span="2">
+                            <b:navLink href="/TENTAG/printer/index.xhtml" style="list-style-type: none;">
+                                <b:panel style="text-align: center;">
+                                    <b:iconAwesome name="print" size="4x" style="color: grey;"/><br/>
+                                    <h:outputLabel value="Print Vendor" style="margin-top: 10px;"/>
+                                </b:panel>
+                            </b:navLink>
+                        </b:column>
+                    </b:row>
+                </b:container>
             </ui:define>
         </ui:composition>
     </h:body>
