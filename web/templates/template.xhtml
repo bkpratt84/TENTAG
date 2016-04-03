@@ -7,14 +7,13 @@
     
     <h:head>
         <title>TENTAG</title>
-
     </h:head>
     
     <h:body>
         <!--Located in body to override other CSS-->
         <f:facet name="last">
-            <h:outputStylesheet library="css" name="theme-style.css"/>
-            <h:outputStylesheet library="css" name="style.css"/>
+            <h:outputStylesheet name="/css/theme-style.css"/>
+            <h:outputStylesheet name="/css/style.css"/>
         </f:facet>
         
         <div class="page-container">
@@ -23,7 +22,13 @@
                     <ui:include src ="/templates/header.xhtml"/>
                 </ui:insert>
             </div>
-
+            
+            <div id="errors">
+                <ui:insert name="errors">
+                    <ui:include src ="/templates/errors.xhtml"/>
+                </ui:insert>
+            </div>
+            
             <div id="content">
                 <ui:insert name="content">
                     <ui:include src ="/templates/content.xhtml"/>
