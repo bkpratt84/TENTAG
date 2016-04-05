@@ -1,21 +1,16 @@
 package com.violox.tentag.entity;
 
 import com.violox.tentag.domain.*;
-import java.io.Serializable;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.Resource;
 import javax.enterprise.context.ApplicationScoped;
-import javax.sql.DataSource;
+import javax.sql.*;
 
 @ApplicationScoped
-public class ContactRelation implements Relation<Contact, Integer>, Serializable {
+public class ContactRelation implements Relation<Contact, Integer> {
 
     private Integer key;
     
