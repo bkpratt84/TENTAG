@@ -6,23 +6,24 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
 @ApplicationScoped
-public class AddressPrinterRelationship implements Relationship<Printer, Address> {
+public class BillingAddressPropertyRelationship implements Relationship<Property, Address> {
 
     @Inject
     private Key<Integer> child_key;
     @Inject
     private AddressRelation parent;
     @Inject
-    private PrinterRelation child;
+    private PropertyRelation child;
 
     @Override
-    public ArrayList<Printer> getByParent(Address parent) {
-        return child.getByAddress(parent);
+    public ArrayList<Property> getByParent(Address parent) {
+        return child.getByBillingAddress(parent);
     }
 
     @Override
-    public Address getByChild(Printer item) {
-        child_key.setKey(item.getAddress().getId());
+    public Address getByChild(Property child) {
+        child_key.setKey(child.getBillingAddress().getId());
         return parent.get(child_key);
     }
+
 }

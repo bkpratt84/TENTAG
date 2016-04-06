@@ -18,7 +18,7 @@ import javax.sql.DataSource;
 public class BatchHistoryRelation implements Relation<BatchHistory, Integer> {
 
     private Integer key;
-    
+
     @Resource(name = "jdbc/TentagDatabaseResource")
     @ApplicationScoped
     private DataSource ds;
@@ -30,16 +30,12 @@ public class BatchHistoryRelation implements Relation<BatchHistory, Integer> {
 
     @Override
     public BatchHistory post(BatchHistory item) {
-String sql = String.format("INSERT INTO `tentag`.`batch_history` "
-        + "( `batch_id`"
-        + ", `from_status`"
-        + ", `to_status`"
-        + ", `change_dt`) "
-        + "VALUES (%d, %d, %d, '%4$tY-%4$tm-%4$te %4$tH:%4$tM:%4$tS'); "
-        , item.getBatch().getId()
-        , item.getFromStatus()
-        , item.getToStatus()
-        , item.getChangeDateTime()
+        String sql = String.format("INSERT INTO `tentag`.`batch_history` "
+                + "( `batch_id`"
+                + ", `from_status`"
+                + ", `to_status`"
+                + ", `change_dt`) "
+                + "VALUES (%d, %d, %d, '%4$tY-%4$tm-%4$te %4$tH:%4$tM:%4$tS'); ", item.getBatch().getId(), item.getFromStatus(), item.getToStatus(), item.getChangeDateTime()
         );
 
         try (Connection conn = ds.getConnection()) {
@@ -54,7 +50,8 @@ String sql = String.format("INSERT INTO `tentag`.`batch_history` "
         } catch (SQLException ex) {
             Logger.getLogger(BatchHistoryRelation.class.getName()).log(Level.SEVERE, null, ex);
             return null;
-        }    }
+        }
+    }
 
     @Override
     public BatchHistory get(Key<Integer> key) {
@@ -72,7 +69,7 @@ String sql = String.format("INSERT INTO `tentag`.`batch_history` "
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                
+
                 ret.setSequence(rs.getInt("sequence_id"));
                 batch_key.setKey(rs.getInt("batch_id"));
                 ret.setBatch(batch.get(batch_key));
@@ -125,12 +122,7 @@ String sql = String.format("INSERT INTO `tentag`.`batch_history` "
                 + ", `from_status` = %d"
                 + ", `to_status` = %d"
                 + ", `change_dt` = '%4$tY-%4$tm-%4$te %4$tH:%4$tM:%4$tS' "
-                + "WHERE `sequence_id` = %d; "
-                , item.getBatch().getId()
-                , item.getFromStatus()
-                , item.getToStatus()
-                , item.getChangeDateTime()
-                , item.getSequence()
+                + "WHERE `sequence_id` = %d; ", item.getBatch().getId(), item.getFromStatus(), item.getToStatus(), item.getChangeDateTime(), item.getSequence()
         );
 
         try (Connection conn = ds.getConnection()) {
@@ -163,6 +155,38 @@ String sql = String.format("INSERT INTO `tentag`.`batch_history` "
     @Override
     public void setKey(Integer key) {
         this.key = key;
+    }
+
+    public ArrayList<BatchHistory> getByBatch(Batch parent) {
+        ArrayList<BatchHistory> ret = new ArrayList<>();
+        String sql = String.format("SELECT `batch_history`.`sequence_id`"
+                + ", `batch_history`.`batch_id`"
+                + ", `batch_history`.`from_status`"
+                + ", `batch_history`.`to_status`"
+                + ", `batch_history`.`change_dt` "
+                + "FROM `tentag`.`batch_history` "
+                + "WHERE `batch_history`.`batch_id` = %d; ", parent.getId()
+        );
+        try (Connection conn = ds.getConnection()) {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                BatchHistory item = new BatchHistory();
+                item.setSequence(rs.getInt("sequence_id"));
+                batch_key.setKey(rs.getInt("batch_id"));
+                item.setBatch(batch.get(batch_key));
+                item.setFromStatus(rs.getInt("from_status"));
+                item.setToStatus(rs.getInt("to_status"));
+                item.setChangeDateTime(rs.getDate("change_dt"));
+
+                ret.add(item);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(BatchHistoryRelation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return ret;
     }
 
 }

@@ -143,4 +143,59 @@ public class GroupPrinterRelation implements Relation<GroupPrinter, IntegerPair>
         this.key = key;
     }
 
+    public ArrayList<GroupPrinter> getbyPrinter(Printer parent) {
+        ArrayList<GroupPrinter> ret = new ArrayList<>();
+        String sql = String.format("SELECT `group_printer`.`group_id`"
+                + ", `group_printer`.`printer_id` "
+                + "FROM `tentag`.`group_printer`"
+                + " WHERE `group_printer`.`printer_id` = %d; "
+                , parent.getId()
+        );
+        try (Connection conn = ds.getConnection()) {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                GroupPrinter item = new GroupPrinter();
+                group_key.setKey(rs.getInt("group_id"));
+                item.setGroup(group.get(group_key));
+                printer_key.setKey(rs.getInt("printer_id"));
+                item.setPrinter(printer.get(printer_key));
+                ret.add(item);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(GroupPrinterRelation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return ret;
+
+    }
+
+    public ArrayList<GroupPrinter> getByGroup(Group parent) {
+        ArrayList<GroupPrinter> ret = new ArrayList<>();
+        String sql = String.format("SELECT `group_printer`.`group_id`"
+                + ", `group_printer`.`printer_id` "
+                + "FROM `tentag`.`group_printer`"
+                + " WHERE `group_printer`.`group_id` = %d; "
+                , parent.getId()
+        );
+        try (Connection conn = ds.getConnection()) {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                GroupPrinter item = new GroupPrinter();
+                group_key.setKey(rs.getInt("group_id"));
+                item.setGroup(group.get(group_key));
+                printer_key.setKey(rs.getInt("printer_id"));
+                item.setPrinter(printer.get(printer_key));
+                ret.add(item);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(GroupPrinterRelation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return ret;
+    }
+
 }

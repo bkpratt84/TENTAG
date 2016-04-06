@@ -140,4 +140,58 @@ public class GroupPropertyRelation implements Relation<GroupProperty, IntegerPai
         this.key = key;
     }
 
+    public ArrayList<GroupProperty> getByProperty(Property parent) {
+        ArrayList<GroupProperty> ret = new ArrayList<>();
+        String sql = String.format("SELECT `group_property`.`group_id`"
+                + ", `group_property`.`property_id` "
+                + "FROM `tentag`.`group_property`"
+                + " WHERE `group_property`.`property_id` = %d; "
+                , parent.getId()
+        );
+        try (Connection conn = ds.getConnection()) {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                GroupProperty item = new GroupProperty();
+                group_key.setKey(rs.getInt("group_id"));
+                item.setGroup(group.get(group_key));
+                property_key.setKey(rs.getInt("property_id"));
+                item.setProperty(property.get(property_key));
+                ret.add(item);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(GroupPropertyRelation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return ret;
+    }
+
+    ArrayList<GroupProperty> getByGroup(Group parent) {
+        ArrayList<GroupProperty> ret = new ArrayList<>();
+        String sql = String.format("SELECT `group_property`.`group_id`"
+                + ", `group_property`.`property_id` "
+                + "FROM `tentag`.`group_property`"
+                + " WHERE `group_property`.`group_id` = %d; "
+                , parent.getId()
+        );
+        try (Connection conn = ds.getConnection()) {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                GroupProperty item = new GroupProperty();
+                group_key.setKey(rs.getInt("group_id"));
+                item.setGroup(group.get(group_key));
+                property_key.setKey(rs.getInt("property_id"));
+                item.setProperty(property.get(property_key));
+                ret.add(item);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(GroupPropertyRelation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return ret;
+    }
+
 }

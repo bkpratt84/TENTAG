@@ -8,7 +8,7 @@ import javax.validation.constraints.*;
 public class PermitHistory {
 
     private Integer sequence;
-    private Batch batch;
+    private Permit permit;
     @NotNull(message = "From status may not be blank.")
     private Integer fromStatus;
     @NotNull(message = "To status may not be blank.")
@@ -24,12 +24,12 @@ public class PermitHistory {
         this.sequence = sequence;
     }
 
-    public Batch getBatch() {
-        return batch;
+    public Permit getPermit() {
+        return permit;
     }
 
-    public void setBatch(Batch batch) {
-        this.batch = batch;
+    public void setPermit(Permit permit) {
+        this.permit = permit;
     }
 
     public Integer getFromStatus() {

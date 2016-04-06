@@ -153,4 +153,66 @@ public class BatchRelation implements Relation<Batch, Integer> {
         this.key = key;
     }
 
+    public ArrayList<Batch> getByProperty(Property parent) {
+        ArrayList<Batch> ret = new ArrayList<>();
+        String sql = String.format("SELECT `batch`.`batch_id`"
+                + ", `batch`.`property_id`"
+                + ", `batch`.`printer_id`"
+                + ", `batch`.`batch_status` "
+                + "FROM `tentag`.`batch`"
+                + " WHERE `batch`.`property_id`= %d; "
+                , parent.getId()
+        );
+        try (Connection conn = ds.getConnection()) {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Batch item = new Batch();
+                item.setId(rs.getInt("batch_id"));
+                printer_key.setKey(rs.getInt("printer_id"));
+                item.setPrinter(printer.get(printer_key));
+                property_key.setKey(rs.getInt("property_id"));
+                item.setProperty(property.get(property_key));
+                item.setStatus(rs.getInt("batch_status"));
+                ret.add(item);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(BatchRelation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return ret;
+    }
+
+    public ArrayList<Batch> getByPrinter(Printer parent) {
+        ArrayList<Batch> ret = new ArrayList<>();
+        String sql = String.format("SELECT `batch`.`batch_id`"
+                + ", `batch`.`property_id`"
+                + ", `batch`.`printer_id`"
+                + ", `batch`.`batch_status` "
+                + "FROM `tentag`.`batch`"
+                + " WHERE `batch`.`printer_id`= %d; "
+                , parent.getId()
+        );
+        try (Connection conn = ds.getConnection()) {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Batch item = new Batch();
+                item.setId(rs.getInt("batch_id"));
+                printer_key.setKey(rs.getInt("printer_id"));
+                item.setPrinter(printer.get(printer_key));
+                property_key.setKey(rs.getInt("property_id"));
+                item.setProperty(property.get(property_key));
+                item.setStatus(rs.getInt("batch_status"));
+                ret.add(item);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(BatchRelation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return ret; 
+    }
+
 }
