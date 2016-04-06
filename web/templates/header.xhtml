@@ -7,27 +7,30 @@
 
     <h:body>
         <ui:composition>
-            <b:navBar brand="TENTAG" brandHref="/TENTAG/index.xhtml">
+            <b:navBar brand="TENTAG" brandHref="#{facesContext.externalContext.requestContextPath}#{navigationController.toHome(false)}">
                 <b:navbarLinks pull="right"><b:navLink value="    " href="#"/></b:navbarLinks>
                 <!--Not logged in-->
                 <b:navbarLinks pull="right" rendered="#{empty facesContext.externalContext.userPrincipal.name}">
-                    <b:navLink value="Home" href="/TENTAG/index.xhtml"/>
-                    <b:navLink value="About Us" href="/TENTAG/index.xhtml"/>
-                    <b:navLink value="Contact" href="/TENTAG/index.xhtml"/>
+                    <b:navLink value="Home" href="#{facesContext.externalContext.requestContextPath}#{navigationController.toHome(false)}"/>
+                    <b:navLink value="About Us" href="#{facesContext.externalContext.requestContextPath}#{navigationController.toHome(false)}"/>
+                    <b:navLink value="Contact" href="#{facesContext.externalContext.requestContextPath}#{navigationController.toHome(false)}"/>
+                    <b:navLink value="Sign In" href="#{facesContext.externalContext.requestContextPath}#{navigationController.toLogin(false)}"/>
                 </b:navbarLinks>
                 
                 <!--Logged in-->
-                <b:navbarLinks pull="right" rendered="#{not empty facesContext.externalContext.userPrincipal.name}">
-                    <b:navLink value="Home" href="/TENTAG/index.xhtml"/>
-                    <b:dropMenu value="" iconAwesome="bars">
-                        <b:navLink value="Signed in as #{facesContext.externalContext.userPrincipal.name}" outcome="null"/>
-                        <b:navLink/>
-                        <b:navLink value="Your Profile" iconAwesome="user" outcome="null"/>
-                        <b:navLink/>
-                        <b:navLink value="Settings" iconAwesome="cog" outcome="null"/>
-                        <b:navLink value="Sign Out" iconAwesome="sign-out" outcome="null"/>
-                    </b:dropMenu>
-                </b:navbarLinks>
+                <h:form>
+                    <b:navbarLinks pull="right" rendered="#{not empty facesContext.externalContext.userPrincipal.name}">
+                        <b:navLink value="Home" href="#{facesContext.externalContext.requestContextPath}#{navigationController.toHome(false)}"/>
+                        <b:dropMenu value="" iconAwesome="bars">
+                            <b:navLink value="Signed in as #{facesContext.externalContext.userPrincipal.name}" outcome="null"/>
+                            <b:navLink/>
+                            <b:navLink value="Your Profile" iconAwesome="user" outcome="null"/>
+                            <b:navLink/>
+                            <b:navLink value="Settings" iconAwesome="cog" outcome="null"/>
+                            <b:navCommandLink value="Sign Out" iconAwesome="sign-out" action="#{loginController.logout}"/>
+                        </b:dropMenu>
+                    </b:navbarLinks>
+                </h:form>
             </b:navBar>
         </ui:composition>
     </h:body>

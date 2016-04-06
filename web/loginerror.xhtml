@@ -5,7 +5,7 @@
       xmlns:p="http://primefaces.org/ui">
     <h:body>
         <p:panel header="Login Error">
-            Sorry, you made an Error. Please try again: <a href="#{facesContext.externalContext.requestContextPath}/" >Login</a>
+            Sorry, you made an Error. Please try again: <a href="#{facesContext.externalContext}#{navigationController.toLogin(false)}" >Login</a>
         </p:panel>
     </h:body>
 </html>
