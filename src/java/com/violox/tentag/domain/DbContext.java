@@ -1,5 +1,7 @@
 package com.violox.tentag.domain;
 
+import com.violox.tentag.entity.BillingAddressPropertyRelationship;
+import com.violox.tentag.entity.MailingAddressPropertyRelationship;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
@@ -119,10 +121,16 @@ public class DbContext {
         return addressPrinter;
     }
     @Inject
-    private Relationship<Property, Address> addressProperty;
+    private BillingAddressPropertyRelationship BillingAddressProperty;
 
-    public Relationship AddressProperty() {
-        return addressProperty;
+    public Relationship BillingAddressProperty() {
+        return BillingAddressProperty;
+    }
+    @Inject
+    private MailingAddressPropertyRelationship MailingAddressProperty;
+
+    public Relationship MailingAddressProperty() {
+        return MailingAddressProperty;
     }
     @Inject
     private Relationship<BatchHistory, Batch> batchBatchHistory;
