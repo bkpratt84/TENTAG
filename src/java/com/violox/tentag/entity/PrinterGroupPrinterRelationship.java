@@ -2,22 +2,28 @@ package com.violox.tentag.entity;
 
 import com.violox.tentag.domain.*;
 import java.util.ArrayList;
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 
+@ApplicationScoped
 public class PrinterGroupPrinterRelationship implements Relationship<GroupPrinter, Printer> {
 
-    public PrinterGroupPrinterRelationship() {
-    }
+    @Inject
+    private Key<Integer> child_key;
+    @Inject
+    private PrinterRelation parent;
+    @Inject
+    private GroupPrinterRelation child;
 
     @Override
     public ArrayList<GroupPrinter> getByParent(Printer parent) {
-        // TODO implement here
-        return null;
+        return child.getbyPrinter(parent);
     }
 
     @Override
     public Printer getByChild(GroupPrinter child) {
-        // TODO implement here
-        return null;
+        child_key.setKey(child.getPrinter().getId());
+        return parent.get(child_key);
     }
 
 }

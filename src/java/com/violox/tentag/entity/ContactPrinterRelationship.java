@@ -2,25 +2,28 @@ package com.violox.tentag.entity;
 
 import com.violox.tentag.domain.*;
 import java.util.ArrayList;
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 
+@ApplicationScoped
 public class ContactPrinterRelationship implements Relationship<Printer, Contact> {
 
-    /**
-     * Default constructor
-     */
-    public ContactPrinterRelationship() {
-    }
+    @Inject
+    private Key<Integer> child_key;
+    @Inject
+    private ContactRelation parent;
+    @Inject
+    private PrinterRelation child;
 
     @Override
     public ArrayList<Printer> getByParent(Contact parent) {
-        // TODO implement here
-        return null;
+        return child.getByContact(parent);
     }
 
     @Override
     public Contact getByChild(Printer child) {
-        // TODO implement here
-        return null;
+        child_key.setKey(child.getId());
+        return parent.get(child_key);
     }
 
 }

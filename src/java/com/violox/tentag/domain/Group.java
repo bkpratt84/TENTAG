@@ -13,6 +13,8 @@ public class Group {
     private ArrayList<User> users;
     private ArrayList<Property> properties;
     private ArrayList<Printer> printers;
+    @NotNull(message = "Must have a role name.")
+    private String role;
 
     public Integer getId() {
         return id;
@@ -53,5 +55,14 @@ public class Group {
     public void setPrinters(ArrayList<Printer> printers) {
         this.printers = printers;
     }
+    
+     public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.name = role;
+    }
+   
 
 }
