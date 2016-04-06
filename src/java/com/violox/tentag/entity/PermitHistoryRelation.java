@@ -151,7 +151,7 @@ String sql = String.format("INSERT INTO `tentag`.`permit_history` "
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.execute();
         } catch (SQLException ex) {
-            Logger.getLogger(AddressRelation.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PermitHistoryRelation.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

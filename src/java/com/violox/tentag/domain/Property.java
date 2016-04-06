@@ -11,8 +11,8 @@ public class Property {
     @NotNull(message = "Property Name may not be blank.")
     private String name;
     private Contact contact;
-    private Address mailingAddress;
-    private Address billingAddress;
+    private MailingAddress mailingAddress;
+    private BillingAddress billingAddress;
     private ArrayList<Group> groups;
 
     public Integer getId() {
@@ -39,19 +39,19 @@ public class Property {
         this.contact = contact;
     }
 
-    public Address getMailingAddress() {
+    public MailingAddress getMailingAddress() {
         return mailingAddress;
     }
 
-    public void setMailingAddress(Address mailingAddress) {
+    public void setMailingAddress(MailingAddress mailingAddress) {
         this.mailingAddress = mailingAddress;
     }
 
-    public Address getBillingAddress() {
+    public BillingAddress getBillingAddress() {
         return billingAddress;
     }
 
-    public void setBillingAddress(Address billingAddress) {
+    public void setBillingAddress(BillingAddress billingAddress) {
         this.billingAddress = billingAddress;
     }
 

@@ -27,7 +27,7 @@ public class PrinterRelation implements Relation<Printer, Integer> {
     @Inject
     private Key<Integer> address_key;
     @Inject
-    private Relation<Address, Integer> address;
+    private Relation<MailingAddress, Integer> address;
 
     @Override
     public Printer post(Printer item) {
@@ -176,7 +176,7 @@ public class PrinterRelation implements Relation<Printer, Integer> {
         this.key = key;
     }
 
-    public ArrayList<Printer> getByAddress(Address parent) {
+    public ArrayList<Printer> getByAddress(MailingAddress parent) {
         ArrayList<Printer> ret = new ArrayList<>();
         String sql = String.format("SELECT `printer`.`printer_id`"
                 + ", `printer`.`printer_contact_id`"

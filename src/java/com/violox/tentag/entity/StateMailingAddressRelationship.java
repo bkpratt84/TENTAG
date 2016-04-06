@@ -6,22 +6,22 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
 @ApplicationScoped
-public class StateAddressRelationship implements Relationship<Address, State> {
+public class StateMailingAddressRelationship implements Relationship<MailingAddress, State> {
 
     @Inject
     private Key<Integer> child_key;
     @Inject
     private StateRelation parent;
     @Inject
-    private AddressRelation child;
+    private MailingAddressRelation child;
 
     @Override
-    public ArrayList<Address> getByParent(State parent) {
-        return child.getByState(parent);
+    public ArrayList<MailingAddress> getByParent(State parent) {
+        return child.getByStateMailing(parent);
     }
 
     @Override
-    public State getByChild(Address child) {
+    public State getByChild(MailingAddress child) {
         child_key.setKey(child.getState().getId());
         return parent.get(child_key);
     }

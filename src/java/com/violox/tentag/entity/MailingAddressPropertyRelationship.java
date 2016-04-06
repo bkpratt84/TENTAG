@@ -6,25 +6,22 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
 @ApplicationScoped
-public class MailingAddressPropertyRelationship implements Relationship<Property, Address> {
-
-    public MailingAddressPropertyRelationship() {
-    }
+public class MailingAddressPropertyRelationship implements Relationship<Property, MailingAddress> {
 
     @Inject
     private Key<Integer> child_key;
     @Inject
-    private AddressRelation parent;
+    private MailingAddressRelation parent;
     @Inject
     private PropertyRelation child;
 
     @Override
-    public ArrayList<Property> getByParent(Address parent) {
+    public ArrayList<Property> getByParent(MailingAddress parent) {
         return child.getByMailingAddress(parent);
     }
 
     @Override
-    public Address getByChild(Property child) {
+    public MailingAddress getByChild(Property child) {
         child_key.setKey(child.getMailingAddress().getId());
         return parent.get(child_key);
     }

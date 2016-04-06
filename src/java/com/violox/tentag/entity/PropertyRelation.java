@@ -27,12 +27,12 @@ public class PropertyRelation implements Relation<Property, Integer> {
     @Inject
     private Key<Integer> mailing_address_key;
     @Inject
-    private Relation<Address, Integer> mailing_address;
+    private Relation<MailingAddress, Integer> mailing_address;
 
     @Inject
     private Key<Integer> billing_address_key;
     @Inject
-    private Relation<Address, Integer> billing_address;
+    private Relation<BillingAddress, Integer> billing_address;
 
     @Override
     public Property post(Property item) {
@@ -85,7 +85,7 @@ public class PropertyRelation implements Relation<Property, Integer> {
                 mailing_address_key.setKey(rs.getInt(""));
                 ret.setMailingAddress(mailing_address.get(mailing_address_key));
                 billing_address_key.setKey(rs.getInt(""));
-                ret.setMailingAddress(billing_address.get(billing_address_key));
+                ret.setBillingAddress(billing_address.get(billing_address_key));
             }
         } catch (SQLException ex) {
             Logger.getLogger(PropertyRelation.class.getName()).log(Level.SEVERE, null, ex);
@@ -116,7 +116,7 @@ public class PropertyRelation implements Relation<Property, Integer> {
                 mailing_address_key.setKey(rs.getInt(""));
                 item.setMailingAddress(mailing_address.get(mailing_address_key));
                 billing_address_key.setKey(rs.getInt(""));
-                item.setMailingAddress(billing_address.get(billing_address_key));
+                item.setBillingAddress(billing_address.get(billing_address_key));
 
                 ret.add(item);
             }
@@ -175,7 +175,7 @@ public class PropertyRelation implements Relation<Property, Integer> {
     /*
      * Foreign key refs
     */
-    public ArrayList<Property> getByMailingAddress(Address address) {
+    public ArrayList<Property> getByMailingAddress(MailingAddress address) {
 
         ArrayList<Property> ret = new ArrayList<>();
         String sql = String.format("SELECT `property`.`property_id`"
@@ -199,7 +199,7 @@ public class PropertyRelation implements Relation<Property, Integer> {
                 mailing_address_key.setKey(rs.getInt(""));
                 item.setMailingAddress(mailing_address.get(mailing_address_key));
                 billing_address_key.setKey(rs.getInt(""));
-                item.setMailingAddress(billing_address.get(billing_address_key));
+                item.setBillingAddress(billing_address.get(billing_address_key));
 
                 ret.add(item);
             }
@@ -211,7 +211,7 @@ public class PropertyRelation implements Relation<Property, Integer> {
 
     }
 
-        public ArrayList<Property> getByBillingAddress(Address parent) {
+        public ArrayList<Property> getByBillingAddress(BillingAddress parent) {
 
         ArrayList<Property> ret = new ArrayList<>();
         String sql = String.format("SELECT `property`.`property_id`"
@@ -235,7 +235,7 @@ public class PropertyRelation implements Relation<Property, Integer> {
                 mailing_address_key.setKey(rs.getInt(""));
                 item.setMailingAddress(mailing_address.get(mailing_address_key));
                 billing_address_key.setKey(rs.getInt(""));
-                item.setMailingAddress(billing_address.get(billing_address_key));
+                item.setBillingAddress(billing_address.get(billing_address_key));
 
                 ret.add(item);
             }
@@ -270,7 +270,7 @@ public class PropertyRelation implements Relation<Property, Integer> {
                 mailing_address_key.setKey(rs.getInt(""));
                 item.setMailingAddress(mailing_address.get(mailing_address_key));
                 billing_address_key.setKey(rs.getInt(""));
-                item.setMailingAddress(billing_address.get(billing_address_key));
+                item.setBillingAddress(billing_address.get(billing_address_key));
 
                 ret.add(item);
             }

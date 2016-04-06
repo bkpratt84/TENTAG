@@ -1,11 +1,7 @@
 package com.violox.tentag.entity;
 
 import com.violox.tentag.domain.*;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -143,7 +139,7 @@ public class BatchHistoryRelation implements Relation<BatchHistory, Integer> {
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.execute();
         } catch (SQLException ex) {
-            Logger.getLogger(AddressRelation.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(BatchHistoryRelation.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

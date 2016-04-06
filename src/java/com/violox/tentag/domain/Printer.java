@@ -9,7 +9,7 @@ public class Printer {
 
     private Integer id;
     private Contact contact;
-    private Address address;
+    private MailingAddress address;
     @NotNull(message = "Printer must have name.")
     private String name;
     private Boolean isActive;
@@ -31,11 +31,11 @@ public class Printer {
         this.contact = contact;
     }
 
-    public Address getAddress() {
+    public MailingAddress getAddress() {
         return address;
     }
 
-    public void setAddress(Address address) {
+    public void setAddress(MailingAddress address) {
         this.address = address;
     }
 

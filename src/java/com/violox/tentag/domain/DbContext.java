@@ -1,7 +1,5 @@
 package com.violox.tentag.domain;
 
-import com.violox.tentag.entity.BillingAddressPropertyRelationship;
-import com.violox.tentag.entity.MailingAddressPropertyRelationship;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
@@ -11,7 +9,7 @@ public class DbContext {
     
     // Relations
     @Inject
-    private Relation<Address, Integer> address;
+    private Relation<BillingAddress, Integer> address;
 
     public Relation Address() {
         return address;
@@ -115,19 +113,19 @@ public class DbContext {
 
     // Relationships
     @Inject
-    private Relationship<Printer, Address> addressPrinter;
+    private Relationship<Printer, MailingAddress> addressPrinter;
 
     public Relationship AddressPrinter() {
         return addressPrinter;
     }
     @Inject
-    private BillingAddressPropertyRelationship BillingAddressProperty;
+    private Relationship<Property, BillingAddress> BillingAddressProperty;
 
     public Relationship BillingAddressProperty() {
         return BillingAddressProperty;
     }
     @Inject
-    private MailingAddressPropertyRelationship MailingAddressProperty;
+    private Relationship<Property, MailingAddress> MailingAddressProperty;
 
     public Relationship MailingAddressProperty() {
         return MailingAddressProperty;
@@ -211,7 +209,7 @@ public class DbContext {
         return propertyUnit;
     }
     @Inject
-    private Relationship<Address, State> stateAddress;
+    private Relationship<BillingAddress, State> stateAddress;
 
     public Relationship StateAddress() {
         return stateAddress;

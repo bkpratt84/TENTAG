@@ -1,21 +1,28 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package com.violox.tentag.domain;
 
-import javax.enterprise.context.RequestScoped;
-import javax.validation.constraints.*;
+import javax.validation.constraints.NotNull;
 
-@RequestScoped
+/**
+ *
+ * @author gordon
+ */
 public class Address {
-
-    private Integer id;
+    
+    protected Integer id;
     @NotNull(message = "Must have address line 1.")
-    private String addressLine1;
-    private String addressLine2;
+    protected String addressLine1;
+    protected String addressLine2;
     @NotNull(message = "Must have a city.")
-    private String city;
+    protected String city;
     @NotNull(message = "Must select a state.")
-    private State state;
+    protected State state;
     @NotNull(message = "Must have zip code.")
-    private String zip;
+    protected String zip;
 
     public Integer getId() {
         return id;
@@ -65,6 +72,4 @@ public class Address {
         this.zip = zip;
     }
     
-    
-
 }
