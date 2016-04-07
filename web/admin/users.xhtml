@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:body>
+        <ui:composition>
+            <b:panel look="primary" title="Users" collapsible="false" style="margin: 0 10px 10px 10px;">
+                <b:row>
+                    <h:form>
+                        <b:commandButton tooltip="Add User" value="Add" iconAwesome="plus" ajax="true" look="success" style="margin: 0 0 15px 10px;"/>
+                        <!--<b:commandButton value="Delete" iconAwesome="trash" ajax="true" look="warning" style="margin: 0 0 15px 10px;"/>-->
+                    </h:form>
+                </b:row>
+                
+                <b:row>
+                    <h:form>
+                        <p:dataTable var="user" value="#{adminUserController.users}" style="margin: 0 10px;">
+                            <p:column headerText="ID">
+                                <h:outputText value="#{user.id}"/>
+                            </p:column>
+                            <p:column headerText="Username">
+                                <h:outputText value="#{user.name}"/>
+                            </p:column>
+                            <p:column>
+                                <b:commandButton tooltip="Edit User" value="" iconAwesome="pencil" ajax="true" look="primary" />
+                                <b:commandButton tooltip="Reset Password" value="" iconAwesome="unlock" ajax="true" look="info" style="margin: 0 0 0 10px;"/>
+                                <b:commandButton tooltip="Delete User" value="" iconAwesome="trash" ajax="true" look="danger" style="margin: 0 0 0 10px;"/>
+                            </p:column>
+                        </p:dataTable>
+                    </h:form>
+                </b:row>
+            </b:panel>
+        </ui:composition>
+    </h:body>
+</html>

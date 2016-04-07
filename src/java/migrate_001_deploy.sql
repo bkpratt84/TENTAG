@@ -12,7 +12,7 @@ INSERT INTO `tentag`.`user` (`user_name`, `password`) VALUES ('ed','8c6976e5b541
 INSERT INTO `tentag`.`user` (`user_name`, `password`) VALUES ('admin', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918');
 
 CREATE TABLE `tentag`.`group` (
-  `group_id` INT NOT NULL AUTO_INCREMENT,
+  `group_id` INT NOT NULL AUTO_INCREMENT,   
   `group_name` VARCHAR(50) NOT NULL,
   PRIMARY KEY (`group_id`));
 

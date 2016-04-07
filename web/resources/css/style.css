@@ -10,3 +10,11 @@
 #content {
     margin: 10px 0 0 0;
 }
+
+.nav > li > a {
+    cursor: pointer;
+}
+
+.dropdown-menu > li > a {
+    cursor: pointer;
+}
