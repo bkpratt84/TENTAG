@@ -1,5 +1,6 @@
 package com.violox.tentag.domain;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import javax.enterprise.context.RequestScoped;
 import javax.validation.constraints.*;
@@ -12,7 +13,13 @@ public class User {
     @NotNull(message = "User must have a password.")
     private String password;
     private ArrayList<Group> groups;
-
+    
+    public User(Integer id, String name, String password) {
+        this.id = id;
+        this.name = name;
+        this.password = password;
+    }
+    
     public Integer getId() {
         return id;
     }

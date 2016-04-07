@@ -3,33 +3,38 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
         xmlns:h="http://xmlns.jcp.org/jsf/html"
         xmlns:ui="http://java.sun.com/jsf/facelets"
-        xmlns:b="http://bootsfaces.net/ui">
+        xmlns:b="http://bootsfaces.net/ui"
+        xmlns:p="http://primefaces.org/ui">
     
     <h:body>
         <ui:composition template="/templates/template.xhtml">
             <ui:define name="content">
-                <b:row>
-                    <b:column span="4"/>
-                    <b:column span="4">
-                        <b:panel title="Admin" look="primary">
-                            ADMIN PAGE
-                            <br/><h:link outcome="/index" value="Back to Homepage" />
-                        </b:panel>
-                    </b:column>
-                    <b:column span="4"/>
-                </b:row>
+                <b:panelGrid colSpans="2,10">
+                    <b:panel look="primary" title="Admin" collapsible="false" style="margin-left: 10px;">
+                        <b:listLinks>
+                            <b:navLink value="Home" iconAwesome="home" update=":admin-content"
+                                       onclick="ajax:adminNavController.setPage('#{navigationController.toAdminHome(false)}')" />
+                            
+                            <p:separator styleClass="separator" />
+                            
+                            <b:navLink header="Users and Groups"/>
+                            <b:navLink value="Users" iconAwesome="user" update=":admin-content"
+                                       onclick="ajax:adminNavController.setPage('#{navigationController.toAdminUsers(false)}')" />
+                            
+                            <p:separator styleClass="separator" />
+                            
+                            <b:navLink header="Vendors" />
+                        </b:listLinks>
+                    </b:panel>
+                    
+                    <h:panelGroup layout="block" id="admin-content">
+                        <ui:include src="#{adminNavController.page}"/>
+                    </h:panelGroup>
+                    
+                </b:panelGrid>
                 
-                <b:row>
-                    <b:column span="4" offset="4">
-                        <b:panel title="Test Output Controller" look="info">
-                            <h:outputText value="#{indexController.contact.firstName }"></h:outputText><br/>
-                            <h:outputText value="#{indexController.contact.lastName }"></h:outputText><br/>
-                            <h:outputText value="#{indexController.contact.email }"></h:outputText><br/>
-                            <h:outputText value="#{indexController.contact.primaryPhone }"></h:outputText><br/>
-                            <h:outputText value="#{indexController.contact.secondaryPhone }"></h:outputText><br/>
-                        </b:panel>
-                    </b:column>
-                </b:row>
+                <!--Pre-load component resources - issue with bootsfaces ajax-->
+                <p:dataTable rendered="false" />
             </ui:define>
         </ui:composition>
     </h:body>
