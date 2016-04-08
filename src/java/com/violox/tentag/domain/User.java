@@ -14,7 +14,7 @@ public class User {
     private String password;
     private ArrayList<Group> groups;
     
-   
+  
     public Integer getId() {
         return id;
     }
