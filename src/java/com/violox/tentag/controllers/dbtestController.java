@@ -86,12 +86,12 @@ public class dbtestController implements Serializable {
 //        user = (User) context.User().get(test_obj_key);
         user = (User) context.User().getByAlternateKey(user);
 
-        ArrayList<Group> users_groups = new ArrayList<>();
-        for (UserGroup ug : (ArrayList<UserGroup>) context.UserUserGroup().getByParent(user)) {
-            test_obj_key.setKey(ug.getGroupId());
-            users_groups.add((Group) context.Group().get(test_obj_key));
-        }
-        user.setGroups(users_groups);
+//        ArrayList<Group> users_groups = new ArrayList<>();
+//        for (UserGroup ug : (ArrayList<UserGroup>) context.UserUserGroup().getByParent(user)) {
+//            test_obj_key.setKey(ug.getGroupId());
+//            users_groups.add((Group) context.Group().get(test_obj_key));
+//        }
+        user.fillGroups(context, test_obj_key);
         return user;
     }
 
