@@ -11,6 +11,16 @@ public class NavigationController {
         return redirect ? (url + "?faces-redirect=true") : url;
     }
     
+    public String toAdminHome(boolean redirect) {
+        String url = "/admin/home.xhtml";
+        return redirect ? (url + "?faces-redirect=true") : url;
+    }
+ 
+    public String toAdminUsers(boolean redirect) {
+        String url = "/admin/users.xhtml";
+        return redirect ? (url + "?faces-redirect=true") : url;
+    }
+    
     public String toPrinter(boolean redirect) {
         String url = "/printer/index.xhtml";
         return redirect ? (url + "?faces-redirect=true") : url;
@@ -29,5 +39,5 @@ public class NavigationController {
     public String toLogin(boolean redirect) {
         String url = "/login/index.xhtml";
         return redirect ? (url + "?faces-redirect=true") : url;
-    }
+    }    
 }
