@@ -55,7 +55,9 @@ public class PermitHistory {
     public void setChangeDateTime(Date changeDateTime) {
         this.changeDateTime = changeDateTime;
     }
-    
-    
+
+    public void fillPermit(DbContext context) {
+        this.permit = (Permit) context.PermitPermitHistory().getByChild(this);
+    }
 
 }

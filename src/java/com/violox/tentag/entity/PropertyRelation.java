@@ -7,7 +7,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.Resource;
 import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
 import javax.sql.*;
 
 @ApplicationScoped
@@ -18,21 +17,6 @@ public class PropertyRelation implements Relation<Property, Integer> {
     @Resource(name = "jdbc/TentagDatabaseResource")
     @ApplicationScoped
     private DataSource ds;
-
-    @Inject
-    private Key<Integer> contact_key;
-    @Inject
-    private Relation<Contact, Integer> contact;
-
-    @Inject
-    private Key<Integer> mailing_address_key;
-    @Inject
-    private Relation<MailingAddress, Integer> mailing_address;
-
-    @Inject
-    private Key<Integer> billing_address_key;
-    @Inject
-    private Relation<BillingAddress, Integer> billing_address;
 
     @Override
     public Property post(Property item) {
@@ -80,12 +64,6 @@ public class PropertyRelation implements Relation<Property, Integer> {
 
             while (rs.next()) {
                 ret.setName(rs.getString(""));
-                contact_key.setKey(rs.getInt(""));
-                ret.setContact(contact.get(contact_key));
-                mailing_address_key.setKey(rs.getInt(""));
-                ret.setMailingAddress(mailing_address.get(mailing_address_key));
-                billing_address_key.setKey(rs.getInt(""));
-                ret.setBillingAddress(billing_address.get(billing_address_key));
             }
         } catch (SQLException ex) {
             Logger.getLogger(PropertyRelation.class.getName()).log(Level.SEVERE, null, ex);
@@ -111,13 +89,6 @@ public class PropertyRelation implements Relation<Property, Integer> {
             while (rs.next()) {
                 Property item = new Property();
                 item.setName(rs.getString(""));
-                contact_key.setKey(rs.getInt(""));
-                item.setContact(contact.get(contact_key));
-                mailing_address_key.setKey(rs.getInt(""));
-                item.setMailingAddress(mailing_address.get(mailing_address_key));
-                billing_address_key.setKey(rs.getInt(""));
-                item.setBillingAddress(billing_address.get(billing_address_key));
-
                 ret.add(item);
             }
         } catch (SQLException ex) {
@@ -194,13 +165,6 @@ public class PropertyRelation implements Relation<Property, Integer> {
             while (rs.next()) {
                 Property item = new Property();
                 item.setName(rs.getString(""));
-                contact_key.setKey(rs.getInt(""));
-                item.setContact(contact.get(contact_key));
-                mailing_address_key.setKey(rs.getInt(""));
-                item.setMailingAddress(mailing_address.get(mailing_address_key));
-                billing_address_key.setKey(rs.getInt(""));
-                item.setBillingAddress(billing_address.get(billing_address_key));
-
                 ret.add(item);
             }
         } catch (SQLException ex) {
@@ -211,7 +175,7 @@ public class PropertyRelation implements Relation<Property, Integer> {
 
     }
 
-        public ArrayList<Property> getByBillingAddress(BillingAddress parent) {
+        public ArrayList<Property> getByBillingAddress(Address parent) {
 
         ArrayList<Property> ret = new ArrayList<>();
         String sql = String.format("SELECT `property`.`property_id`"
@@ -230,13 +194,6 @@ public class PropertyRelation implements Relation<Property, Integer> {
             while (rs.next()) {
                 Property item = new Property();
                 item.setName(rs.getString(""));
-                contact_key.setKey(rs.getInt(""));
-                item.setContact(contact.get(contact_key));
-                mailing_address_key.setKey(rs.getInt(""));
-                item.setMailingAddress(mailing_address.get(mailing_address_key));
-                billing_address_key.setKey(rs.getInt(""));
-                item.setBillingAddress(billing_address.get(billing_address_key));
-
                 ret.add(item);
             }
         } catch (SQLException ex) {
@@ -265,13 +222,6 @@ public class PropertyRelation implements Relation<Property, Integer> {
             while (rs.next()) {
                 Property item = new Property();
                 item.setName(rs.getString(""));
-                contact_key.setKey(rs.getInt(""));
-                item.setContact(contact.get(contact_key));
-                mailing_address_key.setKey(rs.getInt(""));
-                item.setMailingAddress(mailing_address.get(mailing_address_key));
-                billing_address_key.setKey(rs.getInt(""));
-                item.setBillingAddress(billing_address.get(billing_address_key));
-
                 ret.add(item);
             }
         } catch (SQLException ex) {

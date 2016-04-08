@@ -113,22 +113,22 @@ public class DbContext {
 
     // Relationships
     @Inject
-    private Relationship<Printer, MailingAddress> addressPrinter;
+    private Relationship<Printer, MailingAddress> mailingAddressPrinter;
 
-    public Relationship AddressPrinter() {
-        return addressPrinter;
+    public Relationship MailingAddressPrinter() {
+        return mailingAddressPrinter;
     }
     @Inject
-    private Relationship<Property, BillingAddress> BillingAddressProperty;
+    private Relationship<Property, BillingAddress> billingAddressProperty;
 
     public Relationship BillingAddressProperty() {
-        return BillingAddressProperty;
+        return billingAddressProperty;
     }
     @Inject
-    private Relationship<Property, MailingAddress> MailingAddressProperty;
+    private Relationship<Property, MailingAddress> mailingAddressProperty;
 
     public Relationship MailingAddressProperty() {
-        return MailingAddressProperty;
+        return mailingAddressProperty;
     }
     @Inject
     private Relationship<BatchHistory, Batch> batchBatchHistory;
@@ -137,10 +137,10 @@ public class DbContext {
         return batchBatchHistory;
     }
     @Inject
-    private Relationship<Permit, Batch> permitBatch;
+    private Relationship<Permit, Batch> batchPermit;
 
-    public Relationship PermitBatch() {
-        return permitBatch;
+    public Relationship BatchPermit() {
+        return batchPermit;
     }
     @Inject
     private Relationship<Printer, Contact> contactPrinter;
@@ -209,10 +209,17 @@ public class DbContext {
         return propertyUnit;
     }
     @Inject
-    private Relationship<BillingAddress, State> stateAddress;
+    private Relationship<BillingAddress, State> stateBillingAddress;
 
-    public Relationship StateAddress() {
-        return stateAddress;
+    public Relationship StateBillingAddress() {
+        return stateBillingAddress;
+    }
+
+    @Inject
+    private Relationship<MailingAddress, State> stateMailingAddress;
+
+    public Relationship StateMailingAddress() {
+        return stateMailingAddress;
     }
     @Inject
     private Relationship<Permit, State> statePermit;

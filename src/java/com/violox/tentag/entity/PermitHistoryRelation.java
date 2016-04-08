@@ -11,7 +11,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.Resource;
 import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
 import javax.sql.DataSource;
 
 @ApplicationScoped
@@ -22,11 +21,6 @@ public class PermitHistoryRelation implements Relation<PermitHistory, Integer> {
     @Resource(name = "jdbc/TentagDatabaseResource")
     @ApplicationScoped
     private DataSource ds;
-
-    @Inject
-    private Key<Integer> permit_key;
-    @Inject
-    private Relation<Permit, Integer> permit;
 
     @Override
     public PermitHistory post(PermitHistory item) {
@@ -74,8 +68,6 @@ String sql = String.format("INSERT INTO `tentag`.`permit_history` "
             while (rs.next()) {
                 
                 ret.setSequence(rs.getInt("sequence_id"));
-                permit_key.setKey(rs.getInt("permit_id"));
-                ret.setPermit(permit.get(permit_key));
                 ret.setFromStatus(rs.getInt("from_status"));
                 ret.setToStatus(rs.getInt("to_status"));
                 ret.setChangeDateTime(rs.getDate("change_dt"));
@@ -103,8 +95,6 @@ String sql = String.format("INSERT INTO `tentag`.`permit_history` "
             while (rs.next()) {
                 PermitHistory item = new PermitHistory();
                 item.setSequence(rs.getInt("sequence_id"));
-                permit_key.setKey(rs.getInt("permit_id"));
-                item.setPermit(permit.get(permit_key));
                 item.setFromStatus(rs.getInt("from_status"));
                 item.setToStatus(rs.getInt("to_status"));
                 item.setChangeDateTime(rs.getDate("change_dt"));
@@ -183,8 +173,6 @@ String sql = String.format("INSERT INTO `tentag`.`permit_history` "
             while (rs.next()) {
                 PermitHistory item = new PermitHistory();
                 item.setSequence(rs.getInt("sequence_id"));
-                permit_key.setKey(rs.getInt("permit_id"));
-                item.setPermit(permit.get(permit_key));
                 item.setFromStatus(rs.getInt("from_status"));
                 item.setToStatus(rs.getInt("to_status"));
                 item.setChangeDateTime(rs.getDate("change_dt"));

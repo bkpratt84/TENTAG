@@ -7,7 +7,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.Resource;
 import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
 import javax.sql.*;
 
 @ApplicationScoped
@@ -18,21 +17,6 @@ public class PermitRelation implements Relation<Permit, Integer> {
     @Resource(name = "jdbc/TentagDatabaseResource")
     @ApplicationScoped
     private DataSource ds;
-
-    @Inject
-    private Key<Integer> batch_key;
-    @Inject
-    private Relation<Batch, Integer> batch;
-
-    @Inject
-    private Key<Integer> unit_key;
-    @Inject
-    private Relation<Unit, Integer> unit;
-
-    @Inject
-    private Key<Integer> state_key;
-    @Inject
-    private Relation<State, Integer> state;
 
     @Override
     public Permit post(Permit item) {
@@ -91,10 +75,6 @@ public class PermitRelation implements Relation<Permit, Integer> {
 
             while (rs.next()) {
                 ret.setId(rs.getInt("permit_id"));
-                batch_key.setKey(rs.getInt("batch_id"));
-                ret.setBatch(batch.get(batch_key));
-                unit_key.setKey(rs.getInt("unit_id"));
-                ret.setUnit(unit.get(unit_key));
                 ret.setStatus(rs.getInt("permit_status"));
                 ret.setIsOpenParking(rs.getBoolean("permit_is_open_parking"));
                 ret.setAssignment(rs.getString("permit_assignment"));
@@ -102,8 +82,6 @@ public class PermitRelation implements Relation<Permit, Integer> {
                 ret.setVehicleModel(rs.getString("permit_veh_model"));
                 ret.setVehicleColor(rs.getString("permit_veh_color"));
                 ret.setVehiclePlateNumber(rs.getString("permit_veh_plate_number"));
-                state_key.setKey(rs.getInt("permit_veh_plate_state_id"));
-                ret.setVehiclePlateState(state.get(state_key));
             }
         } catch (SQLException ex) {
             Logger.getLogger(PermitRelation.class.getName()).log(Level.SEVERE, null, ex);
@@ -136,10 +114,6 @@ public class PermitRelation implements Relation<Permit, Integer> {
                 Permit item = new Permit();
 
                 item.setId(rs.getInt("permit_id"));
-                batch_key.setKey(rs.getInt("batch_id"));
-                item.setBatch(batch.get(batch_key));
-                unit_key.setKey(rs.getInt("unit_id"));
-                item.setUnit(unit.get(unit_key));
                 item.setStatus(rs.getInt("permit_status"));
                 item.setIsOpenParking(rs.getBoolean("permit_is_open_parking"));
                 item.setAssignment(rs.getString("permit_assignment"));
@@ -147,8 +121,6 @@ public class PermitRelation implements Relation<Permit, Integer> {
                 item.setVehicleModel(rs.getString("permit_veh_model"));
                 item.setVehicleColor(rs.getString("permit_veh_color"));
                 item.setVehiclePlateNumber(rs.getString("permit_veh_plate_number"));
-                state_key.setKey(rs.getInt("permit_veh_plate_state_id"));
-                item.setVehiclePlateState(state.get(state_key));
 
                 ret.add(item);
             }
@@ -235,10 +207,6 @@ public class PermitRelation implements Relation<Permit, Integer> {
                 Permit item = new Permit();
 
                 item.setId(rs.getInt("permit_id"));
-                batch_key.setKey(rs.getInt("batch_id"));
-                item.setBatch(batch.get(batch_key));
-                unit_key.setKey(rs.getInt("unit_id"));
-                item.setUnit(unit.get(unit_key));
                 item.setStatus(rs.getInt("permit_status"));
                 item.setIsOpenParking(rs.getBoolean("permit_is_open_parking"));
                 item.setAssignment(rs.getString("permit_assignment"));
@@ -246,8 +214,6 @@ public class PermitRelation implements Relation<Permit, Integer> {
                 item.setVehicleModel(rs.getString("permit_veh_model"));
                 item.setVehicleColor(rs.getString("permit_veh_color"));
                 item.setVehiclePlateNumber(rs.getString("permit_veh_plate_number"));
-                state_key.setKey(rs.getInt("permit_veh_plate_state_id"));
-                item.setVehiclePlateState(state.get(state_key));
 
                 ret.add(item);
             }
@@ -283,10 +249,6 @@ public class PermitRelation implements Relation<Permit, Integer> {
                 Permit item = new Permit();
 
                 item.setId(rs.getInt("permit_id"));
-                batch_key.setKey(rs.getInt("batch_id"));
-                item.setBatch(batch.get(batch_key));
-                unit_key.setKey(rs.getInt("unit_id"));
-                item.setUnit(unit.get(unit_key));
                 item.setStatus(rs.getInt("permit_status"));
                 item.setIsOpenParking(rs.getBoolean("permit_is_open_parking"));
                 item.setAssignment(rs.getString("permit_assignment"));
@@ -294,8 +256,6 @@ public class PermitRelation implements Relation<Permit, Integer> {
                 item.setVehicleModel(rs.getString("permit_veh_model"));
                 item.setVehicleColor(rs.getString("permit_veh_color"));
                 item.setVehiclePlateNumber(rs.getString("permit_veh_plate_number"));
-                state_key.setKey(rs.getInt("permit_veh_plate_state_id"));
-                item.setVehiclePlateState(state.get(state_key));
 
                 ret.add(item);
             }
@@ -330,10 +290,6 @@ public class PermitRelation implements Relation<Permit, Integer> {
                 Permit item = new Permit();
 
                 item.setId(rs.getInt("permit_id"));
-                batch_key.setKey(rs.getInt("batch_id"));
-                item.setBatch(batch.get(batch_key));
-                unit_key.setKey(rs.getInt("unit_id"));
-                item.setUnit(unit.get(unit_key));
                 item.setStatus(rs.getInt("permit_status"));
                 item.setIsOpenParking(rs.getBoolean("permit_is_open_parking"));
                 item.setAssignment(rs.getString("permit_assignment"));
@@ -341,8 +297,6 @@ public class PermitRelation implements Relation<Permit, Integer> {
                 item.setVehicleModel(rs.getString("permit_veh_model"));
                 item.setVehicleColor(rs.getString("permit_veh_color"));
                 item.setVehiclePlateNumber(rs.getString("permit_veh_plate_number"));
-                state_key.setKey(rs.getInt("permit_veh_plate_state_id"));
-                item.setVehiclePlateState(state.get(state_key));
 
                 ret.add(item);
             }

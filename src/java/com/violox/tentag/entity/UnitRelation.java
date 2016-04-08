@@ -7,7 +7,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.Resource;
 import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
 import javax.sql.*;
 
 @ApplicationScoped
@@ -18,11 +17,6 @@ public class UnitRelation implements Relation<Unit, Integer> {
     @Resource(name = "jdbc/TentagDatabaseResource")
     @ApplicationScoped
     private DataSource ds;
-
-    @Inject
-    private Key<Integer> property_key;
-    @Inject
-    private Relation<Property, Integer> property;
 
     @Override
     public Unit post(Unit item) {
@@ -65,8 +59,6 @@ public class UnitRelation implements Relation<Unit, Integer> {
 
             while (rs.next()) {
                 ret.setId(rs.getInt("unit_id"));
-                property_key.setKey(rs.getInt("property_id"));
-                ret.setProperty(property.get(property_key));
                 ret.setName(rs.getString("unit_name"));
                 ret.setNotes(rs.getString("unit_notes"));
             }
@@ -90,8 +82,6 @@ public class UnitRelation implements Relation<Unit, Integer> {
             while (rs.next()) {
                 Unit item = new Unit();
                 item.setId(rs.getInt("unit_id"));
-                property_key.setKey(rs.getInt("property_id"));
-                item.setProperty(property.get(property_key));
                 item.setName(rs.getString("unit_name"));
                 item.setNotes(rs.getString("unit_notes"));
                 ret.add(item);
@@ -166,8 +156,6 @@ public class UnitRelation implements Relation<Unit, Integer> {
             while (rs.next()) {
                 Unit item = new Unit();
                 item.setId(rs.getInt("unit_id"));
-                property_key.setKey(rs.getInt("property_id"));
-                item.setProperty(property.get(property_key));
                 item.setName(rs.getString("unit_name"));
                 item.setNotes(rs.getString("unit_notes"));
                 ret.add(item);

@@ -14,6 +14,7 @@ public class Printer {
     private String name;
     private Boolean isActive;
     private ArrayList<Group> groups;
+    private ArrayList<Batch> batches;
 
     public Integer getId() {
         return id;
@@ -61,6 +62,27 @@ public class Printer {
 
     public void setGroups(ArrayList<Group> groups) {
         this.groups = groups;
+    }
+
+    public void fillContact(DbContext context) {
+        this.contact = (Contact) context.ContactPrinter().getByChild(this);
+    }
+
+    public void fillAddress(DbContext context) {
+        this.address = (MailingAddress) context.MailingAddressPrinter().getByChild(this);
+    }
+
+    public void fillBatch(DbContext context, Key<Integer> key) {
+        key.setKey(this.id);
+        this.batches = (ArrayList<Batch>) context.PrinterBatch().getByParent(this);
+    }
+
+    public ArrayList<Batch> getBatches() {
+        return batches;
+    }
+
+    public void setBatches(ArrayList<Batch> batches) {
+        this.batches = batches;
     }
 
 }

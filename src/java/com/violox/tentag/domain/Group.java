@@ -55,14 +55,64 @@ public class Group {
     public void setPrinters(ArrayList<Printer> printers) {
         this.printers = printers;
     }
-    
-     public String getRole() {
+
+    public String getRole() {
         return role;
     }
 
     public void setRole(String role) {
         this.role = role;
     }
-   
+
+    public void fillPrinters(DbContext context, Key<Integer> obj_key) {
+        if (this.id == null) {
+            return;
+        }
+        if (this.printers == null) {
+            this.printers = new ArrayList<>();
+        } else {
+            this.printers.clear();
+        }
+
+        for (GroupPrinter junction : (ArrayList<GroupPrinter>) context.GroupGroupPrinter().getByParent(this)) {
+            obj_key.setKey(junction.getGroupId());
+            Printer child = (Printer) context.Printer().get(obj_key);
+            printers.add(child);
+        }
+    }
+
+    public void fillProperties(DbContext context, Key<Integer> obj_key) {
+        if (this.id == null) {
+            return;
+        }
+        if (this.properties == null) {
+            this.properties = new ArrayList<>();
+        } else {
+            this.properties.clear();
+        }
+
+        for (GroupProperty junction : (ArrayList<GroupProperty>) context.GroupGroupProperty().getByParent(this)) {
+            obj_key.setKey(junction.getGroupId());
+            Property child = (Property) context.Property().get(obj_key);
+            properties.add(child);
+        }
+    }
+
+    public void fillUsers(DbContext context, Key<Integer> obj_key) {
+        if (this.id == null) {
+            return;
+        }
+        if (this.users == null) {
+            this.users = new ArrayList<>();
+        } else {
+            this.users.clear();
+        }
+
+        for (UserGroup junction : (ArrayList<UserGroup>) context.GroupUserGroup().getByParent(this)) {
+            obj_key.setKey(junction.getGroupId());
+            User child = (User) context.User().get(obj_key);
+            users.add(child);
+        }
+    }
 
 }

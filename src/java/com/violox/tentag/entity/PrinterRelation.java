@@ -7,7 +7,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.Resource;
 import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
 import javax.sql.*;
 
 @ApplicationScoped
@@ -19,15 +18,6 @@ public class PrinterRelation implements Relation<Printer, Integer> {
     @ApplicationScoped
     private DataSource ds;
 
-    @Inject
-    private Key<Integer> contact_key;
-    @Inject
-    private Relation<Contact, Integer> contact;
-
-    @Inject
-    private Key<Integer> address_key;
-    @Inject
-    private Relation<MailingAddress, Integer> address;
 
     @Override
     public Printer post(Printer item) {
@@ -77,13 +67,8 @@ public class PrinterRelation implements Relation<Printer, Integer> {
 
             while (rs.next()) {
                 ret.setId(rs.getInt("printer_id"));
-                contact_key.setKey(rs.getInt("printer_contact_id"));
-                ret.setContact(contact.get(contact_key));
-                address_key.setKey(rs.getInt("printer_address_id"));
-                ret.setAddress(address.get(address_key));
                 ret.setName(rs.getString("printer_name"));
                 ret.setIsActive(rs.getBoolean("printer_is_active"));
-                //TODO set relations
             }
         } catch (SQLException ex) {
             Logger.getLogger(PrinterRelation.class.getName()).log(Level.SEVERE, null, ex);
@@ -111,14 +96,8 @@ public class PrinterRelation implements Relation<Printer, Integer> {
                 Printer item = new Printer();
 
                 item.setId(rs.getInt("printer_id"));
-                contact_key.setKey(rs.getInt("printer_contact_id"));
-                item.setContact(contact.get(contact_key));
-                address_key.setKey(rs.getInt("printer_address_id"));
-                item.setAddress(address.get(address_key));
                 item.setName(rs.getString("printer_name"));
                 item.setIsActive(rs.getBoolean("printer_is_active"));
-                //TODO set relations
-
                 ret.add(item);
             }
         } catch (SQLException ex) {
@@ -194,14 +173,8 @@ public class PrinterRelation implements Relation<Printer, Integer> {
                 Printer item = new Printer();
 
                 item.setId(rs.getInt("printer_id"));
-                contact_key.setKey(rs.getInt("printer_contact_id"));
-                item.setContact(contact.get(contact_key));
-                address_key.setKey(rs.getInt("printer_address_id"));
-                item.setAddress(address.get(address_key));
                 item.setName(rs.getString("printer_name"));
                 item.setIsActive(rs.getBoolean("printer_is_active"));
-                //TODO set relations
-
                 ret.add(item);
             }
         } catch (SQLException ex) {
@@ -227,16 +200,9 @@ public class PrinterRelation implements Relation<Printer, Integer> {
 
             while (rs.next()) {
                 Printer item = new Printer();
-
                 item.setId(rs.getInt("printer_id"));
-                contact_key.setKey(rs.getInt("printer_contact_id"));
-                item.setContact(contact.get(contact_key));
-                address_key.setKey(rs.getInt("printer_address_id"));
-                item.setAddress(address.get(address_key));
                 item.setName(rs.getString("printer_name"));
                 item.setIsActive(rs.getBoolean("printer_is_active"));
-                //TODO set relations
-
                 ret.add(item);
             }
         } catch (SQLException ex) {

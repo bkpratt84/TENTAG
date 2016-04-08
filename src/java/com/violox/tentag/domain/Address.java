@@ -11,7 +11,7 @@ import javax.validation.constraints.NotNull;
  *
  * @author gordon
  */
-public class Address {
+public abstract class Address {
     
     protected Integer id;
     @NotNull(message = "Must have address line 1.")
@@ -71,5 +71,8 @@ public class Address {
     public void setZip(String zip) {
         this.zip = zip;
     }
+    
+
+    public abstract void fillState(DbContext context);
     
 }

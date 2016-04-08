@@ -7,7 +7,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.Resource;
 import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
 import javax.sql.*;
 
 @ApplicationScoped
@@ -18,11 +17,6 @@ public class MailingAddressRelation implements Relation<MailingAddress, Integer>
     @Resource(name = "jdbc/TentagDatabaseResource")
     @ApplicationScoped
     private DataSource ds;
-
-    @Inject
-    private Key<Integer> state_key;
-    @Inject
-    private Relation<State, Integer> state;
 
     @Override
     public MailingAddress post(MailingAddress item) {
@@ -77,8 +71,6 @@ public class MailingAddressRelation implements Relation<MailingAddress, Integer>
                 ret.setAddressLine2(rs.getString("address_line_2"));
                 ret.setCity(rs.getString("address_city"));
                 ret.setZip(rs.getString("address_zip"));
-                state_key.setKey(rs.getInt("address_state_id"));
-                ret.setState(state.get(state_key));
             }
         } catch (SQLException ex) {
             Logger.getLogger(MailingAddressRelation.class.getName()).log(Level.SEVERE, null, ex);
@@ -108,8 +100,6 @@ public class MailingAddressRelation implements Relation<MailingAddress, Integer>
                 item.setAddressLine2(rs.getString("address_line_2"));
                 item.setCity(rs.getString("address_city"));
                 item.setZip(rs.getString("address_zip"));
-                state_key.setKey(rs.getInt("address_state_id"));
-                item.setState(state.get(state_key));
                 ret.add(item);
             }
         } catch (SQLException ex) {
@@ -186,8 +176,6 @@ public class MailingAddressRelation implements Relation<MailingAddress, Integer>
                 item.setAddressLine2(rs.getString("address_line_2"));
                 item.setCity(rs.getString("address_city"));
                 item.setZip(rs.getString("address_zip"));
-                state_key.setKey(rs.getInt("address_state_id"));
-                item.setState(state.get(state_key));
 
                 ret.add(item);
             }
@@ -221,8 +209,6 @@ public class MailingAddressRelation implements Relation<MailingAddress, Integer>
                 item.setAddressLine2(rs.getString("address_line_2"));
                 item.setCity(rs.getString("address_city"));
                 item.setZip(rs.getString("address_zip"));
-                state_key.setKey(rs.getInt("address_state_id"));
-                item.setState(state.get(state_key));
 
                 ret.add(item);
             }

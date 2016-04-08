@@ -9,8 +9,6 @@ import javax.annotation.Resource;
 import javax.enterprise.context.ApplicationScoped;
 import javax.sql.*;
 
-
-
 @ApplicationScoped
 public class GroupRelation implements Relation<Group, Integer> {
 

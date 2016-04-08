@@ -55,9 +55,9 @@ public class BatchHistory {
     public void setChangeDateTime(Date changeDateTime) {
         this.changeDateTime = changeDateTime;
     }
-    
-    
-    
-    
+
+    public void fillBatch(DbContext context) {
+        this.batch = (Batch) context.BatchBatchHistory().getByChild(this);
+    }
 
 }

@@ -1,5 +1,6 @@
 package com.violox.tentag.domain;
 
+import java.util.ArrayList;
 import javax.enterprise.context.RequestScoped;
 import javax.validation.constraints.*;
 
@@ -18,6 +19,7 @@ public class Permit {
     private String vehicleColor;
     private String vehiclePlateNumber;
     private State vehiclePlateState;
+    private ArrayList<PermitHistory> permitHistory;
 
     public Integer getId() {
         return id;
@@ -106,6 +108,30 @@ public class Permit {
     public void setVehiclePlateState(State vehiclePlateState) {
         this.vehiclePlateState = vehiclePlateState;
     }
-
     
+    public void fillUnit(DbContext context) {
+        this.unit = (Unit) context.UnitPermit().getByChild(this);
+    }
+    
+    public void fillState(DbContext context) {
+        this.vehiclePlateState = (State) context.StatePermit().getByChild(this);
+    }
+    
+    public void fillBatch(DbContext context) {
+        this.batch = (Batch) context.BatchPermit().getByChild(this);
+    }
+    
+    public void fillPermitHistory(DbContext context, Key<Integer> key){
+        key.setKey(this.id);
+        this.setPermitHistory((ArrayList<PermitHistory>) context.PermitPermitHistory().getByParent(this));
+    }
+
+    public ArrayList<PermitHistory> getPermitHistory() {
+        return permitHistory;
+    }
+
+    public void setPermitHistory(ArrayList<PermitHistory> permitHistory) {
+        this.permitHistory = permitHistory;
+    }
+
 }

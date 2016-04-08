@@ -6,7 +6,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.Resource;
 import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
 import javax.sql.*;
 import java.sql.*;
 
@@ -18,16 +17,6 @@ public class BatchRelation implements Relation<Batch, Integer> {
     @Resource(name = "jdbc/TentagDatabaseResource")
     @ApplicationScoped
     private DataSource ds;
-
-    @Inject
-    private Key<Integer> property_key;
-    @Inject
-    private Relation<Property, Integer> property;
-
-    @Inject
-    private Key<Integer> printer_key;
-    @Inject
-    private Relation<Printer, Integer> printer;
 
     @Override
     public Batch post(Batch item) {
@@ -70,10 +59,6 @@ public class BatchRelation implements Relation<Batch, Integer> {
 
             while (rs.next()) {
                 ret.setId(rs.getInt("batch_id"));
-                printer_key.setKey(rs.getInt("printer_id"));
-                ret.setPrinter(printer.get(printer_key));
-                property_key.setKey(rs.getInt("property_id"));
-                ret.setProperty(property.get(property_key));
                 ret.setStatus(rs.getInt("batch_status"));
             }
         } catch (SQLException ex) {
@@ -98,10 +83,6 @@ public class BatchRelation implements Relation<Batch, Integer> {
             while (rs.next()) {
                 Batch item = new Batch();
                 item.setId(rs.getInt("batch_id"));
-                printer_key.setKey(rs.getInt("printer_id"));
-                item.setPrinter(printer.get(printer_key));
-                property_key.setKey(rs.getInt("property_id"));
-                item.setProperty(property.get(property_key));
                 item.setStatus(rs.getInt("batch_status"));
                 ret.add(item);
             }
@@ -170,10 +151,6 @@ public class BatchRelation implements Relation<Batch, Integer> {
             while (rs.next()) {
                 Batch item = new Batch();
                 item.setId(rs.getInt("batch_id"));
-                printer_key.setKey(rs.getInt("printer_id"));
-                item.setPrinter(printer.get(printer_key));
-                property_key.setKey(rs.getInt("property_id"));
-                item.setProperty(property.get(property_key));
                 item.setStatus(rs.getInt("batch_status"));
                 ret.add(item);
             }
@@ -201,10 +178,6 @@ public class BatchRelation implements Relation<Batch, Integer> {
             while (rs.next()) {
                 Batch item = new Batch();
                 item.setId(rs.getInt("batch_id"));
-                printer_key.setKey(rs.getInt("printer_id"));
-                item.setPrinter(printer.get(printer_key));
-                property_key.setKey(rs.getInt("property_id"));
-                item.setProperty(property.get(property_key));
                 item.setStatus(rs.getInt("batch_status"));
                 ret.add(item);
             }

@@ -7,7 +7,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.Resource;
 import javax.enterprise.context.ApplicationScoped;
-//import javax.inject.Inject;
 import javax.sql.*;
 
 @ApplicationScoped
@@ -19,15 +18,6 @@ public class GroupPrinterRelation implements Relation<GroupPrinter, IntegerPair>
     @ApplicationScoped
     private DataSource ds;
 
-//    @Inject
-//    private Key<Integer> group_key;
-//    @Inject
-//    private Relation<Group, Integer> group;
-//
-//    @Inject
-//    private Key<Integer> printer_key;
-//    @Inject
-//    private Relation<Printer, Integer> printer;
     @Override
     public GroupPrinter post(GroupPrinter item) {
         String sql = String.format("INSERT INTO `tentag`.`group_printer` "

@@ -1,7 +1,6 @@
 package com.violox.tentag.domain;
 
 import javax.enterprise.context.RequestScoped;
-import javax.validation.constraints.*;
 
 @RequestScoped
 public class BatchStatusBitMap {

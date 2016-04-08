@@ -1,5 +1,6 @@
 package com.violox.tentag.domain;
 
+import java.util.ArrayList;
 import javax.enterprise.context.RequestScoped;
 import javax.validation.constraints.*;
 
@@ -11,6 +12,7 @@ public class Unit {
     @NotNull(message = "Unit must have a name.")
     private String name;
     private String notes;
+    private ArrayList<Permit> permits;
 
     public Integer getId() {
         return id;
@@ -43,5 +45,23 @@ public class Unit {
     public void setNotes(String notes) {
         this.notes = notes;
     }
+
+    public ArrayList<Permit> getPermits() {
+        return permits;
+    }
+
+    public void setPermits(ArrayList<Permit> permits) {
+        this.permits = permits;
+    }
+
+    public void fillProperty(DbContext context) {
+        this.setProperty((Property) context.PropertyBatch().getByChild(this));
+    }
+
+    public void fillPermit(DbContext context, Key<Integer> key) {
+        key.setKey(this.id);
+        this.setPermits((ArrayList<Permit>) context.UnitPermit().getByParent(this));
+    }
+
 
 }
