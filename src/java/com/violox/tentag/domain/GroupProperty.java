@@ -5,23 +5,23 @@ import javax.enterprise.context.RequestScoped;
 @RequestScoped
 public class GroupProperty {
 
-    private Group group;
-    private Property property;
+    private Integer groupId;
+    private Integer propertyId;
 
-    public Group getGroup() {
-        return group;
+    public Integer getGroupId() {
+        return groupId;
     }
 
-    public void setGroup(Group group) {
-        this.group = group;
+    public void setGroupId(Integer groupId) {
+        this.groupId = groupId;
     }
 
-    public Property getProperty() {
-        return property;
+    public Integer getPropertyId() {
+        return propertyId;
     }
 
-    public void setProperty(Property property) {
-        this.property = property;
+    public void setPropertyId(Integer propertyId) {
+        this.propertyId = propertyId;
     }
 
 }

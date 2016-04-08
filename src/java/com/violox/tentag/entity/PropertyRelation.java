@@ -281,4 +281,9 @@ public class PropertyRelation implements Relation<Property, Integer> {
         return ret;
     }
 
+    @Override
+    public Property getByAlternateKey(Property item) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

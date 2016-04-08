@@ -152,4 +152,9 @@ public class ContactRelation implements Relation<Contact, Integer> {
         this.key = key;
     }
 
+    @Override
+    public Contact getByAlternateKey(Contact item) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

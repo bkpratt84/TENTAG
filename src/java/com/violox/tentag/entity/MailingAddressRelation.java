@@ -233,4 +233,9 @@ public class MailingAddressRelation implements Relation<MailingAddress, Integer>
         return ret;
     }
 
+    @Override
+    public MailingAddress getByAlternateKey(MailingAddress item) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

@@ -10,6 +10,8 @@ public interface Relation<T, U> {
 
     public T get(Key<U> key);
 
+    public T getByAlternateKey(T item);
+
     public ArrayList<T> get();
 
     public void put(T item);

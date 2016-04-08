@@ -5,23 +5,23 @@ import javax.enterprise.context.RequestScoped;
 @RequestScoped
 public class GroupPrinter {
 
-    private Group group;
-    private Printer printer;
+    private Integer groupId;
+    private Integer printerId;
 
-    public Group getGroup() {
-        return group;
+    public Integer getGroupId() {
+        return groupId;
     }
 
-    public void setGroup(Group group) {
-        this.group = group;
+    public void setGroupId(Integer groupId) {
+        this.groupId = groupId;
     }
 
-    public Printer getPrinter() {
-        return printer;
+    public Integer getPrinterId() {
+        return printerId;
     }
 
-    public void setPrinter(Printer printer) {
-        this.printer = printer;
+    public void setPrinterId(Integer printerId) {
+        this.printerId = printerId;
     }
 
 }

@@ -130,4 +130,9 @@ public class PermitStatusBitMapRelation implements Relation<PermitStatusBitMap, 
         this.key = key;
     }
 
+    @Override
+    public PermitStatusBitMap getByAlternateKey(PermitStatusBitMap item) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

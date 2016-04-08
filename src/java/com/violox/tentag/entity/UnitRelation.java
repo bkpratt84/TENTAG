@@ -179,4 +179,9 @@ public class UnitRelation implements Relation<Unit, Integer> {
         return ret;
     }
 
+    @Override
+    public Unit getByAlternateKey(Unit item) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

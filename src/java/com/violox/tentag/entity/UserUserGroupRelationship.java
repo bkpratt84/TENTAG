@@ -22,7 +22,7 @@ public class UserUserGroupRelationship implements Relationship<UserGroup, User> 
 
     @Override
     public User getByChild(UserGroup child) {
-        child_key.setKey(child.getUser().getId());
+        child_key.setKey(child.getUserId());
         return parent.get(child_key);
     }
 

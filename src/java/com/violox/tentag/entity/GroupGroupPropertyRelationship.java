@@ -22,7 +22,7 @@ public class GroupGroupPropertyRelationship implements Relationship<GroupPropert
 
     @Override
     public Group getByChild(GroupProperty child) {
-        child_key.setKey(child.getGroup().getId());
+        child_key.setKey(child.getGroupId());
         return parent.get(child_key);
     }
 

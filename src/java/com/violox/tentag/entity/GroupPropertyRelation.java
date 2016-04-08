@@ -10,7 +10,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.Resource;
 import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
 import javax.sql.DataSource;
 
 @ApplicationScoped
@@ -22,21 +21,11 @@ public class GroupPropertyRelation implements Relation<GroupProperty, IntegerPai
     @ApplicationScoped
     private DataSource ds;
 
-    @Inject
-    private Key<Integer> group_key;
-    @Inject
-    private Relation<Group, Integer> group;
-
-    @Inject
-    private Key<Integer> property_key;
-    @Inject
-    private Relation<Property, Integer> property;
-
     @Override
     public GroupProperty post(GroupProperty item) {
         String sql = String.format("INSERT INTO `tentag`.`group_property` "
                 + "(`group_id`, `property_id`) "
-                + "VALUES (%d, %d); ", item.getGroup().getId(), item.getProperty().getId()
+                + "VALUES (%d, %d); ", item.getGroupId(), item.getPropertyId()
         );
 
         try (Connection conn = ds.getConnection()) {
@@ -64,10 +53,8 @@ public class GroupPropertyRelation implements Relation<GroupProperty, IntegerPai
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                group_key.setKey(rs.getInt("group_id"));
-                ret.setGroup(group.get(group_key));
-                property_key.setKey(rs.getInt("property_id"));
-                ret.setProperty(property.get(property_key));
+                ret.setGroupId(rs.getInt("group_id"));
+                ret.setPropertyId(rs.getInt("property_id"));
             }
         } catch (SQLException ex) {
             Logger.getLogger(GroupPropertyRelation.class.getName()).log(Level.SEVERE, null, ex);
@@ -87,10 +74,8 @@ public class GroupPropertyRelation implements Relation<GroupProperty, IntegerPai
 
             while (rs.next()) {
                 GroupProperty item = new GroupProperty();
-                group_key.setKey(rs.getInt("group_id"));
-                item.setGroup(group.get(group_key));
-                property_key.setKey(rs.getInt("property_id"));
-                item.setProperty(property.get(property_key));
+                item.setGroupId(rs.getInt("group_id"));
+                item.setPropertyId(rs.getInt("property_id"));
                 ret.add(item);
             }
         } catch (SQLException ex) {
@@ -105,7 +90,7 @@ public class GroupPropertyRelation implements Relation<GroupProperty, IntegerPai
         String sql = String.format("UPDATE `tentag`.`group_property` "
                 + "SET `group_id` = %d "
                 + ", `property_id` = %d "
-                + "WHERE `group_id` = %d AND `property_id` = %d; ", item.getGroup().getId(), item.getProperty().getId(), item.getGroup().getId(), item.getProperty().getId()
+                + "WHERE `group_id` = %d AND `property_id` = %d; ", item.getGroupId(), item.getPropertyId(), item.getGroupId(), item.getPropertyId()
         );
 
         try (Connection conn = ds.getConnection()) {
@@ -119,7 +104,7 @@ public class GroupPropertyRelation implements Relation<GroupProperty, IntegerPai
     @Override
     public void delete(GroupProperty item) {
         String sql = String.format("DELETE FROM `tentag`.`group_property` "
-                + "WHERE `group_id` = %d AND `property_id` = %d;", item.getGroup().getId(), item.getProperty().getId()
+                + "WHERE `group_id` = %d AND `property_id` = %d;", item.getGroupId(), item.getPropertyId()
         );
 
         try (Connection conn = ds.getConnection()) {
@@ -154,10 +139,8 @@ public class GroupPropertyRelation implements Relation<GroupProperty, IntegerPai
 
             while (rs.next()) {
                 GroupProperty item = new GroupProperty();
-                group_key.setKey(rs.getInt("group_id"));
-                item.setGroup(group.get(group_key));
-                property_key.setKey(rs.getInt("property_id"));
-                item.setProperty(property.get(property_key));
+                item.setGroupId(rs.getInt("group_id"));
+                item.setPropertyId(rs.getInt("property_id"));
                 ret.add(item);
             }
         } catch (SQLException ex) {
@@ -181,10 +164,8 @@ public class GroupPropertyRelation implements Relation<GroupProperty, IntegerPai
 
             while (rs.next()) {
                 GroupProperty item = new GroupProperty();
-                group_key.setKey(rs.getInt("group_id"));
-                item.setGroup(group.get(group_key));
-                property_key.setKey(rs.getInt("property_id"));
-                item.setProperty(property.get(property_key));
+                item.setGroupId(rs.getInt("group_id"));
+                item.setPropertyId(rs.getInt("property_id"));
                 ret.add(item);
             }
         } catch (SQLException ex) {
@@ -192,6 +173,11 @@ public class GroupPropertyRelation implements Relation<GroupProperty, IntegerPai
         }
 
         return ret;
+    }
+
+    @Override
+    public GroupProperty getByAlternateKey(GroupProperty item) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

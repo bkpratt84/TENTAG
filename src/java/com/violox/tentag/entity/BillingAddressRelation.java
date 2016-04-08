@@ -198,4 +198,9 @@ public class BillingAddressRelation implements Relation<BillingAddress, Integer>
         return ret;
     }
 
+    @Override
+    public BillingAddress getByAlternateKey(BillingAddress item) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

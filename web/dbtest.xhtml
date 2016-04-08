@@ -8,12 +8,34 @@
     </h:head>
     <h:body>
         <h:form>
-            <h:outputText value="#{dbtestController.object.id}"></h:outputText> - <h:outputText value="#{dbtestController.object.email}"></h:outputText><br/><br/>
-            <c:forEach var="item" items="#{dbtestController.objects}">
+            <h:outputText value="#{dbtestController.contact.id}"></h:outputText> - <h:outputText value="#{dbtestController.contact.email}"></h:outputText><br/><br/>
+            <c:forEach var="item" items="#{dbtestController.contacts}">
                 <h:outputText value="#{item.email}"></h:outputText><br/>
             </c:forEach>
-            <h:commandLink actionListener="#{dbtestController.updateObject()}" value="update"></h:commandLink><br/>
-            <h:commandLink actionListener="#{dbtestController.destroyObject()}" value="delete"></h:commandLink>
+            <h:commandLink actionListener="#{dbtestController.updateContact()}" value="update"></h:commandLink><br/>
+            <h:commandLink actionListener="#{dbtestController.destroyContact()}" value="delete"></h:commandLink>
+            <br />
+            <br/>
+
+            <h:outputText value="#{dbtestController.user.id}"></h:outputText> - <h:outputText value="#{dbtestController.user.name}"></h:outputText><br/><br/>
+            <c:forEach var="item" items="#{dbtestController.users}">
+                <h:outputText value="#{item.name}"></h:outputText><br/>
+            </c:forEach>
+            <h:commandLink actionListener="#{dbtestController.updateUser()}" value="update"></h:commandLink><br/>
+            <h:commandLink actionListener="#{dbtestController.destroyUser()}" value="delete"></h:commandLink>
+            <br />
+            <br/>
+
+            <h:outputText value="#{dbtestController.group.id}"></h:outputText> - <h:outputText value="#{dbtestController.group.name}"></h:outputText><br/><br/>
+            <c:forEach var="item" items="#{dbtestController.groups}">
+                <h:outputText value="#{item.name}"></h:outputText><br/>
+            </c:forEach>
+            <h:commandLink actionListener="#{dbtestController.updateGroup()}" value="update"></h:commandLink><br/>
+            <h:commandLink actionListener="#{dbtestController.destroyGroup()}" value="delete"></h:commandLink>
+            <br />
+            <br/>
+            <h:commandLink actionListener="#{dbtestController.destroyUserGroup()}" value="delete usergroup"></h:commandLink>
+
         </h:form>
     </h:body>
 

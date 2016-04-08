@@ -215,4 +215,9 @@ public class BatchRelation implements Relation<Batch, Integer> {
         return ret; 
     }
 
+    @Override
+    public Batch getByAlternateKey(Batch item) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

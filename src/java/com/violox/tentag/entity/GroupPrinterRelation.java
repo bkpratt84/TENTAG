@@ -7,7 +7,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.Resource;
 import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
+//import javax.inject.Inject;
 import javax.sql.*;
 
 @ApplicationScoped
@@ -19,21 +19,20 @@ public class GroupPrinterRelation implements Relation<GroupPrinter, IntegerPair>
     @ApplicationScoped
     private DataSource ds;
 
-    @Inject
-    private Key<Integer> group_key;
-    @Inject
-    private Relation<Group, Integer> group;
-
-    @Inject
-    private Key<Integer> printer_key;
-    @Inject
-    private Relation<Printer, Integer> printer;
-
+//    @Inject
+//    private Key<Integer> group_key;
+//    @Inject
+//    private Relation<Group, Integer> group;
+//
+//    @Inject
+//    private Key<Integer> printer_key;
+//    @Inject
+//    private Relation<Printer, Integer> printer;
     @Override
     public GroupPrinter post(GroupPrinter item) {
         String sql = String.format("INSERT INTO `tentag`.`group_printer` "
                 + "(`group_id`, `printer_id`) "
-                + "VALUES (%d, %d); ", item.getGroup().getId(), item.getPrinter().getId()
+                + "VALUES (%d, %d); ", item.getGroupId(), item.getPrinterId()
         );
 
         try (Connection conn = ds.getConnection()) {
@@ -61,10 +60,8 @@ public class GroupPrinterRelation implements Relation<GroupPrinter, IntegerPair>
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                group_key.setKey(rs.getInt("group_id"));
-                ret.setGroup(group.get(group_key));
-                printer_key.setKey(rs.getInt("printer_id"));
-                ret.setPrinter(printer.get(printer_key));
+                ret.setGroupId(rs.getInt("group_id"));
+                ret.setPrinterId(rs.getInt("printer_id"));
             }
         } catch (SQLException ex) {
             Logger.getLogger(GroupPrinterRelation.class.getName()).log(Level.SEVERE, null, ex);
@@ -84,10 +81,8 @@ public class GroupPrinterRelation implements Relation<GroupPrinter, IntegerPair>
 
             while (rs.next()) {
                 GroupPrinter item = new GroupPrinter();
-                group_key.setKey(rs.getInt("group_id"));
-                item.setGroup(group.get(group_key));
-                printer_key.setKey(rs.getInt("printer_id"));
-                item.setPrinter(printer.get(printer_key));
+                item.setGroupId(rs.getInt("group_id"));
+                item.setPrinterId(rs.getInt("printer_id"));
                 ret.add(item);
             }
         } catch (SQLException ex) {
@@ -102,11 +97,7 @@ public class GroupPrinterRelation implements Relation<GroupPrinter, IntegerPair>
         String sql = String.format("UPDATE `tentag`.`group_printer` "
                 + "SET `group_id` = %d "
                 + ", `printer_id` = %d "
-                + "WHERE `group_id` = %d AND `printer_id` = %d; "
-                , item.getGroup().getId()
-                , item.getPrinter().getId()
-                , item.getGroup().getId()
-                , item.getPrinter().getId()
+                + "WHERE `group_id` = %d AND `printer_id` = %d; ", item.getGroupId(), item.getPrinterId(), item.getGroupId(), item.getPrinterId()
         );
 
         try (Connection conn = ds.getConnection()) {
@@ -120,9 +111,7 @@ public class GroupPrinterRelation implements Relation<GroupPrinter, IntegerPair>
     @Override
     public void delete(GroupPrinter item) {
         String sql = String.format("DELETE FROM `tentag`.`group_printer` "
-                + "WHERE `group_id` = %d AND `printer_id` = %d;"
-                , item.getGroup().getId()
-                , item.getPrinter().getId()
+                + "WHERE `group_id` = %d AND `printer_id` = %d;", item.getGroupId(), item.getPrinterId()
         );
 
         try (Connection conn = ds.getConnection()) {
@@ -148,8 +137,7 @@ public class GroupPrinterRelation implements Relation<GroupPrinter, IntegerPair>
         String sql = String.format("SELECT `group_printer`.`group_id`"
                 + ", `group_printer`.`printer_id` "
                 + "FROM `tentag`.`group_printer`"
-                + " WHERE `group_printer`.`printer_id` = %d; "
-                , parent.getId()
+                + " WHERE `group_printer`.`printer_id` = %d; ", parent.getId()
         );
         try (Connection conn = ds.getConnection()) {
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -157,10 +145,8 @@ public class GroupPrinterRelation implements Relation<GroupPrinter, IntegerPair>
 
             while (rs.next()) {
                 GroupPrinter item = new GroupPrinter();
-                group_key.setKey(rs.getInt("group_id"));
-                item.setGroup(group.get(group_key));
-                printer_key.setKey(rs.getInt("printer_id"));
-                item.setPrinter(printer.get(printer_key));
+                item.setGroupId(rs.getInt("group_id"));
+                item.setPrinterId(rs.getInt("printer_id"));
                 ret.add(item);
             }
         } catch (SQLException ex) {
@@ -176,8 +162,7 @@ public class GroupPrinterRelation implements Relation<GroupPrinter, IntegerPair>
         String sql = String.format("SELECT `group_printer`.`group_id`"
                 + ", `group_printer`.`printer_id` "
                 + "FROM `tentag`.`group_printer`"
-                + " WHERE `group_printer`.`group_id` = %d; "
-                , parent.getId()
+                + " WHERE `group_printer`.`group_id` = %d; ", parent.getId()
         );
         try (Connection conn = ds.getConnection()) {
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -185,10 +170,8 @@ public class GroupPrinterRelation implements Relation<GroupPrinter, IntegerPair>
 
             while (rs.next()) {
                 GroupPrinter item = new GroupPrinter();
-                group_key.setKey(rs.getInt("group_id"));
-                item.setGroup(group.get(group_key));
-                printer_key.setKey(rs.getInt("printer_id"));
-                item.setPrinter(printer.get(printer_key));
+                item.setGroupId(rs.getInt("group_id"));
+                item.setPrinterId(rs.getInt("printer_id"));
                 ret.add(item);
             }
         } catch (SQLException ex) {
@@ -196,6 +179,11 @@ public class GroupPrinterRelation implements Relation<GroupPrinter, IntegerPair>
         }
 
         return ret;
+    }
+
+    @Override
+    public GroupPrinter getByAlternateKey(GroupPrinter item) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

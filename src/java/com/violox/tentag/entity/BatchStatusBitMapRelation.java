@@ -127,4 +127,9 @@ public class BatchStatusBitMapRelation implements Relation<BatchStatusBitMap, In
         this.key = key;
     }
 
+    @Override
+    public BatchStatusBitMap getByAlternateKey(BatchStatusBitMap item) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

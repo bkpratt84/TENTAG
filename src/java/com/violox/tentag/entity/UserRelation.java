@@ -63,13 +63,6 @@ public class UserRelation implements Relation<User, Integer> {
                 ret.setId(rs.getInt("user_id"));
                 ret.setName(rs.getString("user_name"));
                 ret.setPassword(rs.getString("password"));
-                ArrayList<UserGroup> g = groups.getByParent(ret);
-                ArrayList<Group> gr = new ArrayList<>();
-                for (UserGroup n : g) {
-                    gr.add(n.getGroup());
-                }
-                ret.setGroups(gr);
-
             }
         } catch (SQLException ex) {
             Logger.getLogger(UserRelation.class.getName()).log(Level.SEVERE, null, ex);
@@ -92,13 +85,6 @@ public class UserRelation implements Relation<User, Integer> {
                 item.setId(rs.getInt("user_id"));
                 item.setName(rs.getString("user_name"));
                 item.setPassword(rs.getString("password"));
-                ArrayList<UserGroup> g = groups.getByParent(item);
-                ArrayList<Group> gr = new ArrayList<>();
-                for (UserGroup n : g) {
-                    gr.add(n.getGroup());
-                }
-                item.setGroups(gr);
-
                 ret.add(item);
             }
         } catch (SQLException ex) {
@@ -146,6 +132,32 @@ public class UserRelation implements Relation<User, Integer> {
     @Override
     public void setKey(Integer key) {
         this.key = key;
+    }
+
+    @Override
+    public User getByAlternateKey(User item) {
+        User ret = new User();
+        String sql = String.format("SELECT `user`.`user_id`"
+                + ", `user`.`user_name`"
+                + ", `user`.`password` "
+                + "FROM `tentag`.`user`"
+                + "WHERE `user`.`user_name` = '%s'; ", item.getName()
+        );
+
+        try (Connection conn = ds.getConnection()) {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                ret.setId(rs.getInt("user_id"));
+                ret.setName(rs.getString("user_name"));
+                ret.setPassword(rs.getString("password"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UserRelation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return ret;
     }
 
 }

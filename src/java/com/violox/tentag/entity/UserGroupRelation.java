@@ -7,7 +7,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.Resource;
 import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
 import javax.sql.*;
 
 @ApplicationScoped
@@ -19,16 +18,6 @@ public class UserGroupRelation implements Relation<UserGroup, IntegerPair> {
     @ApplicationScoped
     private DataSource ds;
 
-    @Inject
-    private Key<Integer> user_key;
-    @Inject
-    private Relation<User, Integer> user;
-
-    @Inject
-    private Key<Integer> group_key;
-    @Inject
-    private Relation<Group, Integer> group;
-
     @Override
     public UserGroup post(UserGroup item) {
         /*
@@ -39,7 +28,7 @@ public class UserGroupRelation implements Relation<UserGroup, IntegerPair> {
                 + ", `group_id`"
                 + ", `user_name`"
                 + ", `group_name`) " // this is actually the role name
-                + "VALUES (%d, %d, '%s', '%s'); ", item.getUser().getId(), item.getGroup().getId(), item.getUser().getName(), item.getGroup().getRole()
+                + "VALUES (%d, %d, '%s', '%s'); ", item.getUserId(), item.getGroupId(), item.getUserName(), item.getRoleName()
         );
 
         try (Connection conn = ds.getConnection()) {
@@ -72,10 +61,10 @@ public class UserGroupRelation implements Relation<UserGroup, IntegerPair> {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                user_key.setKey(rs.getInt(""));
-                ret.setUser(user.get(user_key));
-                group_key.setKey(rs.getInt(""));
-                ret.setGroup(group.get(group_key));
+                ret.setUserId(rs.getInt("user_id"));
+                ret.setGroupId(rs.getInt("group_id"));
+                ret.setUserName(rs.getString("user_name"));
+                ret.setRoleName(rs.getString("group_name"));
             }
         } catch (SQLException ex) {
             Logger.getLogger(UserGroupRelation.class.getName()).log(Level.SEVERE, null, ex);
@@ -99,12 +88,10 @@ public class UserGroupRelation implements Relation<UserGroup, IntegerPair> {
 
             while (rs.next()) {
                 UserGroup item = new UserGroup ();
-                
-                user_key.setKey(rs.getInt(""));
-                item.setUser(user.get(user_key));
-                group_key.setKey(rs.getInt(""));
-                item.setGroup(group.get(group_key));
-
+                item.setUserId(rs.getInt("user_id"));
+                item.setGroupId(rs.getInt("group_id"));
+                item.setUserName(rs.getString("user_name"));
+                item.setRoleName(rs.getString("group_name"));
                 ret.add(item);
             }
         } catch (SQLException ex) {
@@ -124,10 +111,10 @@ public class UserGroupRelation implements Relation<UserGroup, IntegerPair> {
                 + ", `user_name` = '%s'"
                 + ", `group_name` = '%s' "
                 + "WHERE `user_id` = %d AND `group_id` = %d; "
-                , item.getUser().getId()
-                , item.getGroup().getId()
-                , item.getUser()
-                , item.getGroup()
+                , item.getUserId()
+                , item.getGroupId()
+                , item.getUserName()
+                , item.getRoleName()
         );
 
         try (Connection conn = ds.getConnection()) {
@@ -144,8 +131,8 @@ public class UserGroupRelation implements Relation<UserGroup, IntegerPair> {
 
         String sql = String.format("DELETE FROM `tentag`.`user_group` "
                 + "WHERE `user_id` = %d AND `group_id` = %d; "
-                , item.getUser().getId()
-                , item.getGroup().getId()
+                , item.getUserId()
+                , item.getGroupId()
         );
 
         try (Connection conn = ds.getConnection()) {
@@ -185,12 +172,10 @@ public class UserGroupRelation implements Relation<UserGroup, IntegerPair> {
 
             while (rs.next()) {
                 UserGroup item = new UserGroup ();
-                
-                user_key.setKey(rs.getInt(""));
-                item.setUser(user.get(user_key));
-                group_key.setKey(rs.getInt(""));
-                item.setGroup(group.get(group_key));
-
+                item.setUserId(rs.getInt("user_id"));
+                item.setGroupId(rs.getInt("group_id"));
+                item.setUserName(rs.getString("user_name"));
+                item.setRoleName(rs.getString("group_name"));
                 ret.add(item);
             }
         } catch (SQLException ex) {
@@ -216,12 +201,10 @@ public class UserGroupRelation implements Relation<UserGroup, IntegerPair> {
 
             while (rs.next()) {
                 UserGroup item = new UserGroup ();
-                
-                user_key.setKey(rs.getInt(""));
-                item.setUser(user.get(user_key));
-                group_key.setKey(rs.getInt(""));
-                item.setGroup(group.get(group_key));
-
+                item.setUserId(rs.getInt("user_id"));
+                item.setGroupId(rs.getInt("group_id"));
+                item.setUserName(rs.getString("user_name"));
+                item.setRoleName(rs.getString("group_name"));
                 ret.add(item);
             }
         } catch (SQLException ex) {
@@ -229,6 +212,11 @@ public class UserGroupRelation implements Relation<UserGroup, IntegerPair> {
         }
 
         return ret;  
+    }
+
+    @Override
+    public UserGroup getByAlternateKey(UserGroup item) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

@@ -185,4 +185,9 @@ public class BatchHistoryRelation implements Relation<BatchHistory, Integer> {
         return ret;
     }
 
+    @Override
+    public BatchHistory getByAlternateKey(BatchHistory item) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

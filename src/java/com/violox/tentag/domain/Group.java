@@ -61,7 +61,7 @@ public class Group {
     }
 
     public void setRole(String role) {
-        this.name = role;
+        this.role = role;
     }
    
 

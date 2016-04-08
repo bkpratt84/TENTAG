@@ -22,7 +22,7 @@ public class PrinterGroupPrinterRelationship implements Relationship<GroupPrinte
 
     @Override
     public Printer getByChild(GroupPrinter child) {
-        child_key.setKey(child.getPrinter().getId());
+        child_key.setKey(child.getPrinterId());
         return parent.get(child_key);
     }
 

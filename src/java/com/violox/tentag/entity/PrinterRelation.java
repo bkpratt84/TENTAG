@@ -246,4 +246,9 @@ public class PrinterRelation implements Relation<Printer, Integer> {
         return ret;
     }
 
+    @Override
+    public Printer getByAlternateKey(Printer item) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

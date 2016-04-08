@@ -352,4 +352,9 @@ public class PermitRelation implements Relation<Permit, Integer> {
 
         return ret;    }
 
+    @Override
+    public Permit getByAlternateKey(Permit item) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

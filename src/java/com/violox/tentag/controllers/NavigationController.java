@@ -12,7 +12,7 @@ public class NavigationController {
     }
     
     public String toPrinter(boolean redirect) {
-        String url = "/Printer/index.xhtml";
+        String url = "/printer/index.xhtml";
         return redirect ? (url + "?faces-redirect=true") : url;
     }
     

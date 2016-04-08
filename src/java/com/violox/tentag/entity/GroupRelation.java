@@ -22,11 +22,11 @@ public class GroupRelation implements Relation<Group, Integer> {
 
     @Override
     public Group post(Group item) {
-        String sql = String.format("INSERT INTO `tentag`.`group` (`group_name`,`role_name`) "
+        String sql = String.format("INSERT INTO `tentag`.`group` "
+                + "(`group_name`,`role_name`) "
                 + "VALUES ('%s','%s'); "
                 , item.getName()
                 , item.getRole()
-                //TODO set relations
         );
 
         try (Connection conn = ds.getConnection()) {
@@ -48,9 +48,10 @@ public class GroupRelation implements Relation<Group, Integer> {
     @Override
     public Group get(Key<Integer> key) {
          Group ret = new Group();
-        String sql = String.format("SELECT `group`.`group_id`"
+        String sql = String.format("SELECT "
+                + "  `group`.`group_id`"
                 + ", `group`.`group_name`"
-                + ",  `group`.`role_name`"
+                + ", `group`.`role_name`"
                 + "FROM `tentag`.`group` "
                 + "WHERE `group`.`group_id` = %d; "
                 , key.getKey()
@@ -62,9 +63,8 @@ public class GroupRelation implements Relation<Group, Integer> {
 
             while (rs.next()) {
                 ret.setId(rs.getInt("group_id"));
-                ret.setName("group_name");
+                ret.setName(rs.getString("group_name"));
                 ret.setRole(rs.getString("role_name"));
-                //TODO Set Relationships
             }
         } catch (SQLException ex) {
             Logger.getLogger(GroupRelation.class.getName()).log(Level.SEVERE, null, ex);
@@ -89,10 +89,8 @@ public class GroupRelation implements Relation<Group, Integer> {
             while (rs.next()) {
                 Group item = new Group();
                 item.setId(rs.getInt("group_id"));
-                item.setName("group_name");
+                item.setName(rs.getString("group_name"));
                 item.setRole(rs.getString("role_name"));
-                //TODO Set Relationships
-
                 ret.add(item);
             }
         } catch (SQLException ex) {
@@ -148,6 +146,11 @@ public class GroupRelation implements Relation<Group, Integer> {
     @Override
     public void setKey(Integer key) {
         this.key = key;
+    }
+
+    @Override
+    public Group getByAlternateKey(Group item) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

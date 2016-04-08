@@ -7,7 +7,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.Resource;
 import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
 import javax.sql.*;
 
 @ApplicationScoped
@@ -133,5 +132,10 @@ public class StateRelation implements Relation<State, Integer> {
     @Override
     public void setKey(Integer key) {
         this.key = key;
+    }
+
+    @Override
+    public State getByAlternateKey(State item) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

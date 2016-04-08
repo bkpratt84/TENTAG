@@ -197,4 +197,9 @@ String sql = String.format("INSERT INTO `tentag`.`permit_history` "
 
         return ret;
     }
+
+    @Override
+    public PermitHistory getByAlternateKey(PermitHistory item) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
