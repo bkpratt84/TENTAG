@@ -35,7 +35,7 @@ public class NavigationController {
      
     public String toAdminBatches(boolean redirect, boolean includeContext) {
         String url = includeContext ? "/TENTAG" : "";
-        url += "/admin/batches";
+        url += "/admin/batches.xhtml";
         return redirect ? (url + "?faces-redirect=true") : url;
     }
     

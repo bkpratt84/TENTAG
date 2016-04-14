@@ -28,6 +28,8 @@
                     <p:separator styleClass="separator" />
 
                     <b:navLink header="Vendors" />
+                     <b:navLink value="Batches" iconAwesome="newspaper-o" update=":admin-content"
+                                       onclick="ajax:adminNavController.setPage('#{navigationController.toAdminBatches(false, false)}')" />
                 </b:listLinks>
             </b:panel>
 
