@@ -1,6 +1,7 @@
 package com.violox.tentag.controllers;
 
 import com.violox.tentag.utils.Messages;
+import java.io.IOException;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
@@ -14,12 +15,12 @@ public class LoginController implements Serializable {
     @Inject
     NavigationController nav;
     
-    //private static final Logger logger = Logger.getLogger("LoginController");
+    private static final Logger logger = Logger.getLogger("LoginController");
     private String username;
     private boolean loggedIn;
     private String role;
     
-    public String logout() {
+    public void logout() throws IOException {
         loggedIn = false;
         username = null;
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
@@ -27,8 +28,8 @@ public class LoginController implements Serializable {
         
         FacesContext context = FacesContext.getCurrentInstance();
         context.getExternalContext().getFlash().setKeepMessages(true);
-        
-        return nav.toHome(true);
+
+        context.getExternalContext().redirect(nav.toHome(false, true));
     }
 
     public String getUsername() {

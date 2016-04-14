@@ -27,15 +27,15 @@
     </welcome-file-list>
     <security-role>
         <description/>
-        <role-name>admin</role-name>
+        <role-name>Admin</role-name>
     </security-role>
     <security-role>
         <description/>
-        <role-name>printer</role-name>
+        <role-name>Printer</role-name>
     </security-role>
     <security-role>
         <description/>
-        <role-name>property</role-name>
+        <role-name>Property</role-name>
     </security-role>
     <resource-ref>
         <res-ref-name>jdbc/TentagDatabaseResource</res-ref-name>
@@ -63,7 +63,7 @@
         </web-resource-collection>
         <auth-constraint>
             <description/>
-            <role-name>admin</role-name>
+            <role-name>Admin</role-name>
         </auth-constraint>
     </security-constraint>
     <security-constraint>
@@ -82,8 +82,8 @@
         </web-resource-collection>
         <auth-constraint>
             <description/>
-            <role-name>admin</role-name>
-            <role-name>property</role-name>
+            <!--<role-name>Admin</role-name>-->
+            <role-name>Property</role-name>
         </auth-constraint>
     </security-constraint>
     <security-constraint>
@@ -102,8 +102,8 @@
         </web-resource-collection>
         <auth-constraint>
             <description/>
-            <role-name>admin</role-name>
-            <role-name>printer</role-name>
+            <!--<role-name>Admin</role-name>-->
+            <role-name>Printer</role-name>
         </auth-constraint>
     </security-constraint>
     <security-constraint>
@@ -115,9 +115,9 @@
         </web-resource-collection>
         <auth-constraint>
             <description/>
-            <role-name>admin</role-name>
-            <role-name>property</role-name>
-            <role-name>printer</role-name>
+            <role-name>Admin</role-name>
+            <role-name>Property</role-name>
+            <role-name>Printer</role-name>
         </auth-constraint>
     </security-constraint>
     <login-config>

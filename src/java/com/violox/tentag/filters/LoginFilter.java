@@ -32,21 +32,22 @@ public class LoginFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) req;
         HttpServletResponse response = (HttpServletResponse) res;
         //HttpSession session = request.getSession(false);
-        String redirect = request.getContextPath();
+        //String redirect = request.getContextPath();
+        String redirect = "";
         
         if (login.isLoggedIn() == false) {
             login.setLoggedIn(true);
             login.setUsername(request.getUserPrincipal().getName());
-            
-            if (request.isUserInRole("admin")) {
-                login.setRole("admin");
-                redirect += nav.toAdmin(false);
-            } else if (request.isUserInRole("property")) {
-                login.setRole("property");
-                redirect += nav.toProperty(false);
-            } else if (request.isUserInRole("printer")) {
-                login.setRole("printer");
-                redirect += nav.toPrinter(false);
+
+            if (request.isUserInRole("Admin")) {
+                login.setRole("Admin");
+                redirect += nav.toAdmin(false, true);
+            } else if (request.isUserInRole("Property")) {
+                login.setRole("Property");
+                redirect += nav.toProperty(false, true);
+            } else if (request.isUserInRole("Printer")) {
+                login.setRole("Printer");
+                redirect += nav.toPrinter(false, true);
             }
             
             response.sendRedirect(redirect);

@@ -12,6 +12,8 @@
     <h:body>
         <!--Located in body to override other CSS-->
         <f:facet name="last">
+            <h:outputScript name="/js/ajaxFix.js" target="head"/>
+            <h:outputScript name="/js/UTIL.js" target="head"/>
             <h:outputStylesheet name="/css/theme-style.css"/>
             <h:outputStylesheet name="/css/style.css"/>
         </f:facet>

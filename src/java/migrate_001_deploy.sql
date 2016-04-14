@@ -2,30 +2,34 @@ CREATE TABLE `tentag`.`user` (
   `user_id` INT NOT NULL AUTO_INCREMENT,
   `user_name` VARCHAR(50) NOT NULL,
   `password` VARCHAR(255) NOT NULL,
+  `role_name` VARCHAR(50) NOT NULL,
   PRIMARY KEY (`user_id`));
 
-INSERT INTO `tentag`.`user` (`user_name`, `password`) VALUES ('jesus','8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918');
-INSERT INTO `tentag`.`user` (`user_name`, `password`) VALUES ('mary','8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918');
-INSERT INTO `tentag`.`user` (`user_name`, `password`) VALUES ('joseph','8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918');
-INSERT INTO `tentag`.`user` (`user_name`, `password`) VALUES ('ralph','8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918');
-INSERT INTO `tentag`.`user` (`user_name`, `password`) VALUES ('ed','8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918');
-INSERT INTO `tentag`.`user` (`user_name`, `password`) VALUES ('admin', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918');
+INSERT INTO `tentag`.`user` (`user_name`, `role_name`, `password`) VALUES ('Jesus','Admin','8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918');
+INSERT INTO `tentag`.`user` (`user_name`, `role_name`, `password`) VALUES ('Mary','Property','8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918');
+INSERT INTO `tentag`.`user` (`user_name`, `role_name`, `password`) VALUES ('Joseph','Printer','8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918');
+INSERT INTO `tentag`.`user` (`user_name`, `role_name`, `password`) VALUES ('Ralph','Property','8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918');
+INSERT INTO `tentag`.`user` (`user_name`, `role_name`, `password`) VALUES ('Ed','Printer','8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918');
+INSERT INTO `tentag`.`user` (`user_name`, `role_name`, `password`) VALUES ('Admin','Admin','8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918');
 
 CREATE TABLE `tentag`.`group` (
   `group_id` INT NOT NULL AUTO_INCREMENT,   
   `group_name` VARCHAR(50) NOT NULL,
+  `role_name` VARCHAR(50) NOT NULL DEFAULT 'Property',
   PRIMARY KEY (`group_id`));
 
-INSERT INTO `tentag`.`group` (`group_name`) VALUES ('admin');
-INSERT INTO `tentag`.`group` (`group_name`) VALUES ('property');
-INSERT INTO `tentag`.`group` (`group_name`) VALUES ('printer');
+--INSERT INTO `tentag`.`group` (`group_name`, `role_name`) VALUES ('Admin Group', 'Admin');
+INSERT INTO `tentag`.`group` (`group_name`, `role_name`) VALUES ('Location1 Property', 'Property');
+INSERT INTO `tentag`.`group` (`group_name`, `role_name`) VALUES ('Location2 Property', 'Property');
+INSERT INTO `tentag`.`group` (`group_name`, `role_name`) VALUES ('Location1 Printer', 'Printer');
+INSERT INTO `tentag`.`group` (`group_name`, `role_name`) VALUES ('Location2 Printer', 'Printer');
+INSERT INTO `tentag`.`group` (`group_name`, `role_name`) VALUES ('Location3 Printer', 'Printer');
 
 
 CREATE TABLE `tentag`.`user_group` (
   `user_id` INT NOT NULL,
   `group_id` INT NOT NULL,
   `user_name` VARCHAR(50) NOT NULL,
-  `group_name` VARCHAR(50) NOT NULL,
   PRIMARY KEY (`user_id`, `group_id`),
   CONSTRAINT `fk_usergroup_user`
     FOREIGN KEY (`user_id`)
@@ -39,15 +43,13 @@ CREATE TABLE `tentag`.`user_group` (
     ON UPDATE NO ACTION);
 
 
-INSERT INTO `tentag`.`user_group` (`user_id`, `group_id`, `user_name`, `group_name`) VALUES (1,1,'jesus','admin');
-INSERT INTO `tentag`.`user_group` (`user_id`, `group_id`, `user_name`, `group_name`) VALUES (2,2,'mary','property');
-INSERT INTO `tentag`.`user_group` (`user_id`, `group_id`, `user_name`, `group_name`) VALUES (3,3,'joseph','printer');
-INSERT INTO `tentag`.`user_group` (`user_id`, `group_id`, `user_name`, `group_name`) VALUES (4,2,'ralph','property');
-INSERT INTO `tentag`.`user_group` (`user_id`, `group_id`, `user_name`, `group_name`) VALUES (4,3,'ralph','printer');
-INSERT INTO `tentag`.`user_group` (`user_id`, `group_id`, `user_name`, `group_name`) VALUES (5,1,'ed','admin');
-INSERT INTO `tentag`.`user_group` (`user_id`, `group_id`, `user_name`, `group_name`) VALUES (5,2,'ed','property');
-INSERT INTO `tentag`.`user_group` (`user_id`, `group_id`, `user_name`, `group_name`) VALUES (5,3,'ed','printer');
-INSERT INTO `tentag`.`user_group` (`user_id`, `group_id`, `user_name`, `group_name`) VALUES (6,1,'admin','admin');
+INSERT INTO `tentag`.`user_group` (`user_id`, `group_id`, `user_name`) VALUES (2,1,'Mary');
+INSERT INTO `tentag`.`user_group` (`user_id`, `group_id`, `user_name`) VALUES (3,3,'Joseph');
+INSERT INTO `tentag`.`user_group` (`user_id`, `group_id`, `user_name`) VALUES (4,1,'Ralph');
+INSERT INTO `tentag`.`user_group` (`user_id`, `group_id`, `user_name`) VALUES (4,2,'Ralph');
+INSERT INTO `tentag`.`user_group` (`user_id`, `group_id`, `user_name`) VALUES (5,3,'Ed');
+INSERT INTO `tentag`.`user_group` (`user_id`, `group_id`, `user_name`) VALUES (5,4,'Ed');
+INSERT INTO `tentag`.`user_group` (`user_id`, `group_id`, `user_name`) VALUES (5,5,'Ed');
 
 CREATE TABLE `tentag`.`state` (
   `state_id` INT NOT NULL AUTO_INCREMENT,

@@ -1,39 +1,66 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:b="http://bootsfaces.net/ui"
-      xmlns:p="http://primefaces.org/ui">
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:b="http://bootsfaces.net/ui"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-    <h:body>
-        <ui:composition>
-            <b:panel look="primary" title="Users" collapsible="false" style="margin: 0 10px 10px 10px;">
-                <b:row>
-                    <h:form>
-                        <b:commandButton tooltip="Add User" value="Add" iconAwesome="plus" ajax="true" look="success" style="margin: 0 0 15px 10px;"/>
-                        <!--<b:commandButton value="Delete" iconAwesome="trash" ajax="true" look="warning" style="margin: 0 0 15px 10px;"/>-->
-                    </h:form>
-                </b:row>
+    <b:panel look="primary" title="Users" collapsible="false" style="margin: 0 10px 10px 10px;">
+        <b:row>
+            <h:form id="form_options">
+                <b:commandButton value="Add" iconAwesome="plus" ajax="true" look="success" style="margin: 0 0 15px 10px;"
+                                 action="#{adminUserController.addUser()}" process="@form" update=":form_dt"/>
+                <b:commandButton value="Edit" iconAwesome="pencil" ajax="true" look="primary" style="margin: 0 0 15px 10px;"
+                                 onclick="triggerHiddenEvent('form_options:hiddenCommand'); return false;"
+                                 disabled="#{empty adminUserController.selectedUser}"/>
+                <b:commandButton value="Reset" iconAwesome="unlock" ajax="true" look="info" style="margin: 0 0 15px 10px;"
+                                 disabled="#{empty adminUserController.selectedUser}"/>
+                <b:commandButton value="Delete" iconAwesome="trash" ajax="true" look="danger" style="margin: 0 0 15px 10px;"
+                                 disabled="#{empty adminUserController.selectedUser}"/>
                 
-                <b:row>
-                    <h:form>
-                        <p:dataTable var="user" value="#{adminUserController.users}" style="margin: 0 10px;">
-                            <p:column headerText="ID">
-                                <h:outputText value="#{user.id}"/>
-                            </p:column>
-                            <p:column headerText="Username">
-                                <h:outputText value="#{user.name}"/>
-                            </p:column>
-                            <p:column>
-                                <b:commandButton tooltip="Edit User" value="" iconAwesome="pencil" ajax="true" look="primary" />
-                                <b:commandButton tooltip="Reset Password" value="" iconAwesome="unlock" ajax="true" look="info" style="margin: 0 0 0 10px;"/>
-                                <b:commandButton tooltip="Delete User" value="" iconAwesome="trash" ajax="true" look="danger" style="margin: 0 0 0 10px;"/>
-                            </p:column>
-                        </p:dataTable>
-                    </h:form>
-                </b:row>
-            </b:panel>
-        </ui:composition>
-    </h:body>
-</html>
+                <p:commandButton id="hiddenCommand" actionListener="#{adminUserController.DFeditUser}" style="display: none;">
+                    <p:ajax event="dialogReturn"/>
+                </p:commandButton>
+            </h:form>
+        </b:row>
+
+        <b:row>
+            <h:form id="form_dt">
+                <p:dataTable id="dt_users" var="user" value="#{adminUserController.users}" style="margin: 0 10px;"
+                             selectionMode="single" selection="#{adminUserController.selectedUser}" rowKey="#{user.id}"
+                             editable="false" editMode="row">
+                    
+                    <p:ajax event="rowSelect" update=":form_options" />
+                    <!--<p:ajax event="cellEdit"/>-->
+                    
+                    <p:column headerText="ID">
+                        <h:outputText value="#{user.id}"/>
+                    </p:column>
+                    <p:column headerText="Username">
+<!--                        <p:cellEditor>
+                            <f:facet name="output">
+                                <h:outputText value="#{user.name}" />
+                            </f:facet>
+                            <f:facet name="input">
+                                <h:inputText value="#{user.name}" style="color: black;"/>
+                            </f:facet>
+                        </p:cellEditor>-->
+                        <h:outputText value="#{user.name}"/>
+                    </p:column>
+                    <p:column headerText="Role">
+                        <h:outputText value="#{adminUserController.getUserRole(user)}"/>
+                    </p:column>
+<!--                    <p:column>
+                        <b:commandButton tooltip="Edit User" value="" iconAwesome="pencil" ajax="true" look="primary" />
+                        <b:commandButton tooltip="Reset Password" value="" iconAwesome="unlock" ajax="true" look="info" style="margin: 0 0 0 10px;"/>
+                        <b:commandButton tooltip="Delete User" value="" iconAwesome="trash" ajax="true" look="danger" style="margin: 0 0 0 10px;"/>
+                    </p:column>-->
+<!--                    <p:column>
+                        <p:rowEditor />
+                    </p:column>-->
+                </p:dataTable>
+            </h:form>
+        </b:row>
+    </b:panel>
+</ui:composition>

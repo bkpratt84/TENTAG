@@ -1,3 +1,2 @@
-ALTER TABLE `tentag`.`group` 
-DROP `role_name`;
-
+-- ALTER TABLE `tentag`.`group` 
+-- DROP `role_name`;
