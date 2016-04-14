@@ -16,6 +16,10 @@ public class Batch {
     private ArrayList<BatchHistory> batchHistory;
     private ArrayList<Permit> permits;
 
+    //F Keys
+    private Integer propertyId;
+    private Integer printerId;
+
     public Integer getId() {
         return id;
     }
@@ -30,6 +34,22 @@ public class Batch {
 
     public void setProperty(Property property) {
         this.property = property;
+    }
+
+    public Integer getPropertyId() {
+        return propertyId;
+    }
+
+    public void setPropertyId(Integer propertyId) {
+        this.propertyId = propertyId;
+    }
+
+    public Integer getPrinterId() {
+        return printerId;
+    }
+
+    public void setPrinterId(Integer printerId) {
+        this.printerId = printerId;
     }
 
     public Printer getPrinter() {
@@ -55,13 +75,13 @@ public class Batch {
     public void fillProperty(DbContext context) {
         this.property = (Property) context.PropertyBatch().getByChild(this);
     }
-    
-    public void fillBatchHistory(DbContext context, Key<Integer> key){
+
+    public void fillBatchHistory(DbContext context, Key<Integer> key) {
         key.setKey(this.id);
         this.setBatchHistory((ArrayList<BatchHistory>) context.BatchBatchHistory().getByParent(this));
     }
 
-    public void fillPermits(DbContext context, Key<Integer> key){
+    public void fillPermits(DbContext context, Key<Integer> key) {
         key.setKey(this.id);
         this.setPermits((ArrayList<Permit>) context.BatchPermit().getByParent(this));
     }
@@ -73,6 +93,7 @@ public class Batch {
     public void setBatchHistory(ArrayList<BatchHistory> batchHistory) {
         this.batchHistory = batchHistory;
     }
+
     public ArrayList<Permit> getPermits() {
         return permits;
     }
@@ -80,6 +101,5 @@ public class Batch {
     public void setPermits(ArrayList<Permit> permits) {
         this.permits = permits;
     }
-    
 
 }

@@ -114,5 +114,8 @@ public class Property {
             groups.add(child);
         }
     }
-
+    
+    public String toString(){
+        return this.name;
+    }
 }

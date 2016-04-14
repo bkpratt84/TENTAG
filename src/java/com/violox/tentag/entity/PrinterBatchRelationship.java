@@ -22,7 +22,7 @@ public class PrinterBatchRelationship implements Relationship<Batch, Printer> {
 
     @Override
     public Printer getByChild(Batch child) {
-        child_key.setKey(child.getPrinter().getId());
+        child_key.setKey(child.getPrinterId());
         return parent.get(child_key);
     }
 

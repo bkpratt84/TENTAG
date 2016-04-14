@@ -60,6 +60,8 @@ public class BatchRelation implements Relation<Batch, Integer> {
             while (rs.next()) {
                 ret.setId(rs.getInt("batch_id"));
                 ret.setStatus(rs.getInt("batch_status"));
+                ret.setPropertyId(rs.getInt("property_id"));
+                ret.setPrinterId(rs.getInt("printer_id"));
             }
         } catch (SQLException ex) {
             Logger.getLogger(BatchRelation.class.getName()).log(Level.SEVERE, null, ex);
@@ -84,6 +86,8 @@ public class BatchRelation implements Relation<Batch, Integer> {
                 Batch item = new Batch();
                 item.setId(rs.getInt("batch_id"));
                 item.setStatus(rs.getInt("batch_status"));
+                item.setPropertyId(rs.getInt("property_id"));
+                item.setPrinterId(rs.getInt("printer_id"));
                 ret.add(item);
             }
         } catch (SQLException ex) {
@@ -152,6 +156,8 @@ public class BatchRelation implements Relation<Batch, Integer> {
                 Batch item = new Batch();
                 item.setId(rs.getInt("batch_id"));
                 item.setStatus(rs.getInt("batch_status"));
+                item.setPropertyId(rs.getInt("property_id"));
+                item.setPrinterId(rs.getInt("printer_id"));
                 ret.add(item);
             }
         } catch (SQLException ex) {
@@ -179,6 +185,8 @@ public class BatchRelation implements Relation<Batch, Integer> {
                 Batch item = new Batch();
                 item.setId(rs.getInt("batch_id"));
                 item.setStatus(rs.getInt("batch_status"));
+                item.setPropertyId(rs.getInt("property_id"));
+                item.setPrinterId(rs.getInt("printer_id"));
                 ret.add(item);
             }
         } catch (SQLException ex) {

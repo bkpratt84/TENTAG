@@ -22,7 +22,7 @@ public class PropertyBatchRelationship implements Relationship<Batch, Property> 
 
     @Override
     public Property getByChild(Batch child) {
-        child_key.setKey(child.getProperty().getId());
+        child_key.setKey(child.getPropertyId());
         return parent.get(child_key);
     }
 
