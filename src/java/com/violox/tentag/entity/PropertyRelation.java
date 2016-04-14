@@ -63,7 +63,7 @@ public class PropertyRelation implements Relation<Property, Integer> {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                ret.setName(rs.getString(""));
+                ret.setName(rs.getString("property_name"));
             }
         } catch (SQLException ex) {
             Logger.getLogger(PropertyRelation.class.getName()).log(Level.SEVERE, null, ex);
@@ -88,7 +88,7 @@ public class PropertyRelation implements Relation<Property, Integer> {
 
             while (rs.next()) {
                 Property item = new Property();
-                item.setName(rs.getString(""));
+                item.setName(rs.getString("property_name"));
                 ret.add(item);
             }
         } catch (SQLException ex) {
@@ -164,7 +164,7 @@ public class PropertyRelation implements Relation<Property, Integer> {
 
             while (rs.next()) {
                 Property item = new Property();
-                item.setName(rs.getString(""));
+                item.setName(rs.getString("property_name"));
                 ret.add(item);
             }
         } catch (SQLException ex) {
@@ -193,7 +193,7 @@ public class PropertyRelation implements Relation<Property, Integer> {
 
             while (rs.next()) {
                 Property item = new Property();
-                item.setName(rs.getString(""));
+                item.setName(rs.getString("property_name"));
                 ret.add(item);
             }
         } catch (SQLException ex) {
@@ -221,7 +221,7 @@ public class PropertyRelation implements Relation<Property, Integer> {
 
             while (rs.next()) {
                 Property item = new Property();
-                item.setName(rs.getString(""));
+                item.setName(rs.getString("property_name"));
                 ret.add(item);
             }
         } catch (SQLException ex) {

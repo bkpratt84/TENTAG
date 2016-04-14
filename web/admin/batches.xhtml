@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:body>
+        <ui:composition>
+            <b:panel look="primary" title="Batches" collapsible="false" style="margin: 0 10px 10px 10px;">
+                <b:row>
+                    <h:form>
+                        <p:dataTable var="batch" value="#{adminBatchController.batches}" style="margin: 0 10px;">
+                            <p:column headerText="ID">
+                                <h:outputText value="#{batch.id}" style="line-height: 30px;"/>
+                            </p:column>
+                            <p:column headerText="Status">
+                                <h:outputText value="#{batch.status}" style="line-height: 30px;"/>
+                            </p:column>
+                            <p:column headerText="Property">
+                                <h:outputText value="#{batch.property}" style="line-height: 30px;"/>
+                            </p:column>
+                            <p:column headerText="Printer">
+                                <h:outputText value="#{batch.printer}" style="line-height: 30px;"/>
+                                <b:commandButton tooltip="Delete Batch" value="" iconAwesome="trash" ajax="true" look="danger" styleClass="pull-right" style="margin: 0 0 0 10px;"/>
+                            </p:column>
+                        </p:dataTable>
+                    </h:form>
+                </b:row>
+            </b:panel>
+        </ui:composition>
+    </h:body>
+</html>

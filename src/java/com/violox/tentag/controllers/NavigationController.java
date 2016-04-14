@@ -32,6 +32,11 @@ public class NavigationController {
         url += "/admin/users/edit";
         return redirect ? (url + "?faces-redirect=true") : url;
     }
+     
+    public String toAdminBatches(boolean redirect) {
+        String url = "/admin/batches.xhtml";
+        return redirect ? (url + "?faces-redirect=true") : url;
+    }
     
     public String toPrinter(boolean redirect, boolean includeContext) {
         String url = includeContext ? "/TENTAG" : "";

@@ -84,5 +84,8 @@ public class Printer {
     public void setBatches(ArrayList<Batch> batches) {
         this.batches = batches;
     }
-
+    
+    public String toString(){
+        return this.name;
+    }
 }
