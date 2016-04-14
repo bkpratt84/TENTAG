@@ -8,7 +8,7 @@ import javax.inject.Inject;
 
 @Named(value = "adminNavController")
 @ViewScoped
-public class AdminNavController implements Serializable {
+public class AdminNavController implements Serializable {    
     private String page;
     
     @Inject
@@ -17,7 +17,7 @@ public class AdminNavController implements Serializable {
     @PostConstruct
     public void init() {
         if (page == null) {
-            page = nav.toAdminHome(false);
+            page = nav.toAdminHome(false, false);
         }
     }
 

@@ -20,8 +20,8 @@ public class UserRelation implements Relation<User, Integer> {
 
     @Override
     public User post(User item) {
-        String sql = String.format("INSERT INTO `tentag`.`user` (`user_name`, `password`) "
-                + "VALUES ('%s', '%s'); ", item.getName(), item.getPassword()
+        String sql = String.format("INSERT INTO `tentag`.`user` (`user_name`, `password`, `role_name`) "
+                + "VALUES ('%s', '%s', '%s'); ", item.getName(), item.getPassword(), item.getRole()
         );
 
         try (Connection conn = ds.getConnection()) {
@@ -45,6 +45,7 @@ public class UserRelation implements Relation<User, Integer> {
         String sql = String.format("SELECT `user`.`user_id`"
                 + ", `user`.`user_name`"
                 + ", `user`.`password` "
+                + ", `user`.`role_name` "
                 + "FROM `tentag`.`user`"
                 + "WHERE `user`.`user_id` = %d; ", key.getKey()
         );
@@ -57,6 +58,7 @@ public class UserRelation implements Relation<User, Integer> {
                 ret.setId(rs.getInt("user_id"));
                 ret.setName(rs.getString("user_name"));
                 ret.setPassword(rs.getString("password"));
+                ret.setRole(rs.getString("role_name"));
             }
         } catch (SQLException ex) {
             Logger.getLogger(UserRelation.class.getName()).log(Level.SEVERE, null, ex);
@@ -68,7 +70,7 @@ public class UserRelation implements Relation<User, Integer> {
     @Override
     public ArrayList<User> get() {
         ArrayList<User> ret = new ArrayList<>();
-        String sql = "SELECT `user`.`user_id`, `user`.`user_name`, `user`.`password` "
+        String sql = "SELECT `user`.`user_id`, `user`.`user_name`, `user`.`password`, `user`.`role_name` "
                 + "FROM `tentag`.`user`; ";
         try (Connection conn = ds.getConnection()) {
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -79,6 +81,7 @@ public class UserRelation implements Relation<User, Integer> {
                 item.setId(rs.getInt("user_id"));
                 item.setName(rs.getString("user_name"));
                 item.setPassword(rs.getString("password"));
+                item.setRole(rs.getString("role_name"));
                 ret.add(item);
             }
         } catch (SQLException ex) {
@@ -93,7 +96,8 @@ public class UserRelation implements Relation<User, Integer> {
         String sql = String.format("UPDATE `tentag`.`user` "
                 + "SET `user_name` = '%s'"
                 + ", `password` = '%s' "
-                + "WHERE `user_id` = %d; ", item.getName(), item.getPassword(), item.getId()
+                + ", `role_name` = '%s' "
+                + "WHERE `user_id` = %d; ", item.getName(), item.getPassword(), item.getRole(), item.getId()
         );
 
         try (Connection conn = ds.getConnection()) {
@@ -134,6 +138,7 @@ public class UserRelation implements Relation<User, Integer> {
         String sql = String.format("SELECT `user`.`user_id`"
                 + ", `user`.`user_name`"
                 + ", `user`.`password` "
+                + ", `user`.`role_name` "
                 + "FROM `tentag`.`user`"
                 + "WHERE `user`.`user_name` = '%s'; ", item.getName()
         );
@@ -146,6 +151,7 @@ public class UserRelation implements Relation<User, Integer> {
                 ret.setId(rs.getInt("user_id"));
                 ret.setName(rs.getString("user_name"));
                 ret.setPassword(rs.getString("password"));
+                ret.setRole(rs.getString("role_name"));
             }
         } catch (SQLException ex) {
             Logger.getLogger(UserRelation.class.getName()).log(Level.SEVERE, null, ex);

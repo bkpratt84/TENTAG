@@ -1,37 +1,31 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:b="http://bootsfaces.net/ui">
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:b="http://bootsfaces.net/ui">
 
-    <h:body>
-        <ui:composition>
-            <b:navBar brand="TENTAG" brandHref="#{facesContext.externalContext.requestContextPath}#{navigationController.toHome(false)}">
-                <b:navbarLinks pull="right"><b:navLink value="    " href="#"/></b:navbarLinks>
-                <!--Not logged in-->
-                <b:navbarLinks pull="right" rendered="#{empty facesContext.externalContext.userPrincipal.name}">
-                    <b:navLink value="Home" href="#{facesContext.externalContext.requestContextPath}#{navigationController.toHome(false)}"/>
-                    <b:navLink value="About Us" href="#{facesContext.externalContext.requestContextPath}#{navigationController.toHome(false)}"/>
-                    <b:navLink value="Contact" href="#{facesContext.externalContext.requestContextPath}#{navigationController.toHome(false)}"/>
-                    <b:navLink value="Sign In" href="#{facesContext.externalContext.requestContextPath}#{navigationController.toLogin(false)}"/>
-                </b:navbarLinks>
-                
-                <!--Logged in-->
-                <h:form>
-                    <b:navbarLinks pull="right" rendered="#{not empty facesContext.externalContext.userPrincipal.name}">
-                        <b:navLink value="Home" href="#{facesContext.externalContext.requestContextPath}#{navigationController.toHome(false)}"/>
-                        <b:dropMenu value="" iconAwesome="bars">
-                            <b:navLink value="Signed in as #{facesContext.externalContext.userPrincipal.name}" outcome="null"/>
-                            <b:navLink/>
-                            <b:navLink value="Your Profile" iconAwesome="user" outcome="null"/>
-                            <b:navLink/>
-                            <b:navLink value="Settings" iconAwesome="cog" outcome="null"/>
-                            <b:navCommandLink value="Sign Out" iconAwesome="sign-out" action="#{loginController.logout}"/>
-                        </b:dropMenu>
-                    </b:navbarLinks>
-                </h:form>
-            </b:navBar>
-        </ui:composition>
-    </h:body>
-</html>
+    <b:navBar brand="TENTAG" brandHref="#{navigationController.toHome(false, true)}">
+        <!--Not logged in-->
+        <b:navbarLinks pull="right" rendered="#{empty facesContext.externalContext.userPrincipal.name}">
+            <b:navLink value="Home" href="#{navigationController.toHome(false, true)}"/>
+            <b:navLink value="About Us" href="#{navigationController.toHome(false, true)}"/>
+            <b:navLink value="Contact" href="#{navigationController.toHome(false, true)}"/>
+            <b:navLink value="Sign In" href="#{navigationController.toAdmin(false, true)}"/>
+        </b:navbarLinks>
+
+        <!--Logged in-->
+        <h:form>
+            <b:navbarLinks pull="right" rendered="#{not empty facesContext.externalContext.userPrincipal.name}">
+                <b:dropMenu value="" iconAwesome="bars">
+                    <b:navLink value="Signed in as #{facesContext.externalContext.userPrincipal.name.toUpperCase()}" outcome="null"/>
+                    <b:navLink/>
+                    <b:navLink value="Your Profile" iconAwesome="user" outcome="null"/>
+                    <b:navLink/>
+                    <b:navLink value="Settings" iconAwesome="cog" outcome="null"/>
+                    <b:navCommandLink value="Sign Out" iconAwesome="sign-out" action="#{loginController.logout()}"/>
+                    
+                </b:dropMenu>
+            </b:navbarLinks>
+        </h:form>
+    </b:navBar>
+</ui:composition>

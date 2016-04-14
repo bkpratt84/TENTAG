@@ -27,7 +27,7 @@ public class UserGroupRelation implements Relation<UserGroup, IntegerPair> {
                 + "(`user_id`"
                 + ", `group_id`"
                 + ", `user_name`"
-                + ", `group_name`) " // this is actually the role name
+                //+ ", `group_name`) " // this is actually the role name
                 + "VALUES (%d, %d, '%s', '%s'); ", item.getUserId(), item.getGroupId(), item.getUserName(), item.getRoleName()
         );
 
@@ -48,7 +48,7 @@ public class UserGroupRelation implements Relation<UserGroup, IntegerPair> {
         String sql = String.format("SELECT `user_group`.`user_id`"
                 + ", `user_group`.`group_id`"
                 + ", `user_group`.`user_name`"
-                + ", `user_group`.`group_name` "
+                //+ ", `user_group`.`group_name` "
                 + "FROM `tentag`.`user_group` "
                 + "WHERE `user_group`.`user_id` = %d "
                 + "and `user_group`.`group_id` = %d; "
@@ -64,7 +64,7 @@ public class UserGroupRelation implements Relation<UserGroup, IntegerPair> {
                 ret.setUserId(rs.getInt("user_id"));
                 ret.setGroupId(rs.getInt("group_id"));
                 ret.setUserName(rs.getString("user_name"));
-                ret.setRoleName(rs.getString("group_name"));
+                //ret.setRoleName(rs.getString("group_name"));
             }
         } catch (SQLException ex) {
             Logger.getLogger(UserGroupRelation.class.getName()).log(Level.SEVERE, null, ex);
@@ -80,7 +80,7 @@ public class UserGroupRelation implements Relation<UserGroup, IntegerPair> {
         String sql = "SELECT `user_group`.`user_id`"
                 + ", `user_group`.`group_id`"
                 + ", `user_group`.`user_name`"
-                + ", `user_group`.`group_name` "
+                //+ ", `user_group`.`group_name` "
                 + "FROM `tentag`.`user_group`; ";
         try (Connection conn = ds.getConnection()) {
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -91,7 +91,7 @@ public class UserGroupRelation implements Relation<UserGroup, IntegerPair> {
                 item.setUserId(rs.getInt("user_id"));
                 item.setGroupId(rs.getInt("group_id"));
                 item.setUserName(rs.getString("user_name"));
-                item.setRoleName(rs.getString("group_name"));
+                //item.setRoleName(rs.getString("group_name"));
                 ret.add(item);
             }
         } catch (SQLException ex) {
@@ -109,12 +109,12 @@ public class UserGroupRelation implements Relation<UserGroup, IntegerPair> {
                 + "SET `user_id` = %d"
                 + ", `group_id` = %d"
                 + ", `user_name` = '%s'"
-                + ", `group_name` = '%s' "
+                //+ ", `group_name` = '%s' "
                 + "WHERE `user_id` = %d AND `group_id` = %d; "
                 , item.getUserId()
                 , item.getGroupId()
                 , item.getUserName()
-                , item.getRoleName()
+                //, item.getRoleName()
         );
 
         try (Connection conn = ds.getConnection()) {
@@ -161,7 +161,7 @@ public class UserGroupRelation implements Relation<UserGroup, IntegerPair> {
         String sql = String.format("SELECT `user_group`.`user_id`"
                 + ", `user_group`.`group_id`"
                 + ", `user_group`.`user_name`"
-                + ", `user_group`.`group_name` "
+                //+ ", `user_group`.`group_name` "
                 + "FROM `tentag`.`user_group` "
                 + "WHERE `user_group`.`user_id` = %d; "
                 , parent.getId()
@@ -175,7 +175,7 @@ public class UserGroupRelation implements Relation<UserGroup, IntegerPair> {
                 item.setUserId(rs.getInt("user_id"));
                 item.setGroupId(rs.getInt("group_id"));
                 item.setUserName(rs.getString("user_name"));
-                item.setRoleName(rs.getString("group_name"));
+                //item.setRoleName(rs.getString("group_name"));
                 ret.add(item);
             }
         } catch (SQLException ex) {
@@ -190,7 +190,7 @@ public class UserGroupRelation implements Relation<UserGroup, IntegerPair> {
         String sql = String.format("SELECT `user_group`.`user_id`"
                 + ", `user_group`.`group_id`"
                 + ", `user_group`.`user_name`"
-                + ", `user_group`.`group_name` "
+                //+ ", `user_group`.`group_name` "
                 + "FROM `tentag`.`user_group` "
                 + "WHERE `user_group`.`group_id` = %d; "
                 , parent.getId()
@@ -204,7 +204,7 @@ public class UserGroupRelation implements Relation<UserGroup, IntegerPair> {
                 item.setUserId(rs.getInt("user_id"));
                 item.setGroupId(rs.getInt("group_id"));
                 item.setUserName(rs.getString("user_name"));
-                item.setRoleName(rs.getString("group_name"));
+                //item.setRoleName(rs.getString("group_name"));
                 ret.add(item);
             }
         } catch (SQLException ex) {
