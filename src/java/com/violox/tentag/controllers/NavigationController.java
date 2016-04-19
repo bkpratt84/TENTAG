@@ -29,7 +29,13 @@ public class NavigationController {
  
     public String toAdminUsersEditUser(boolean redirect, boolean includeContext) {
         String url = includeContext ? "/TENTAG" : "";
-        url += "/admin/users/edit";
+        url += "/admin/users/editUser.xhtml";
+        return redirect ? (url + "?faces-redirect=true") : url;
+    }
+    
+    public String toAdminUsersAddUser(boolean redirect, boolean includeContext) {
+        String url = includeContext ? "/TENTAG" : "";
+        url += "/admin/users/addUser.xhtml";
         return redirect ? (url + "?faces-redirect=true") : url;
     }
      

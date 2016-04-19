@@ -1,19 +1,21 @@
 package com.violox.tentag.domain;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Objects;
 import javax.enterprise.context.RequestScoped;
 import javax.validation.constraints.*;
 
 @RequestScoped
-public class User {
+public class User implements Serializable {
 
     private Integer id;
-    @NotNull(message = "User must have a name.")
+    @Size(min = 4, max = 50, message = "Username between 4 and 50 characters.")
     private String name;
-    @NotNull(message = "User must have a password.")
+    @Size(min = 8, max = 20, message = "Password between 8 and 20 characters.")
     private String password;
-    @Pattern(regexp = "(\bAdmin\b|\bPrinter\b|\bProperty\b)", message = "Role must be Admin, Printer, or Property.")
+    //@Pattern(regexp = "(\bAdmin\b|\bPrinter\b|\bProperty\b)", message = "Role must be Admin, Printer, or Property.")
+    @NotNull(message = "Select a role.")
     private String role;
     private ArrayList<Group> groups;
 
@@ -92,10 +94,10 @@ public class User {
             return false;
         }
         final User other = (User) obj;
-        if (!Objects.equals(this.name, other.name)) {
+        if (!Objects.equals(this.id, other.id)) {
             return false;
         }
-        if (!Objects.equals(this.role, other.role)) {
+        if (!Objects.equals(this.name, other.name)) {
             return false;
         }
         return true;
