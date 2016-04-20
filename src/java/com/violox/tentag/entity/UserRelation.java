@@ -159,5 +159,4 @@ public class UserRelation implements Relation<User, Integer> {
 
         return ret;
     }
-
 }

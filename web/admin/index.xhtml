@@ -3,7 +3,8 @@
     xmlns:h="http://xmlns.jcp.org/jsf/html"
     xmlns:ui="http://java.sun.com/jsf/facelets"
     xmlns:b="http://bootsfaces.net/ui"
-    xmlns:p="http://primefaces.org/ui">
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <ui:define name="content">
         <!--Pre-load component resources - issue with bootsfaces ajax-->
@@ -11,6 +12,8 @@
             <p:dataTable/>
             <b:commandButton value="blah"/>
             <b:selectOneMenu/>
+            <p:dialog/>
+            <p:message/>
         </b:panel>
 
         <b:panelGrid colSpans="2,10">
@@ -28,7 +31,7 @@
                     <p:separator styleClass="separator" />
 
                     <b:navLink header="Vendors" />
-                     <b:navLink value="Batches" iconAwesome="newspaper-o" update=":admin-content"
+                    <b:navLink value="Batches" iconAwesome="newspaper-o" update=":admin-content"
                                        onclick="ajax:adminNavController.setPage('#{navigationController.toAdminBatches(false, false)}')" />
                 </b:listLinks>
             </b:panel>
@@ -36,7 +39,6 @@
             <h:panelGroup layout="block" id="admin-content">
                 <ui:include src="#{adminNavController.page}"/>
             </h:panelGroup>
-
         </b:panelGrid>
     </ui:define>
 </ui:composition>
