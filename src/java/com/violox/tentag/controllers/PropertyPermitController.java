@@ -1,7 +1,7 @@
 package com.violox.tentag.controllers;
 
 import com.violox.tentag.domain.DbContext;
-import com.violox.tentag.domain.UserGroup;
+import com.violox.tentag.domain.Permit;
 import java.io.Serializable;
 import java.util.ArrayList;
 import javax.annotation.PostConstruct;
@@ -9,43 +9,43 @@ import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 
-@Named(value = "propertyUserGroupController")
+@Named(value = "propertyPermitController")
 @ViewScoped
 public class PropertyPermitController implements Serializable {
 
     @Inject
     private DbContext dbcontext;
-    
-    private ArrayList<UserGroup> ugs;
-    private UserGroup ug;
-    
+
+    private ArrayList<Permit> permits;
+    private Permit permit;
+
     private boolean display;
-    
+
     @PostConstruct
     public void init() {
         display = false;
-        
+
         refreshData();
     }
-    
+
     public void refreshData() {
-        ugs = dbcontext.UserGroup().get();
+        permits = dbcontext.Permit().get();
     }
 
-    public ArrayList<UserGroup> getUgs() {
-        return ugs;
+    public ArrayList<Permit> getPermits() {
+        return permits;
     }
 
-    public void setUgs(ArrayList<UserGroup> ugs) {
-        this.ugs = ugs;
+    public void setPermits(ArrayList<Permit> permits) {
+        this.permits = permits;
     }
 
-    public UserGroup getUg() {
-        return ug;
+    public Permit getPermit() {
+        return permit;
     }
 
-    public void setUg(UserGroup ug) {
-        this.ug = ug;
+    public void setPermit(Permit permit) {
+        this.permit = permit;
     }
 
     public boolean isDisplay() {
@@ -55,6 +55,9 @@ public class PropertyPermitController implements Serializable {
     public void setDisplay(boolean display) {
         this.display = display;
     }
-    
-    
+
+    public void deletePermit() {
+        dbcontext.Permit().delete(permit);
+    }
+
 }

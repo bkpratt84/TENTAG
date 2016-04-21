@@ -143,5 +143,31 @@ public class NavigationController {
         url += "/property/batches.xhtml";
         return redirect ? (url + "?faces-redirect=true") : url;
     }
+
+    public String toPropertyPermitsEditPermit(boolean redirect, boolean includeContext) {
+        String url = includeContext ? "/TENTAG" : "";
+        url += "/property/home.xhtml";
+        return redirect ? (url + "?faces-redirect=true") : url;
+    }
+
+    public String toPropertyPermitsAddPermit(boolean redirect, boolean includeContext) {
+        String url = includeContext ? "/TENTAG" : "";
+        url += "/property/home.xhtml";
+        return redirect ? (url + "?faces-redirect=true") : url;
+    }
+
+        public String toPropertyUnitsEditUnit(boolean redirect, boolean includeContext) {
+        String url = includeContext ? "/TENTAG" : "";
+        url += "/property/home.xhtml";
+        return redirect ? (url + "?faces-redirect=true") : url;
+    }
+
+    public String toPropertyUnitsAddUnit(boolean redirect, boolean includeContext) {
+        String url = includeContext ? "/TENTAG" : "";
+        url += "/property/home.xhtml";
+        return redirect ? (url + "?faces-redirect=true") : url;
+    }
+
+
     
 }
