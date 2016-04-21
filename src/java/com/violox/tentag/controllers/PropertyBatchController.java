@@ -22,9 +22,18 @@ public class PropertyBatchController implements Serializable {
     private DbContext dbcontext;
 
     private ArrayList<Batch> batches;
-
+    private Batch batch;
+    
+    private boolean display;
+    
     @PostConstruct
     public void init() {
+        display = false;
+        
+        refreshData();
+    }
+
+    public void refreshData() {
         if (batches == null) {
             batches = new ArrayList<>();
 
@@ -36,9 +45,24 @@ public class PropertyBatchController implements Serializable {
             }
         }
     }
-
+    
     public ArrayList<Batch> getBatches() {
         return batches;
     }
 
+    public Batch getBatch() {
+        return batch;
+    }
+
+    public void setBatch(Batch batch) {
+        this.batch = batch;
+    }
+
+    public boolean isDisplay() {
+        return display;
+    }
+
+    public void setDisplay(boolean display) {
+        this.display = display;
+    }
 }
