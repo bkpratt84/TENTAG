@@ -1,24 +1,44 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-        xmlns:h="http://xmlns.jcp.org/jsf/html"
-        xmlns:ui="http://java.sun.com/jsf/facelets"
-        xmlns:b="http://bootsfaces.net/ui">
-    
-    <h:body>
-        <ui:composition template="/templates/template.xhtml">
-            <ui:define name="content">
-                <b:row>
-                    <b:column span="4"/>
-                    <b:column span="4">
-                        <b:panel title="Property" look="primary">
-                            PROPERTY MANAGER PAGE
-                        <br/><h:link outcome="/index" value="Back to Homepage" />
-                        </b:panel>
-                    </b:column>
-                    <b:column span="4"/>
-                </b:row>
-            </ui:define>
-        </ui:composition>
-    </h:body>
-</html>
+<ui:composition template="/templates/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:b="http://bootsfaces.net/ui"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="content">
+        <!--Pre-load component resources - issue with bootsfaces ajax-->
+        <b:panel rendered="false">
+            <p:dataTable/>
+            <b:commandButton value="blah"/>
+            <b:selectOneMenu/>
+            <p:dialog/>
+            <p:message/>
+        </b:panel>
+
+        <b:panelGrid colSpans="2,10">
+            <b:panel look="primary" title="Property" collapsible="false" style="margin-left: 10px;">
+                <b:listLinks>
+                    <b:navLink value="Home" iconAwesome="home" update=":property-content"
+                               onclick="ajax:propertyNavController.setPage('#{navigationController.toPropertyHome(false, false)}')" />
+
+                    <p:separator styleClass="separator" />
+
+                    <b:navLink header="Property Management"/>
+                    <b:navLink value="Manage Units" iconAwesome="user" update=":property-content"
+                               onclick="ajax:propertyNavController.setPage('#{navigationController.toPropertyUnits(false, false)}')" />
+                    <b:navLink value="Manage Permits" iconAwesome="barcode" update=":property-content"
+                               onclick="ajax:propertyNavController.setPage('#{navigationController.toPropertyPermits(false, false)}')" />
+                    <b:navLink value="Manage Batches" iconAwesome="newspaper-o" update=":property-content"
+                               onclick="ajax:propertyNavController.setPage('#{navigationController.toPropertyBatches(false, false)}')" />
+                </b:listLinks>
+            </b:panel>
+
+            <h:panelGroup layout="block" id="property-content">
+                <ui:include src="#{propertyNavController.page}"/>
+            </h:panelGroup>
+        </b:panelGrid>
+    </ui:define>
+
+
+</ui:composition>
