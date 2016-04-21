@@ -140,7 +140,7 @@ public class NavigationController {
 
     public String toPrinterBatches(boolean redirect, boolean includeContext) {
         String url = includeContext ? "/TENTAG" : "";
-        url += "/property/batches.xhtml";
+        url += "/printer/batches.xhtml";
         return redirect ? (url + "?faces-redirect=true") : url;
     }
     

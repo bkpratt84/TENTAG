@@ -22,9 +22,18 @@ public class PrinterBatchController implements Serializable {
     private DbContext dbcontext;
 
     private ArrayList<Batch> batches;
-
+    
+    private Batch batch;
+    private boolean display;
+    
     @PostConstruct
     public void init() {
+        display = false;
+        
+        refreshData();
+    }
+
+    public void refreshData() {
         if (batches == null) {
             batches = new ArrayList<>();
 
@@ -34,11 +43,27 @@ public class PrinterBatchController implements Serializable {
                 batch.fillPrinter(dbcontext);
                 batch.fillPrinter(dbcontext);
             }
-        }
+        }   
     }
-
+    
     public ArrayList<Batch> getBatches() {
         return batches;
+    }
+
+    public boolean isDisplay() {
+        return display;
+    }
+
+    public void setDisplay(boolean display) {
+        this.display = display;
+    }
+
+    public Batch getBatch() {
+        return batch;
+    }
+
+    public void setBatch(Batch batch) {
+        this.batch = batch;
     }
 
 }
