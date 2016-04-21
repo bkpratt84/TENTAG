@@ -38,6 +38,18 @@ public class NavigationController {
         url += "/admin/users/addUser.xhtml";
         return redirect ? (url + "?faces-redirect=true") : url;
     }
+    
+    public String toAdminUsersResetPW(boolean redirect, boolean includeContext) {
+        String url = includeContext ? "/TENTAG" : "";
+        url += "/admin/users/resetPW.xhtml";
+        return redirect ? (url + "?faces-redirect=true") : url;
+    }
+    
+    public String toAdminUserGroups(boolean redirect, boolean includeContext) {
+        String url = includeContext ? "/TENTAG" : "";
+        url += "/admin/userGroups.xhtml";
+        return redirect ? (url + "?faces-redirect=true") : url;
+    }
      
     public String toAdminBatches(boolean redirect, boolean includeContext) {
         String url = includeContext ? "/TENTAG" : "";

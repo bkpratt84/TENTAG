@@ -5,6 +5,7 @@ import com.violox.tentag.domain.Group;
 import com.violox.tentag.domain.Key;
 import com.violox.tentag.domain.User;
 import com.violox.tentag.domain.UserGroup;
+import com.violox.tentag.domain.md5Hash;
 import com.violox.tentag.utils.Messages;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -13,6 +14,7 @@ import javax.annotation.PostConstruct;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
+import javax.validation.constraints.Size;
 import org.primefaces.context.RequestContext;
 
 @Named(value = "adminUserController")
@@ -26,18 +28,24 @@ public class AdminUserController implements Serializable {
     @Inject
     private DbContext dbcontext;
     
-    private ArrayList<User> users;
+    @Inject
+    private LoginController login;
     
+    private ArrayList<User> users;
     private User user;
+    private boolean display;
     
     @Inject
     private User newUser;
     
+    @Size(min = 8, max = 20, message = "Password between 8 and 20 characters.")
+    String pw1, pw2;
+    
     @PostConstruct
     public void init() {
-        if (users == null) {
-            refreshData();
-        }
+        display = false;
+        
+        refreshData();
     }
     
     public void refreshData() {
@@ -46,15 +54,43 @@ public class AdminUserController implements Serializable {
         for (User u : users) {
             u.fillGroups(dbcontext, obj_key);
         }
+        
+        display = false;
+    }
+
+    public boolean isDisplay() {
+        return display;
+    }
+
+    public void setDisplay(boolean display) {
+        this.display = display;
+    }
+
+    public String getPw1() {
+        return pw1;
+    }
+
+    public void setPw1(String pw1) {
+        this.pw1 = pw1;
+    }
+
+    public String getPw2() {
+        return pw2;
+    }
+
+    public void setPw2(String pw2) {
+        this.pw2 = pw2;
     }
 
     public User getUser() {
         return user;
     }
 
-    public void setUser(User user) {   
+    public void setUser(User user) {
+        display = true;
         this.user = user;
     }
+
 
     public User getNewUser() {
         return newUser;
@@ -77,32 +113,45 @@ public class AdminUserController implements Serializable {
     }
     
     public void deleteUser() {
-        //Delete groups user is in
-        for (Group g : user.getGroups()) {
-            UserGroup ug = new UserGroup();
-            ug.setGroupId(g.getId());
-            ug.setUserId(user.getId());
+        boolean success;
+        String msg;
+        
+        if (user.getName().equals(login.getUsername())) {
+            success = false;
+            msg = "Can't delete yourself!";
+        } else {
+            //Delete groups user is in
+            for (Group g : user.getGroups()) {
+                UserGroup ug = new UserGroup();
+                ug.setGroupId(g.getId());
+                ug.setUserId(user.getId());
 
-            dbcontext.UserGroup().delete(ug);
+                dbcontext.UserGroup().delete(ug);
+            }
+
+            //Delete user
+            dbcontext.User().delete(user);
+            success = true;
+            msg = "User Deleted!";
         }
         
-        //Delete user
-        dbcontext.User().delete(user);
-        
-        user = null;
         refreshData();
-        Messages.setSuccessMessage("User Deleted!", null);
+        if (success) {
+            Messages.setSuccessMessage(msg, null);
+        } else {
+            Messages.setErrorMessage(msg, null);
+        }
         RequestContext.getCurrentInstance().update("form_errors");
     }
     
     public void dgAddUser() {
+        newUser.setPassword(md5Hash.hash(newUser.getPassword()));
         dbcontext.User().post(newUser);
         
-        newUser = null;
         refreshData();
         RequestContext.getCurrentInstance().execute("PF('dgAdd').hide();");
         Messages.setSuccessMessage("User Added!", null);
-        RequestContext.getCurrentInstance().update("form_errors"); 
+        RequestContext.getCurrentInstance().update("form_errors");
     }
     
     public void dgEditUser() {
@@ -119,9 +168,22 @@ public class AdminUserController implements Serializable {
             }
         }
         
-        user = null;
+        refreshData();
         RequestContext.getCurrentInstance().execute("PF('dgSave').hide();");
         Messages.setSuccessMessage("Changes Saved!", null);
+        RequestContext.getCurrentInstance().update("form_errors");
+    }
+    
+    public void dgResetPW() {
+        user.setPassword(md5Hash.hash(pw1));
+        dbcontext.User().put(user);
+        
+        pw1 = null;
+        pw2 = null;
+        
+        refreshData();
+        RequestContext.getCurrentInstance().execute("PF('dgResetPW').hide();");
+        Messages.setSuccessMessage("Password reset!", null);
         RequestContext.getCurrentInstance().update("form_errors");
     }
 }

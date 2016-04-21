@@ -8,7 +8,7 @@
     xmlns:o="http://omnifaces.org/ui">
         
     <p:dialog id="dgAdd" widgetVar="dgAdd" position="center" header="Add User" draggable="false" resizable="false" modal="false"
-              width="320" height="300" closeOnEscape="false" showEffect="fade" closable="true">
+              width="320" height="300" closeOnEscape="false" showEffect="fade" closable="false">
         <p:ajax event="close" update=":form_dt"/>
         
         <h:form id="formAddUser">
@@ -34,7 +34,6 @@
                 <b:column>
                     <b:inputText value="#{adminUserController.newUser.password}" placeholder="Password" type="password"
                                  id="addpassword" style="width: 200px;">
-                        <o:validator validatorId="existingNewUser" message="Username already exists."/>
                         <f:facet name="prepend">
                             <b:iconAwesome name="key"/>
                         </f:facet>
