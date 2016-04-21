@@ -34,21 +34,23 @@
 
         <b:row>
             <h:form id="form_dt">
-                <p:dataTable id="dt_users" var="user" value="#{adminUserController.users}" style="margin: 0 10px;"
-                             selectionMode="single" selection="#{adminUserController.user}" rowKey="#{user.id}"
+                <p:dataTable id="dt_usergroups" var="group" value="#{adminUserGroupController.ugs}" style="margin: 0 10px;"
+                             
                              editable="false" editMode="row" widgetVar="datatable">
+                    
+                    
+                    <!--selectionMode="single" selection="#{adminUserGroupController.ug}" rowKey="#{group.hashCode}"-->
+                    
                     
                     <p:ajax event="rowSelect" update=":form_options" />
                     
-                    <p:column headerText="ID">
-                        <h:outputText value="#{user.id}"/>
+                    <p:column headerText="Group">
+                        <h:outputText value="#{group.groupId}"/>
                     </p:column>
-                    <p:column headerText="Username">
-                        <h:outputText value="#{user.name}"/>
+                    <p:column headerText="User">
+                        <h:outputText value="#{group.userId}"/>
                     </p:column>
-                    <p:column headerText="Role">
-                        <h:outputText value="#{adminUserController.getUserRole(user)}"/>
-                    </p:column>
+
                 </p:dataTable>
             </h:form>
         </b:row>

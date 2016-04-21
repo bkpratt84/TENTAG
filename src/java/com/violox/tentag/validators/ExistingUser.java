@@ -33,8 +33,8 @@ public class ExistingUser implements Validator {
             temp.setName(value.toString());
 
             u = (User) dbContext.User().getByAlternateKey(temp);
-
-            if (u.getName() != null && !ctrl.getNewUser().equals(u) && temp.getName().toLowerCase().equals(u.getName().toLowerCase())) {
+            
+            if (u.getName() != null && !ctrl.getUser().equals(u) && temp.getName().toLowerCase().equals(u.getName().toLowerCase())) {
                 FacesMessage msg = new FacesMessage(null, null);
                 msg.setSeverity(FacesMessage.SEVERITY_ERROR);
                 throw new ValidatorException(msg);

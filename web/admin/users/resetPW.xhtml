@@ -1,0 +1,62 @@
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:b="http://bootsfaces.net/ui"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:o="http://omnifaces.org/ui">
+        
+    <p:dialog id="dgResetPW" widgetVar="dgResetPW" position="center" header="Reset Password" draggable="false" resizable="false" modal="false"
+              width="320" height="200" closeOnEscape="false" showEffect="fade" closable="false">
+        <p:ajax event="close" update=":form_dt"/>
+        
+        <h:form id="formResetPW">
+            <!--<h:messages id="test"/>-->
+            <b:row>
+                <b:column>
+                    <b:inputText value="#{adminUserController.pw1}" placeholder="Password" type="password"
+                                 id="addpw1" style="width: 200px;">
+                        <f:facet name="prepend">
+                            <b:iconAwesome name="key"/>
+                        </f:facet>
+                    </b:inputText>
+                </b:column>
+            </b:row>
+            <b:row style="margin-bottom: 10px;" rendered="#{facesContext.validationFailed}">
+                <b:column>
+                    <p:message id="err_addpw1" for="addpw1" display="text"/>
+                </b:column>
+            </b:row>
+            
+            <b:row>
+                <b:column>
+                    <b:inputText value="#{adminUserController.pw2}" placeholder="Confirm Password" type="password"
+                                 id="addpw2" style="width: 200px;">
+                        <f:facet name="prepend">
+                            <b:iconAwesome name="key"/>
+                        </f:facet>
+                    </b:inputText>
+                </b:column>
+            </b:row>
+            <b:row style="margin-bottom: 10px;" rendered="#{facesContext.validationFailed}">
+                <b:column>
+                    <p:message id="err_addpw2" for="addpw2" display="text"/>
+                </b:column>
+            </b:row>
+            
+            <o:validateEqual components="addpw1 addpw2" message="Passwords must match!" showMessageFor="addpw2" />
+            
+            <b:row>
+                <b:column>
+                    <b:commandButton value="Save" iconAwesome="floppy-o" ajax="true" look="success" style="margin: 0 0 0 0;"
+                                     process="formResetPW"
+                                     action="#{adminUserController.dgResetPW()}" update="@form"/>
+                    
+                    <b:commandButton value="Cancel" iconAwesome="ban" ajax="true" look="info" style="margin: 0 0 0 10px;"
+                                     immediate="true" oncomplete="PF('dgResetPW').hide();" action="#{adminUserController.refreshData()}"/>
+                </b:column>
+            </b:row>
+        </h:form>
+    </p:dialog>
+</ui:composition>

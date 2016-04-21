@@ -1,5 +1,6 @@
 package com.violox.tentag.domain;
 
+import java.util.Objects;
 import javax.enterprise.context.RequestScoped;
 
 @RequestScoped
@@ -41,7 +42,33 @@ public class UserGroup {
     public void setRoleName(String groupName) {
         this.roleName = groupName;
     }
-    
-    
-    
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 79 * hash + Objects.hashCode(this.userId);
+        hash = 79 * hash + Objects.hashCode(this.groupId);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final UserGroup other = (UserGroup) obj;
+        if (!Objects.equals(this.userId, other.userId)) {
+            return false;
+        }
+        if (!Objects.equals(this.groupId, other.groupId)) {
+            return false;
+        }
+        return true;
+    }
 }

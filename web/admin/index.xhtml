@@ -27,15 +27,17 @@
                     <b:navLink header="Users and Groups"/>
                     <b:navLink value="Users" iconAwesome="user" update=":admin-content"
                                onclick="ajax:adminNavController.setPage('#{navigationController.toAdminUsers(false, false)}')" />
+                    <b:navLink value="Groups" iconAwesome="users" update=":admin-content"
+                               onclick="ajax:adminNavController.setPage('#{navigationController.toAdminUserGroups(false, false)}')" />
 
                     <p:separator styleClass="separator" />
 
                     <b:navLink header="Vendors" />
                     <b:navLink value="Batches" iconAwesome="newspaper-o" update=":admin-content"
-                                       onclick="ajax:adminNavController.setPage('#{navigationController.toAdminBatches(false, false)}')" />
+                               onclick="ajax:adminNavController.setPage('#{navigationController.toAdminBatches(false, false)}')" />
                 </b:listLinks>
             </b:panel>
-
+            
             <h:panelGroup layout="block" id="admin-content">
                 <ui:include src="#{adminNavController.page}"/>
             </h:panelGroup>

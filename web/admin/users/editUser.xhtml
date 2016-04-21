@@ -56,7 +56,7 @@
             <b:row>
                 <b:column>
                     <b:commandButton value="Save" iconAwesome="floppy-o" ajax="true" look="success" style="margin: 0 0 0 0;"
-                                     process="formEditUser" action="#{adminUserController.dgEditUser()}" update="@form"/>
+                                     process="formEditUser" action="#{adminUserController.dgEditUser()}" update="@form :form_options"/>
                     
                     <b:commandButton value="Cancel" iconAwesome="ban" ajax="true" look="info" style="margin: 0 0 0 10px;"
                                      immediate="true" oncomplete="PF('dgSave').hide();" action="#{adminUserController.refreshData()}"/>
