@@ -10,15 +10,29 @@ public class NavigationController {
 
     private static final Logger logger = Logger.getLogger("NavigationController");
 
+    public String toHome(boolean redirect, boolean includeContext) {
+        String url = includeContext ? "/TENTAG" : "";
+        url += "/index.xhtml";
+        return redirect ? (url + "?faces-redirect=true") : url;
+    }
+
+    public String toLogin(boolean redirect, boolean includeContext) {
+        String url = includeContext ? "/TENTAG" : "";
+        url += "/login/index.xhtml";
+        return redirect ? (url + "?faces-redirect=true") : url;
+    }
+    
+    
+    
     public String toAdmin(boolean redirect, boolean includeContext) {
         String url = includeContext ? "/TENTAG" : "";
         url += "/admin/index.xhtml";
         return redirect ? (url + "?faces-redirect=true") : url;
     }
 
-    public String toAdminHome(boolean redirect, boolean includeContext) {
+    public String toAdminNav(boolean redirect, boolean includeContext) {
         String url = includeContext ? "/TENTAG" : "";
-        url += "/admin/home.xhtml";
+        url += "/admin/nav.xhtml";
         return redirect ? (url + "?faces-redirect=true") : url;
     }
 
@@ -58,34 +72,31 @@ public class NavigationController {
         return redirect ? (url + "?faces-redirect=true") : url;
     }
 
+    
+    
     public String toPrinter(boolean redirect, boolean includeContext) {
         String url = includeContext ? "/TENTAG" : "";
         url += "/printer/index.xhtml";
         return redirect ? (url + "?faces-redirect=true") : url;
     }
+    
+    public String toPrinterNav(boolean redirect, boolean includeContext) {
+        String url = includeContext ? "/TENTAG" : "";
+        url += "/printer/nav.xhtml";
+        return redirect ? (url + "?faces-redirect=true") : url;
+    }
 
+    
+    
     public String toProperty(boolean redirect, boolean includeContext) {
         String url = includeContext ? "/TENTAG" : "";
         url += "/property/index.xhtml";
         return redirect ? (url + "?faces-redirect=true") : url;
     }
-
-    public String toHome(boolean redirect, boolean includeContext) {
-        String url = includeContext ? "/TENTAG" : "";
-        url += "/index.xhtml";
-        return redirect ? (url + "?faces-redirect=true") : url;
-    }
-
-    public String toLogin(boolean redirect, boolean includeContext) {
-        String url = includeContext ? "/TENTAG" : "";
-        url += "/login/index.xhtml";
-        return redirect ? (url + "?faces-redirect=true") : url;
-    }
-
     
-    public String toPropertyHome(boolean redirect, boolean includeContext) {
+    public String toPropertyNav(boolean redirect, boolean includeContext) {
         String url = includeContext ? "/TENTAG" : "";
-        url += "/property/home.xhtml";
+        url += "/property/nav.xhtml";
         return redirect ? (url + "?faces-redirect=true") : url;
     }
     
@@ -131,10 +142,10 @@ public class NavigationController {
 //        return redirect ? (url + "?faces-redirect=true") : url;
 //    }
 //
-    
+//    
     public String toPrinterHome(boolean redirect, boolean includeContext) {
         String url = includeContext ? "/TENTAG" : "";
-        url += "/printer/home.xhtml";
+        url += "/printer/index.xhtml";
         return redirect ? (url + "?faces-redirect=true") : url;
     }
 
@@ -146,25 +157,25 @@ public class NavigationController {
 
     public String toPropertyPermitsEditPermit(boolean redirect, boolean includeContext) {
         String url = includeContext ? "/TENTAG" : "";
-        url += "/property/home.xhtml";
+        url += "/property/index.xhtml";
         return redirect ? (url + "?faces-redirect=true") : url;
     }
 
     public String toPropertyPermitsAddPermit(boolean redirect, boolean includeContext) {
         String url = includeContext ? "/TENTAG" : "";
-        url += "/property/home.xhtml";
+        url += "/property/index.xhtml";
         return redirect ? (url + "?faces-redirect=true") : url;
     }
 
         public String toPropertyUnitsEditUnit(boolean redirect, boolean includeContext) {
         String url = includeContext ? "/TENTAG" : "";
-        url += "/property/home.xhtml";
+        url += "/property/index.xhtml";
         return redirect ? (url + "?faces-redirect=true") : url;
     }
 
     public String toPropertyUnitsAddUnit(boolean redirect, boolean includeContext) {
         String url = includeContext ? "/TENTAG" : "";
-        url += "/property/home.xhtml";
+        url += "/property/index.xhtml";
         return redirect ? (url + "?faces-redirect=true") : url;
     }
 

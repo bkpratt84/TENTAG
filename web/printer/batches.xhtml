@@ -1,65 +1,79 @@
-<ui:composition
+<ui:composition template="/templates/template.xhtml"
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:h="http://xmlns.jcp.org/jsf/html"
     xmlns:ui="http://java.sun.com/jsf/facelets"
     xmlns:b="http://bootsfaces.net/ui"
     xmlns:p="http://primefaces.org/ui">
 
-    <b:panel look="primary" title="Batches" collapsible="false" style="margin: 0 10px 10px 10px;">
-        <b:row>
-            <h:form id="form_options">
-                <b:commandButton value="Add" iconAwesome="plus" ajax="true" look="success" style="margin: 0 0 15px 10px;"
-                                 oncomplete="PF('dgAdd').show();"  update=":formAddUser @form">
-                    <p:resetInput target=":dgAdd"/>
-                </b:commandButton>
-                
-                <b:commandButton value="Edit" iconAwesome="pencil" ajax="true" look="primary" style="margin: 0 0 15px 10px;"
-                                 oncomplete="PF('dgSave').show();"  update=":formEditUser @form"
-                                 disabled="#{!printerBatchController.display}">
-                    <p:resetInput target=":dgSave"/>
-                </b:commandButton>
+    <ui:define name="content">
+        <b:panel rendered="false">
+            <p:dataTable/>
+        </b:panel>
+        
+        <b:panelGrid colSpans="2,10">
+            <b:panel look="primary" title="Printer Management" collapsible="false" style="margin-left: 10px;">
+                <ui:include src="#{navigationController.toPrinterNav(false, false)}"/>
+            </b:panel>
 
-                <b:commandButton value="Reset" iconAwesome="unlock" ajax="true" look="info" style="margin: 0 0 15px 10px;"
-                                 oncomplete="PF('dgResetPW').show();"  update=":formResetPW @form"
-                                 disabled="#{!printerBatchController.display}">
-                    <p:resetInput target=":dgResetPW"/>
-                </b:commandButton>
-                
-                <b:commandButton value="Delete" iconAwesome="trash" ajax="true" look="danger" style="margin: 0 0 15px 10px;"
-                                 onclick="return confirm('Are you sure you want to delete this user?');"
-                                 action="#{adminUserController.deleteUser()}" update=":form_dt @form :form_options"
-                                 disabled="#{!printerBatchController.display}"/>
-            </h:form>
-        </b:row>
+            <h:panelGroup layout="block">
+                <b:panel look="primary" title="Batches" collapsible="false" style="margin: 0 10px 10px 10px;">
+                    <b:row>
+                        <h:form id="form_options">
+                            <b:commandButton value="Add" iconAwesome="plus" ajax="true" look="success" style="margin: 0 0 15px 10px;"
+                                             oncomplete="PF('dgAdd').show();"  update=":formAddUser @form">
+                                <p:resetInput target=":dgAdd"/>
+                            </b:commandButton>
 
-        <b:row>
-            <h:form id="form_dt">
-                <p:dataTable id="dt_batch" var="batch" value="#{printerBatchController.batches}" style="margin: 0 10px;"
-                             selectionMode="single" selection="#{printerBatchController.batch}" rowKey="#{batch.id}"
-                             editable="false" editMode="row" widgetVar="datatable">
-                    
-                    <p:ajax event="rowSelect" update=":form_options" />
-                    
-                    <p:column headerText="ID">
-                        <h:outputText value="#{batch.id}"/>
-                    </p:column>
-                    <p:column headerText="Property">
-                        <h:outputText value="#{batch.property.name}"/>
-                    </p:column>
-                    <p:column headerText="Printer">
-                        <h:outputText value="#{batch.printer.name}"/>
-                    </p:column>
-                    <p:column headerText="Status">
-                        <h:outputText value="#{batch.status}"/>
-                    </p:column>
-                </p:dataTable>
-            </h:form>
-        </b:row>
-    </b:panel>
-    
-    <ui:include src="#{navigationController.toAdminUsersEditUser(false, false)}"/>
+                            <b:commandButton value="Edit" iconAwesome="pencil" ajax="true" look="primary" style="margin: 0 0 15px 10px;"
+                                             oncomplete="PF('dgSave').show();"  update=":formEditUser @form"
+                                             disabled="#{!printerBatchController.display}">
+                                <p:resetInput target=":dgSave"/>
+                            </b:commandButton>
 
-    <ui:include src="#{navigationController.toAdminUsersAddUser(false, false)}"/>
-    
-    <ui:include src="#{navigationController.toAdminUsersResetPW(false, false)}"/>
+                            <b:commandButton value="Reset" iconAwesome="unlock" ajax="true" look="info" style="margin: 0 0 15px 10px;"
+                                             oncomplete="PF('dgResetPW').show();"  update=":formResetPW @form"
+                                             disabled="#{!printerBatchController.display}">
+                                <p:resetInput target=":dgResetPW"/>
+                            </b:commandButton>
+
+                            <b:commandButton value="Delete" iconAwesome="trash" ajax="true" look="danger" style="margin: 0 0 15px 10px;"
+                                             onclick="return confirm('Are you sure you want to delete this user?');"
+                                             action="#{adminUserController.deleteUser()}" update=":form_dt @form :form_options"
+                                             disabled="#{!printerBatchController.display}"/>
+                        </h:form>
+                    </b:row>
+
+                    <b:row>
+                        <h:form id="form_dt">
+                            <p:dataTable id="dt_batch" var="batch" value="#{printerBatchController.batches}" style="margin: 0 10px;"
+                                         selectionMode="single" selection="#{printerBatchController.batch}" rowKey="#{batch.id}"
+                                         editable="false" editMode="row" widgetVar="datatable">
+
+                                <p:ajax event="rowSelect" update=":form_options" />
+
+                                <p:column headerText="ID">
+                                    <h:outputText value="#{batch.id}"/>
+                                </p:column>
+                                <p:column headerText="Property">
+                                    <h:outputText value="#{batch.property.name}"/>
+                                </p:column>
+                                <p:column headerText="Printer">
+                                    <h:outputText value="#{batch.printer.name}"/>
+                                </p:column>
+                                <p:column headerText="Status">
+                                    <h:outputText value="#{batch.status}"/>
+                                </p:column>
+                            </p:dataTable>
+                        </h:form>
+                    </b:row>
+                </b:panel>
+
+                <ui:include src="#{navigationController.toAdminUsersEditUser(false, false)}"/>
+
+                <ui:include src="#{navigationController.toAdminUsersAddUser(false, false)}"/>
+
+                <ui:include src="#{navigationController.toAdminUsersResetPW(false, false)}"/>
+            </h:panelGroup>
+        </b:panelGrid>
+    </ui:define>
 </ui:composition>

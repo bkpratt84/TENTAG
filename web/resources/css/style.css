@@ -18,3 +18,7 @@
 .dropdown-menu > li > a {
     cursor: pointer;
 }
+
+.nav > li > a:hover {
+    background-color: #cceeff;
+}

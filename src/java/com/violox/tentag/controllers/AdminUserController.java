@@ -116,7 +116,7 @@ public class AdminUserController implements Serializable {
         boolean success;
         String msg;
         
-        if (user.getName().equals(login.getUsername())) {
+        if (user.getName().toLowerCase().equals(login.getUsername().toLowerCase())) {
             success = false;
             msg = "Can't delete yourself!";
         } else {
