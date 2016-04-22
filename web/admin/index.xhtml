@@ -1,45 +1,22 @@
 <ui:composition template="/templates/template.xhtml"
-    xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:h="http://xmlns.jcp.org/jsf/html"
-    xmlns:ui="http://java.sun.com/jsf/facelets"
-    xmlns:b="http://bootsfaces.net/ui"
-    xmlns:p="http://primefaces.org/ui"
-    xmlns:f="http://xmlns.jcp.org/jsf/core">
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:b="http://bootsfaces.net/ui"
+                xmlns:p="http://primefaces.org/ui">
 
     <ui:define name="content">
-        <!--Pre-load component resources - issue with bootsfaces ajax-->
         <b:panel rendered="false">
             <p:dataTable/>
-            <b:commandButton value="blah"/>
-            <b:selectOneMenu/>
-            <p:dialog/>
-            <p:message/>
         </b:panel>
 
         <b:panelGrid colSpans="2,10">
             <b:panel look="primary" title="Admin" collapsible="false" style="margin-left: 10px;">
-                <b:listLinks>
-                    <b:navLink value="Home" iconAwesome="home" update=":admin-content"
-                               onclick="ajax:adminNavController.setPage('#{navigationController.toAdminHome(false, false)}')" />
-
-                    <p:separator styleClass="separator" />
-
-                    <b:navLink header="Users and Groups"/>
-                    <b:navLink value="Users" iconAwesome="user" update=":admin-content"
-                               onclick="ajax:adminNavController.setPage('#{navigationController.toAdminUsers(false, false)}')" />
-                    <b:navLink value="Groups" iconAwesome="users" update=":admin-content"
-                               onclick="ajax:adminNavController.setPage('#{navigationController.toAdminUserGroups(false, false)}')" />
-
-                    <p:separator styleClass="separator" />
-
-                    <b:navLink header="Vendors" />
-                    <b:navLink value="Batches" iconAwesome="newspaper-o" update=":admin-content"
-                               onclick="ajax:adminNavController.setPage('#{navigationController.toAdminBatches(false, false)}')" />
-                </b:listLinks>
+                <ui:include src="#{navigationController.toAdminNav(false, false)}"/>
             </b:panel>
-            
-            <h:panelGroup layout="block" id="admin-content">
-                <ui:include src="#{adminNavController.page}"/>
+
+            <h:panelGroup layout="block">
+                ADMIN HOME
             </h:panelGroup>
         </b:panelGrid>
     </ui:define>

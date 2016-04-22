@@ -1,0 +1,21 @@
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:b="http://bootsfaces.net/ui"
+    xmlns:p="http://primefaces.org/ui">
+    
+    <b:listLinks>
+        <b:navLink styleClass="test" value="Home" iconAwesome="home" href="#{navigationController.toAdmin(false, true)}"/>
+
+        <p:separator styleClass="separator" />
+
+        <b:navLink header="Users and Groups"/>
+        <b:navLink value="Users" iconAwesome="user" href="#{navigationController.toAdminUsers(false, true)}"/>
+        <b:navLink value="Groups" iconAwesome="users" href="#{navigationController.toAdminUserGroups(false, true)}"/>
+
+        <p:separator styleClass="separator" />
+
+        <b:navLink header="Vendors" />
+        <b:navLink value="Batches" iconAwesome="newspaper-o" href="#{navigationController.toAdminBatches(false, true)}"/>
+    </b:listLinks>
+</ui:composition>

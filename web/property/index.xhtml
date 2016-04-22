@@ -3,42 +3,21 @@
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:b="http://bootsfaces.net/ui"
-                xmlns:p="http://primefaces.org/ui"
-                xmlns:f="http://xmlns.jcp.org/jsf/core">
+                xmlns:p="http://primefaces.org/ui">
 
     <ui:define name="content">
-        <!--Pre-load component resources - issue with bootsfaces ajax-->
         <b:panel rendered="false">
             <p:dataTable/>
-            <b:commandButton value="blah"/>
-            <b:selectOneMenu/>
-            <p:dialog/>
-            <p:message/>
         </b:panel>
 
         <b:panelGrid colSpans="2,10">
-            <b:panel look="primary" title="Property" collapsible="false" style="margin-left: 10px;">
-                <b:listLinks>
-                    <b:navLink value="Home" iconAwesome="home" update=":property-content"
-                               onclick="ajax:propertyNavController.setPage('#{navigationController.toPropertyHome(false, false)}')" />
-
-                    <p:separator styleClass="separator" />
-
-                    <b:navLink header="Property Management"/>
-                    <b:navLink value="Manage Units" iconAwesome="user" update=":property-content"
-                               onclick="ajax:propertyNavController.setPage('#{navigationController.toPropertyUnits(false, false)}')" />
-                    <b:navLink value="Manage Permits" iconAwesome="barcode" update=":property-content"
-                               onclick="ajax:propertyNavController.setPage('#{navigationController.toPropertyPermits(false, false)}')" />
-                    <b:navLink value="Manage Batches" iconAwesome="newspaper-o" update=":property-content"
-                               onclick="ajax:propertyNavController.setPage('#{navigationController.toPropertyBatches(false, false)}')" />
-                </b:listLinks>
+            <b:panel look="primary" title="Property Management" collapsible="false" style="margin-left: 10px;">
+                <ui:include src="#{navigationController.toPropertyNav(false, false)}"/>
             </b:panel>
 
-            <h:panelGroup layout="block" id="property-content">
-                <ui:include src="#{propertyNavController.page}"/>
+            <h:panelGroup layout="block">
+                Property HOME
             </h:panelGroup>
         </b:panelGrid>
     </ui:define>
-
-
 </ui:composition>

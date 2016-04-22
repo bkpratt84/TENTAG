@@ -1,0 +1,15 @@
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:b="http://bootsfaces.net/ui"
+    xmlns:p="http://primefaces.org/ui">
+    
+    <b:listLinks>
+        <b:navLink value="Home" iconAwesome="home" href="#{navigationController.toPrinter(false, true)}"/>
+
+        <p:separator styleClass="separator" />
+
+        <b:navLink header="Printer Management"/>
+        <b:navLink value="Manage Batches" iconAwesome="newspaper-o" href="#{navigationController.toPrinterBatches(false, true)}"/>
+    </b:listLinks>
+</ui:composition>

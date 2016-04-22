@@ -3,38 +3,21 @@
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:b="http://bootsfaces.net/ui"
-                xmlns:p="http://primefaces.org/ui"
-                xmlns:f="http://xmlns.jcp.org/jsf/core">
+                xmlns:p="http://primefaces.org/ui">
 
     <ui:define name="content">
-        <!--Pre-load component resources - issue with bootsfaces ajax-->
         <b:panel rendered="false">
             <p:dataTable/>
-            <b:commandButton value="blah"/>
-            <b:selectOneMenu/>
-            <p:dialog/>
-            <p:message/>
         </b:panel>
 
         <b:panelGrid colSpans="2,10">
-            <b:panel look="primary" title="Printer" collapsible="false" style="margin-left: 10px;">
-                <b:listLinks>
-                    <b:navLink value="Home" iconAwesome="home" update=":printer-content"
-                               onclick="ajax:printerNavController.setPage('#{navigationController.toPrinterHome(false, false)}')" />
-
-                    <p:separator styleClass="separator" />
-
-                    <b:navLink header="Printer Management"/>
-                    <b:navLink value="Manage Batches" iconAwesome="newspaper-o" update=":printer-content"
-                               onclick="ajax:printerNavController.setPage('#{navigationController.toPrinterBatches(false, false)}')" />
-                </b:listLinks>
+            <b:panel look="primary" title="Printer Management" collapsible="false" style="margin-left: 10px;">
+                <ui:include src="#{navigationController.toPrinterNav(false, false)}"/>
             </b:panel>
 
-            <h:panelGroup layout="block" id="printer-content">
-                <ui:include src="#{printerNavController.page}"/>
+            <h:panelGroup layout="block">
+                Printer HOME
             </h:panelGroup>
         </b:panelGrid>
     </ui:define>
-
-
 </ui:composition>

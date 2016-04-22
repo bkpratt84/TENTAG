@@ -40,13 +40,13 @@ public class LoginFilter implements Filter {
             login.setUsername(request.getUserPrincipal().getName());
 
             if (request.isUserInRole("Admin")) {
-                login.setRole("Admin");
+                login.setHomepage(nav.toAdmin(false, true));
                 redirect += nav.toAdmin(false, true);
             } else if (request.isUserInRole("Property")) {
-                login.setRole("Property");
+                login.setHomepage(nav.toProperty(false, true));
                 redirect += nav.toProperty(false, true);
             } else if (request.isUserInRole("Printer")) {
-                login.setRole("Printer");
+                login.setHomepage(nav.toPrinter(false, true));
                 redirect += nav.toPrinter(false, true);
             }
             

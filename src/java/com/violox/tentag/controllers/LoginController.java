@@ -6,6 +6,7 @@ import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.logging.Logger;
+import javax.annotation.PostConstruct;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
@@ -18,11 +19,17 @@ public class LoginController implements Serializable {
     private static final Logger logger = Logger.getLogger("LoginController");
     private String username;
     private boolean loggedIn;
-    private String role;
+    private String homepage;
+    
+    @PostConstruct
+    public void init() {
+        homepage = nav.toHome(true, true);
+    }
     
     public void logout() throws IOException {
         loggedIn = false;
         username = null;
+        homepage = nav.toHome(true, true);
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
         Messages.setSuccessMessage("You have signed out.");
         
@@ -48,11 +55,11 @@ public class LoginController implements Serializable {
         this.loggedIn = loggedIn;
     }
 
-    public String getRole() {
-        return role;
+    public String getHomepage() {
+        return homepage;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setHomepage(String homepage) {
+        this.homepage = homepage;
     }
 }
