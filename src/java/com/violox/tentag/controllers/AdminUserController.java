@@ -43,8 +43,6 @@ public class AdminUserController implements Serializable {
     
     @PostConstruct
     public void init() {
-        display = false;
-        
         refreshData();
     }
     

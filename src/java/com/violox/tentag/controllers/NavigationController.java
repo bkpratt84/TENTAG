@@ -44,13 +44,13 @@ public class NavigationController {
 
     public String toAdminUsersEditUser(boolean redirect, boolean includeContext) {
         String url = includeContext ? "/TENTAG" : "";
-        url += "/admin/users/editUser.xhtml";
+        url += "/admin/users/edit.xhtml";
         return redirect ? (url + "?faces-redirect=true") : url;
     }
 
     public String toAdminUsersAddUser(boolean redirect, boolean includeContext) {
         String url = includeContext ? "/TENTAG" : "";
-        url += "/admin/users/addUser.xhtml";
+        url += "/admin/users/add.xhtml";
         return redirect ? (url + "?faces-redirect=true") : url;
     }
 
@@ -63,6 +63,12 @@ public class NavigationController {
     public String toAdminUserGroups(boolean redirect, boolean includeContext) {
         String url = includeContext ? "/TENTAG" : "";
         url += "/admin/userGroups.xhtml";
+        return redirect ? (url + "?faces-redirect=true") : url;
+    }
+    
+    public String toAdminUserGroupsAdd(boolean redirect, boolean includeContext) {
+        String url = includeContext ? "/TENTAG" : "";
+        url += "/admin/usergroups/add.xhtml";
         return redirect ? (url + "?faces-redirect=true") : url;
     }
 
