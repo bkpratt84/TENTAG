@@ -8,7 +8,6 @@ import javax.validation.constraints.*;
 
 @RequestScoped
 public class User implements Serializable {
-
     private Integer id;
     @Size(min = 4, max = 50, message = "Username between 4 and 50 characters.")
     private String name;
@@ -74,7 +73,7 @@ public class User implements Serializable {
             groups.add(g);
         }
     }
-
+    
     @Override
     public int hashCode() {
         int hash = 7;
@@ -101,5 +100,10 @@ public class User implements Serializable {
             return false;
         }
         return true;
+    }
+    
+    @Override
+    public String toString() {
+        return "User[id=" + id + "]";
     }
 }
