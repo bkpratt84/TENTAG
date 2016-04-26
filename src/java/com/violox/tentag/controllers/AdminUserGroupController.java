@@ -1,35 +1,73 @@
 package com.violox.tentag.controllers;
 
 import com.violox.tentag.domain.DbContext;
+import com.violox.tentag.domain.Group;
+import com.violox.tentag.domain.Key;
+import com.violox.tentag.domain.User;
 import com.violox.tentag.domain.UserGroup;
+import com.violox.tentag.utils.Messages;
+import java.awt.event.ActionEvent;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
+import javax.faces.event.AjaxBehaviorEvent;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
+import org.primefaces.context.RequestContext;
 
 @Named(value = "adminUserGroupController")
 @ViewScoped
 public class AdminUserGroupController implements Serializable {
-
+    private static final Logger logger = Logger.getLogger("AdminUserGroupController");
+    
     @Inject
     private DbContext dbcontext;
     
+    @Inject
+    private Key<Integer> key;
+    
+    @Inject
+    private User selUser;
+    
+    @Inject
+    private Group selGroup;
+    
     private ArrayList<UserGroup> ugs;
     private UserGroup ug;
+    private ArrayList<User> users;
     
     private boolean display;
     
     @PostConstruct
-    public void init() {
-        display = false;
-        
+    public void init() {  
         refreshData();
     }
     
     public void refreshData() {
         ugs = dbcontext.UserGroup().get();
+        loadUsers();
+        display = false;
+    }
+    
+    private void loadUsers() {
+        ArrayList<User> temp = dbcontext.User().get();
+        users = new ArrayList<>();
+        
+        for (User u : temp) {
+            if (!u.getRole().equals("Admin")) {
+                users.add(u);
+            }
+        }
+    }
+    
+    public ArrayList<User> getUsers() {
+        return users; 
+    }
+    
+    public ArrayList<Group> getSelGroups() {
+        return selUser.getGroups();
     }
 
     public ArrayList<UserGroup> getUgs() {
@@ -45,6 +83,7 @@ public class AdminUserGroupController implements Serializable {
     }
 
     public void setUg(UserGroup ug) {
+        display = true;
         this.ug = ug;
     }
 
@@ -55,6 +94,61 @@ public class AdminUserGroupController implements Serializable {
     public void setDisplay(boolean display) {
         this.display = display;
     }
+
+    public User getSelUser() {
+        return selUser;
+    }
+
+    public void setSelUser(User selUser) {
+        this.selUser = selUser;
+    }
     
+    public String getGroupName(int ID) {
+        key.setKey(ID);
+        Group group = (Group) dbcontext.Group().get(key);
+        
+        return group.getName();
+    }
     
+    public String getUserName(int ID) {
+        key.setKey(ID);
+        
+        User user = (User) dbcontext.User().get(key);
+        
+        return user.getName();
+    }
+
+    public Group getSelGroup() {
+        return selGroup;
+    }
+
+    public void setSelGroup(Group selGroup) {
+        this.selGroup = selGroup;
+    }
+    
+    public void deleteUserGroup() {
+        String msg;
+        msg = "Usergroup Deleted!";
+        dbcontext.UserGroup().delete(ug);
+        
+        refreshData();
+        Messages.setSuccessMessage(msg, null);
+        RequestContext.getCurrentInstance().update("form_errors");
+    }
+    
+    public void dgAddUsergroup() {
+        //newUser.setPassword(md5Hash.hash(newUser.getPassword()));
+        //dbcontext.User().post(newUser);
+        
+        refreshData();
+        RequestContext.getCurrentInstance().execute("PF('dgAdd').hide();");
+        Messages.setSuccessMessage("Usergroup Added!", null);
+        RequestContext.getCurrentInstance().update("form_errors");
+    }
+    
+    public void onUserSelect() {
+        if (selUser != null) {
+            //selUser.fillGroupsAvail(dbcontext, key);
+        }
+    }
 }

@@ -42,6 +42,10 @@ public class UserGroup {
     public void setRoleName(String groupName) {
         this.roleName = groupName;
     }
+    
+    public int getHashCode() {
+        return hashCode();
+    }
 
     @Override
     public int hashCode() {

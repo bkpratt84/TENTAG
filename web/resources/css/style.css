@@ -22,3 +22,7 @@
 .nav > li > a:hover {
     background-color: #cceeff;
 }
+
+.ui-selectonemenu .ui-selectonemenu-trigger {
+    width: 30px;
+}
