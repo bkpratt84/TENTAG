@@ -239,4 +239,11 @@ public class DbContext {
     public Relationship UserUserGroup() {
         return userUserGroup;
     }
+
+    @Inject
+    private AttributeFilter<Group, String> groupStringAttributeFilter;
+
+    public AttributeFilter GroupStringAttributeFilter() {
+        return groupStringAttributeFilter;
+    }
 }
