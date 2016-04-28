@@ -71,6 +71,24 @@ public class NavigationController {
         url += "/admin/usergroups/add.xhtml";
         return redirect ? (url + "?faces-redirect=true") : url;
     }
+    
+    public String toAdminGroups(boolean redirect, boolean includeContext) {
+        String url = includeContext ? "/TENTAG" : "";
+        url += "/admin/groups.xhtml";
+        return redirect ? (url + "?faces-redirect=true") : url;
+    }
+    
+    public String toAdminGroupsAdd(boolean redirect, boolean includeContext) {
+        String url = includeContext ? "/TENTAG" : "";
+        url += "/admin/groups/add.xhtml";
+        return redirect ? (url + "?faces-redirect=true") : url;
+    }
+    
+    public String toAdminGroupsEdit(boolean redirect, boolean includeContext) {
+        String url = includeContext ? "/TENTAG" : "";
+        url += "/admin/groups/edit.xhtml";
+        return redirect ? (url + "?faces-redirect=true") : url;
+    }
 
     public String toAdminBatches(boolean redirect, boolean includeContext) {
         String url = includeContext ? "/TENTAG" : "";

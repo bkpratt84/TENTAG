@@ -1,0 +1,67 @@
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:b="http://bootsfaces.net/ui"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:f="http://xmlns.jcp.org/jsf/core">
+        
+    <p:dialog id="dgAdd" widgetVar="dgAdd" position="center" header="Add Group" draggable="false" resizable="false" modal="false"
+              width="320" height="200" closeOnEscape="false" showEffect="fade" closable="false">
+        <p:ajax event="close" update=":form_dt"/>
+        
+        <h:form id="formAdd">
+            <!--<h:messages id="test"/>-->
+            <b:row>
+                <b:column>
+                    <b:inputText value="#{adminGroupController.groupName}" placeholder="Group Name" type="text"
+                                 id="addgroup" style="width: 200px;">
+                        <f:facet name="prepend">
+                            <b:iconAwesome name="user"/>
+                        </f:facet>
+                    </b:inputText>
+                </b:column>
+            </b:row>
+            <b:row style="margin-bottom: 10px;" rendered="#{facesContext.validationFailed}">
+                <b:column>
+                    <p:message id="err_addgroup" for="addgroup" display="text"/>
+                </b:column>
+            </b:row>
+            
+            
+            
+            <b:row>
+                <b:column>
+                    <b:selectOneMenu value="#{adminGroupController.role}" placeholder="Select Role"
+                                     id="addrole_select" style="width: 200px;" required="true" requiredMessage="Select a role.">
+                        <f:facet name="prepend">
+                            <span class="input-group-addon">
+                                <h:outputLabel value="Role" for="addrole_select"/>
+                            </span>
+                        </f:facet>
+                        <f:selectItem itemLabel="-- Select Role --" itemValue="" noSelectionOption="true"/>
+                        <f:selectItem itemLabel="Printer" itemValue="Printer"/>
+                        <f:selectItem itemLabel="Property" itemValue="Property"/>
+                    </b:selectOneMenu>
+                </b:column>
+            </b:row>
+            <b:row style="margin-bottom: 10px;" rendered="#{facesContext.validationFailed}">
+                <b:column>
+                    <p:message for="addrole_select" display="text"/>
+                </b:column>
+            </b:row>
+            
+   
+ 
+            <b:row>
+                <b:column>
+                    <b:commandButton value="Save" iconAwesome="floppy-o" ajax="true" look="success" style="margin: 0 0 0 0;"
+                                     process="formAdd" action="#{adminGroupController.dgAddGroup()}" update="@form"/>
+                    
+                    <b:commandButton value="Cancel" iconAwesome="ban" ajax="true" look="info" style="margin: 0 0 0 10px;"
+                                     immediate="true" oncomplete="PF('dgAdd').hide();" action="#{adminGroupController.refreshData()}"/>
+                </b:column>
+            </b:row>
+        </h:form>
+    </p:dialog>
+</ui:composition>

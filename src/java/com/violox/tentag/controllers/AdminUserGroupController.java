@@ -6,12 +6,10 @@ import com.violox.tentag.domain.Key;
 import com.violox.tentag.domain.User;
 import com.violox.tentag.domain.UserGroup;
 import com.violox.tentag.utils.Messages;
-import java.awt.event.ActionEvent;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
-import javax.faces.event.AjaxBehaviorEvent;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -37,6 +35,7 @@ public class AdminUserGroupController implements Serializable {
     private ArrayList<UserGroup> ugs;
     private UserGroup ug;
     private ArrayList<User> users;
+    private ArrayList<Group> groups;
     
     private boolean display;
     
@@ -48,6 +47,8 @@ public class AdminUserGroupController implements Serializable {
     public void refreshData() {
         ugs = dbcontext.UserGroup().get();
         loadUsers();
+        selUser = null;
+        selGroup = null;
         display = false;
     }
     
@@ -67,7 +68,7 @@ public class AdminUserGroupController implements Serializable {
     }
     
     public ArrayList<Group> getSelGroups() {
-        return selUser.getGroups();
+        return groups;
     }
 
     public ArrayList<UserGroup> getUgs() {
@@ -137,8 +138,11 @@ public class AdminUserGroupController implements Serializable {
     }
     
     public void dgAddUsergroup() {
-        //newUser.setPassword(md5Hash.hash(newUser.getPassword()));
-        //dbcontext.User().post(newUser);
+        UserGroup g = new UserGroup();
+        g.setGroupId(selGroup.getId());
+        g.setUserId(selUser.getId());
+        g.setUserName(selUser.getName());
+        dbcontext.UserGroup().post(g);
         
         refreshData();
         RequestContext.getCurrentInstance().execute("PF('dgAdd').hide();");
@@ -148,7 +152,25 @@ public class AdminUserGroupController implements Serializable {
     
     public void onUserSelect() {
         if (selUser != null) {
-            //selUser.fillGroupsAvail(dbcontext, key);
+            boolean found;
+            ArrayList<Group> temp;
+            groups = new ArrayList<>();
+            
+            temp = (ArrayList<Group>) dbcontext.GroupStringAttributeFilter().getByAttribute("g.role_name", selUser.getRole());
+            
+            for (Group g : temp) {
+                found = false;
+                for (UserGroup o : ugs) {
+                    if (o.getGroupId().equals(g.getId()) && o.getUserId().equals(selUser.getId())) {
+                        found = true;
+                        break;
+                    }
+                }
+
+                if (!found) {
+                    groups.add(g);
+                }
+            }
         }
     }
 }
