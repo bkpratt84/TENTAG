@@ -12,7 +12,7 @@ import javax.sql.DataSource;
 @ApplicationScoped
 public class GroupAttributeFilter implements AttributeFilter<Group, String> {
 
-    public static String ROLE_NAME = "u.role_name";
+    public static String ROLE_NAME = "g.role_name";
 
     @Resource(name = "jdbc/TentagDatabaseResource")
     @ApplicationScoped
@@ -21,15 +21,24 @@ public class GroupAttributeFilter implements AttributeFilter<Group, String> {
     @Override
     public ArrayList<Group> getByAttribute(String column, String value) {
         ArrayList<Group> ret = new ArrayList<>();
-        String sql = String.format("select "
+        String sql = String.format("select distinct "
                 + "  g.group_id "
                 + ", g.group_name "
                 + ", g.role_name "
                 + "from "
-                + "tentag.user u "
-                + "join tentag.user_group ug on u.user_id = ug.user_id "
-                + "join tentag.`group` g on ug.group_id = g.group_id "
+                + "tentag.`group` g "
                 + "where " + column + " = '%s'; ", value);
+        
+//        String sql = String.format("select distinct "
+//                + "  g.group_id "
+//                + ", g.group_name "
+//                + ", g.role_name "
+//                + "from "
+//                + "tentag.user u "
+//                + "join tentag.user_group ug on u.user_id = ug.user_id "
+//                + "join tentag.`group` g on ug.group_id = g.group_id "
+//                + "where " + column + " = '%s'; ", value);  
+      
         try (Connection conn = ds.getConnection()) {
             PreparedStatement ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
