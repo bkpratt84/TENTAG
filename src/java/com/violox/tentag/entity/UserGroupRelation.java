@@ -26,9 +26,10 @@ public class UserGroupRelation implements Relation<UserGroup, IntegerPair> {
         String sql = String.format("INSERT INTO `tentag`.`user_group` "
                 + "(`user_id`"
                 + ", `group_id`"
-                + ", `user_name`"
+                + ", `user_name`) "
                 //+ ", `group_name`) " // this is actually the role name
-                + "VALUES (%d, %d, '%s', '%s'); ", item.getUserId(), item.getGroupId(), item.getUserName(), item.getRoleName()
+                + "VALUES (%d, %d, '%s'); ", item.getUserId(), item.getGroupId(), item.getUserName()
+                //+ "VALUES (%d, %d, '%s', '%s'); ", item.getUserId(), item.getGroupId(), item.getUserName(), item.getRoleName()
         );
 
         try (Connection conn = ds.getConnection()) {
