@@ -56,7 +56,7 @@
                         </f:facet>
 
                         <f:selectItem itemLabel="-- Select Property --" itemValue="" noSelectionOption="true"/>
-                        <f:selectItems value="#{propertyUnitController.properties}" var="user" itemLabel="#{user.name}" itemValue="#{user}" />
+                        <f:selectItems value="#{propertyUnitController.properties}" var="property" itemLabel="#{property.name}" itemValue="#{property.id}" />
                     </b:selectOneMenu>
                 </b:column>
             </b:row>

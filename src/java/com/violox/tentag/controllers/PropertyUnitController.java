@@ -24,7 +24,6 @@ public class PropertyUnitController implements Serializable {
     @Inject
     private DbContext dbcontext;
 
-    @Inject
     private Unit newUnit;
 
     @Inject
@@ -38,6 +37,10 @@ public class PropertyUnitController implements Serializable {
 
     @PostConstruct
     public void init() {
+        if(newUnit == null){
+            newUnit = new Unit();
+        }
+            
         display = false;
 
         refreshData();
@@ -96,6 +99,8 @@ public class PropertyUnitController implements Serializable {
     }
 
     public void dgAddUnit() {
+        obj_key.setKey(newUnit.getProperty().getId());
+        newUnit.setProperty((Property)dbcontext.Property().get(obj_key));
         dbcontext.Unit().post(newUnit);
 
         refreshData();

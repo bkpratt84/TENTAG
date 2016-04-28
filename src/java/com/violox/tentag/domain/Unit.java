@@ -55,7 +55,7 @@ public class Unit {
     }
 
     public void fillProperty(DbContext context) {
-        this.setProperty((Property) context.PropertyBatch().getByChild(this));
+        this.setProperty((Property) context.PropertyUnit().getByChild(this));
     }
 
     public void fillPermit(DbContext context, Key<Integer> key) {
