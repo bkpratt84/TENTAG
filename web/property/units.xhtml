@@ -20,13 +20,13 @@
                     <b:row>
                         <h:form id="form_options">
                             <b:commandButton value="Add" iconAwesome="plus" ajax="true" look="success" style="margin: 0 0 15px 10px;"
-                                             oncomplete="PF('dgAdd').show();"  ><!--update=":formAddUnit @form"-->
+                                             oncomplete="PF('dgAdd').show();"  update=":formAddUnit @form">
                                 <p:resetInput target=":dgAdd"/>
                             </b:commandButton>
 
                             <b:commandButton value="Edit" iconAwesome="pencil" ajax="true" look="primary" style="margin: 0 0 15px 10px;"
                                              oncomplete="PF('dgSave').show();"  
-                                             disabled="#{!propertyUnitController.display}"><!--update=":formEditUnit @form"-->
+                                             disabled="#{!propertyUnitController.display}" update=":formEditUnit @form">
                                 <p:resetInput target=":dgSave"/>
                             </b:commandButton>
 
@@ -39,7 +39,7 @@
 
                     <b:row>
                         <h:form id="form_dt">
-                            <p:dataTable id="dt_units" var="unit" value="#{propertyUnitController.units}" style="margin: 0 10px;"
+                            <p:dataTable id="dt_units" var="unit" value="#{propertyUnitController.unit}" style="margin: 0 10px;"
                                          selectionMode="single" selection="#{propertyUnitController.unit}" rowKey="#{unit.id}"
                                          editable="false" editMode="row" widgetVar="datatable">
 
@@ -57,9 +57,10 @@
                     </b:row>
                 </b:panel>
 
-<!--                <ui:include src="#{navigationController.toPropertyUnitsEditUnit(false, false)}"/>
+                <ui:include src="#{navigationController.toPropertyUnitsEditUnit(false, false)}"/>
 
-                <ui:include src="#{navigationController.toPropertyUnitsAddUnit(false, false)}"/>-->
+                <ui:include src="#{navigationController.toPropertyUnitsAddUnit(false, false)}"/>
+                
             </h:panelGroup>
         </b:panelGrid>
     </ui:define>

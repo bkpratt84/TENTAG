@@ -175,13 +175,13 @@ public class NavigationController {
 
         public String toPropertyUnitsEditUnit(boolean redirect, boolean includeContext) {
         String url = includeContext ? "/TENTAG" : "";
-        url += "/property/index.xhtml";
+        url += "/property/units/edit.xhtml";
         return redirect ? (url + "?faces-redirect=true") : url;
     }
 
     public String toPropertyUnitsAddUnit(boolean redirect, boolean includeContext) {
         String url = includeContext ? "/TENTAG" : "";
-        url += "/property/index.xhtml";
+        url += "/property/units/add.xhtml";
         return redirect ? (url + "?faces-redirect=true") : url;
     }
 

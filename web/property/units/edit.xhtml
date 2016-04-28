@@ -1,0 +1,67 @@
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:b="http://bootsfaces.net/ui"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:o="http://omnifaces.org/ui">
+
+    <p:dialog id="dgSave" widgetVar="dgSave" position="center" header="Edit Unit" draggable="false" resizable="false" modal="false"
+              width="320" height="175" closeOnEscape="false" showEffect="fade" closable="false">
+        
+        <p:ajax event="close" update=":form_dt"/>
+        
+        <h:form id="formEditUnit">
+            <!--<h:messages id="test"/>-->
+            <b:row>
+                <b:column>
+                    <b:inputText value="#{propertyUnitController.unit.name}" placeholder="Unitname" type="text"
+                                 id="unitname" style="width: 200px;">
+                        
+                        <f:facet name="prepend">
+                            <b:iconAwesome name="unit"/>
+                        </f:facet>
+                    </b:inputText>
+                </b:column>
+            </b:row>
+            <b:row style="margin-bottom: 10px;" rendered="#{facesContext.validationFailed}">
+                <b:column>
+                    <p:message id="err_unitname" for="unitname" display="text"/>
+                </b:column>
+            </b:row>
+            
+            <b:row>
+                <b:column>
+                    <b:selectOneMenu value="#{propertyUnitController.unit.name}" placeholder="Select Role"
+                                     id="role_select" style="width: 200px;" required="true" requiredMessage="Select a role.">
+                        <f:facet name="prepend">
+                            <span class="input-group-addon">
+                                <h:outputLabel value="Role" for="role_select"/>
+                            </span>
+                        </f:facet>
+
+                        <f:selectItem itemLabel="Property" itemValue="Property"/>
+                        <f:selectItem itemLabel="Printer" itemValue="Printer"/>
+                        <f:selectItem itemLabel="Property" itemValue="Property"/>
+                    </b:selectOneMenu>
+                </b:column>
+            </b:row>
+            <b:row style="margin-bottom: 10px;" rendered="#{facesContext.validationFailed}">
+                <b:column>
+                    <p:message for="role_select" display="text"/>
+                </b:column>
+            </b:row>
+            
+            <b:row>
+                <b:column>
+                    <b:commandButton value="Save" iconAwesome="floppy-o" ajax="true" look="success" style="margin: 0 0 0 0;"
+                                     process="formEditUnit" action="#{propertyUnitController.dgEditUnit()}" update="@form :form_options"/>
+                    
+                    <b:commandButton value="Cancel" iconAwesome="ban" ajax="true" look="info" style="margin: 0 0 0 10px;"
+                                     immediate="true" oncomplete="PF('dgSave').hide();" action="#{propertyUnitController.refreshData()}"/>
+                </b:column>
+            </b:row>
+        </h:form>
+    </p:dialog>
+</ui:composition>
